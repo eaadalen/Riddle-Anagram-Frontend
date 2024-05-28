@@ -26,29 +26,35 @@ export const PlayView = () => {
     )
     .then((response) => response.json())
     .then((data1) => {
-      setLongPrompt(longPrompt.push(data1[0].Answer))
-      data1[0].Answer.split("").forEach(character => 
-        fetch(
-          "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
-          {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              }
-          }
+      new Promise(function(resolve, reject) {
+        setLongPrompt(longPrompt.push(data1[0].Answer))
+        data1[0].Answer.split("").forEach(character => 
+          fetch(
+            "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
+            {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                }
+            }
+          )
+          .then((response) => response.json())
+          .then((data2) => {
+            setShortPrompts(shortPrompts.push(data2[0]))
+          })
         )
-        .then((response) => response.json())
-        .then((data2) => {
-          setShortPrompts(shortPrompts.push(data2[0]))
-        })
-      )
-    })
-    .then((result) => {
-      console.log(longPrompt)
-      console.log(shortPrompts)
-      if (shortPrompts.length == longPrompt[0].length) {
-        console.log(true)
-      }
+        return 1
+      })
+      .then(() => {
+        console.log(longPrompt)
+        console.log(shortPrompts)
+        console.log(longPrompt[0].length)
+        console.log(shortPrompts.length)
+        if (shortPrompts.length == longPrompt[0].length) {
+          console.log(true)
+          setLoaded(true)
+        }
+      })
     })
   }, []) 
 
