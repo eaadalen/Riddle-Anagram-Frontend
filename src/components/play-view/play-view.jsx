@@ -10,13 +10,13 @@ import { Card } from "react-bootstrap";
 import loading from '../../../media/loading-animation.gif';
 
 export const PlayView = () => {
-  const [shortPrompts, setShortPrompts] = useState();
-  const [showModal, setShowModal] = useState(false)
+  const [shortPrompts, setShortPrompts] = useState([])
+  const [longPrompt, setLongPrompt] = useState()
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     fetch(
-      "https://riddle-anagram-game-01434420d487.herokuapp.com/shortprompts",
+      "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
       {
           method: "GET",
           headers: {
@@ -25,13 +25,41 @@ export const PlayView = () => {
       }
     )
     .then((response) => response.json())
-    .then((data) => {
-      setShortPrompts(data.slice(0, 10))
+    .then((data1) => {
+      setLongPrompt(data1[0].Answer)
+      data1[0].Answer.split("").forEach(character => 
+        fetch(
+          "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
+          {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              }
+          }
+        )
+        .then((response) => response.json())
+        .then((data2) => {
+          setShortPrompts(shortPrompts.push(data2[0]))
+        })
+      )
+      return 0
+    })
+    .then((result) => {
+      console.log(longPrompt)
+      console.log(shortPrompts)
       setLoaded(true)
     })
   }, []) 
 
   const shortPromptArray = (word) => {  
+    answer = []
+    for (let i = 0; i < word.length; i++) {
+      answer.push(word[i])
+    }
+    return answer
+  } 
+
+  const selectShortPrompts = (prompt) => {    // Select short prompts based on letters of long prompt
     answer = []
     for (let i = 0; i < word.length; i++) {
       answer.push(word[i])
@@ -46,7 +74,7 @@ export const PlayView = () => {
           <img src={loading}/>
         </div>
       }
-      {loaded && 
+      {loaded &&
         <div className="container-eka">
           <div className="short-prompt-container">
             {shortPrompts.map((prompt) => (

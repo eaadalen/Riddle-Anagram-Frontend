@@ -48787,21 +48787,38 @@ var _loadingAnimationGifDefault = parcelHelpers.interopDefault(_loadingAnimation
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
-    const [shortPrompts, setShortPrompts] = (0, _react.useState)();
-    const [showModal, setShowModal] = (0, _react.useState)(false);
+    const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
+    const [longPrompt, setLongPrompt] = (0, _react.useState)();
     const [loaded, setLoaded] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/shortprompts", {
+        fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then((response)=>response.json()).then((data)=>{
-            setShortPrompts(data.slice(0, 10));
+        }).then((response)=>response.json()).then((data1)=>{
+            setLongPrompt(data1[0].Answer);
+            data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then((response)=>response.json()).then((data2)=>{
+                    setShortPrompts(shortPrompts.push(data2[0]));
+                }));
+            return 0;
+        }).then((result)=>{
+            console.log(longPrompt);
+            console.log(shortPrompts);
             setLoaded(true);
         });
     }, []);
-    const shortPromptArray = (word)=>{
+    const shortPromptArray = (word1)=>{
+        answer = [];
+        for(let i = 0; i < word1.length; i++)answer.push(word1[i]);
+        return answer;
+    };
+    const selectShortPrompts = (prompt)=>{
         answer = [];
         for(let i = 0; i < word.length; i++)answer.push(word[i]);
         return answer;
@@ -48814,12 +48831,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 46,
+                    lineNumber: 74,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 45,
+                lineNumber: 73,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48833,7 +48850,7 @@ const PlayView = ()=>{
                                     prompt.shortPrompt,
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 55,
+                                        lineNumber: 83,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48843,23 +48860,23 @@ const PlayView = ()=>{
                                                 children: "__"
                                             }, void 0, false, {
                                                 fileName: "src/components/play-view/play-view.jsx",
-                                                lineNumber: 58,
+                                                lineNumber: 86,
                                                 columnNumber: 21
                                             }, undefined))
                                     }, void 0, false, {
                                         fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 56,
+                                        lineNumber: 84,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, prompt._id, true, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 53,
+                                lineNumber: 81,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 51,
+                        lineNumber: 79,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48870,7 +48887,7 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 69,
+                                lineNumber: 97,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48878,29 +48895,29 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 72,
+                                lineNumber: 100,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 68,
+                        lineNumber: 96,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 50,
+                lineNumber: 78,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 43,
+        lineNumber: 71,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "hZYks4RCuNtnCjszMYU1HFud6ls=");
+_s(PlayView, "RrcSKQA0PG9oxjIwE85dlBPbJ4k=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
