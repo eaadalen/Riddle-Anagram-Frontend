@@ -131,20 +131,37 @@
   font-size: 2rem;
 }
 
-.container {
+.container-eka {
   text-align: center;
+  border: 1px solid red;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  margin: 7% auto 0;
-  padding-top: 50px;
   display: flex;
 }
 
 .sub-container {
+  border: 1px solid #000;
   margin: 100px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.short-prompt {
+  border: 1px solid #00f;
+  width: 250px;
+  height: 100px;
+  margin: 10px;
+}
+
+.short-prompt-container {
+  text-align: center;
+  border: 1px solid green;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 900px;
+  margin: 100px;
+  display: flex;
 }
 
 .modal {

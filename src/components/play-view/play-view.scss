@@ -1,20 +1,37 @@
 $color: rgb(0, 0, 0);
 
-.container {
+.container-eka {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
-    margin: 0 auto;
-    margin-top: 7%;
-	width: 300px;
     text-align: center;
+	border: 1px solid red;
 }
 
 .sub-container {
     padding-left: 10px;
 	padding-right: 10px;
 	margin: 100px;
+	border: 1px solid black;
+}
+
+.short-prompt {
+	margin: 10px;
+	border: 1px solid blue;
+	margin: 10px;
+	width: 250px;
+	height: 100px;
+}
+
+.short-prompt-container {
+	width: 900px;
+	margin: 100px;
+	border: 1px solid green;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .modal {
