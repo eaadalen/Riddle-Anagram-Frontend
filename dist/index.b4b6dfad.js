@@ -48801,6 +48801,11 @@ const PlayView = ()=>{
             setLoaded(true);
         });
     }, []);
+    const shortPromptArray = (word)=>{
+        answer = [];
+        for(let i = 0; i < word.length; i++)answer.push(word[i]);
+        return answer;
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             !loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48809,12 +48814,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 38,
+                    lineNumber: 46,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 37,
+                lineNumber: 45,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48828,18 +48833,33 @@ const PlayView = ()=>{
                                     prompt.shortPrompt,
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 47,
+                                        lineNumber: 55,
+                                        columnNumber: 17
+                                    }, undefined),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        className: "short-prompt-answer",
+                                        children: shortPromptArray(prompt.Answer).map(()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                                className: "answer-letter",
+                                                children: "__"
+                                            }, void 0, false, {
+                                                fileName: "src/components/play-view/play-view.jsx",
+                                                lineNumber: 58,
+                                                columnNumber: 21
+                                            }, undefined))
+                                    }, void 0, false, {
+                                        fileName: "src/components/play-view/play-view.jsx",
+                                        lineNumber: 56,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, prompt._id, true, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 45,
+                                lineNumber: 53,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 43,
+                        lineNumber: 51,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48850,7 +48870,7 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 54,
+                                lineNumber: 69,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48858,25 +48878,25 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 57,
+                                lineNumber: 72,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 53,
+                        lineNumber: 68,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 42,
+                lineNumber: 50,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 35,
+        lineNumber: 43,
         columnNumber: 5
     }, undefined);
 };

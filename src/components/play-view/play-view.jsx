@@ -30,6 +30,14 @@ export const PlayView = () => {
       setLoaded(true)
     })
   }, []) 
+
+  const shortPromptArray = (word) => {  
+    answer = []
+    for (let i = 0; i < word.length; i++) {
+      answer.push(word[i])
+    }
+    return answer
+  } 
     
   return (
     <div>
@@ -45,7 +53,14 @@ export const PlayView = () => {
               <div key={prompt._id} className="short-prompt">
                 {prompt.shortPrompt}
                 <br></br>
-                
+                <div className="short-prompt-answer">
+                  {shortPromptArray(prompt.Answer).map(() => (
+                    <div className="answer-letter">
+                      __
+                    </div>
+                    ))
+                  }
+                </div>
               </div>
               ))
             }

@@ -148,7 +148,6 @@
 
 .short-prompt {
   border: 1px solid #00f;
-  width: 250px;
   height: 100px;
   margin: 10px;
 }
@@ -162,6 +161,20 @@
   width: 900px;
   margin: 100px;
   display: flex;
+}
+
+.short-prompt-answer {
+  text-align: center;
+  border: 1px solid orange;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  display: flex;
+}
+
+.answer-letter {
+  border: 1px solid #0ff;
+  margin: 10px;
 }
 
 .modal {
