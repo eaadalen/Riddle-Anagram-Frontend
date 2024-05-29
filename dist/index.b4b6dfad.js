@@ -48791,35 +48791,42 @@ const PlayView = ()=>{
     const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
     const [loaded, setLoaded] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then((response)=>response.json()).then((data1)=>{
-            new Promise(function(resolve, reject) {
-                setLongPrompt(longPrompt.push(data1[0].Answer));
+        async function startup() {
+            var LP = [];
+            var SPs = [];
+            fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then((response)=>response.json()).then((data1)=>{
+                LP.push(data1[0].Answer);
                 data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json"
                         }
                     }).then((response)=>response.json()).then((data2)=>{
-                        setShortPrompts(shortPrompts.push(data2[0]));
+                        SPs.push(data2[0]);
                     }));
-                return 1;
-            }).then(()=>{
-                console.log(longPrompt);
-                console.log(shortPrompts);
-                console.log(longPrompt[0].length);
-                console.log(shortPrompts.length);
-                if (shortPrompts.length == longPrompt[0].length) {
-                    console.log(true);
-                    setLoaded(true);
-                }
             });
-        });
+            return [
+                LP,
+                SPs
+            ];
+        }
+        async function asyncCall() {
+            const values = await startup();
+            setLongPrompt(values[0]);
+            setShortPrompts(values[1]);
+            await sleep(1000);
+            setLoaded(true);
+        }
+        asyncCall();
     }, []);
+    function sleep(ms) {
+        return new Promise((resolve)=>setTimeout(resolve, ms));
+    }
     const shortPromptArray = (word)=>{
         answer = [];
         for(let i = 0; i < word.length; i++)answer.push(word[i]);
@@ -48833,12 +48840,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 73,
+                    lineNumber: 81,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 72,
+                lineNumber: 80,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48852,7 +48859,7 @@ const PlayView = ()=>{
                                     prompt.shortPrompt,
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                                         fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 82,
+                                        lineNumber: 90,
                                         columnNumber: 17
                                     }, undefined),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48862,23 +48869,23 @@ const PlayView = ()=>{
                                                 children: "__"
                                             }, void 0, false, {
                                                 fileName: "src/components/play-view/play-view.jsx",
-                                                lineNumber: 85,
+                                                lineNumber: 93,
                                                 columnNumber: 21
                                             }, undefined))
                                     }, void 0, false, {
                                         fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 83,
+                                        lineNumber: 91,
                                         columnNumber: 17
                                     }, undefined)
                                 ]
                             }, prompt._id, true, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 80,
+                                lineNumber: 88,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 78,
+                        lineNumber: 86,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48889,7 +48896,7 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 96,
+                                lineNumber: 104,
                                 columnNumber: 13
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48897,25 +48904,25 @@ const PlayView = ()=>{
                                 children: "_ _ _ _"
                             }, void 0, false, {
                                 fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 99,
+                                lineNumber: 107,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 95,
+                        lineNumber: 103,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 77,
+                lineNumber: 85,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 70,
+        lineNumber: 78,
         columnNumber: 5
     }, undefined);
 };
@@ -48929,7 +48936,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-bootstrap/Container":"hEdsw","../../../media/loading-animation.gif":"iSTV0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {

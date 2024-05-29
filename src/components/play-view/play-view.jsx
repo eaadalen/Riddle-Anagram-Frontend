@@ -15,19 +15,22 @@ export const PlayView = () => {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    fetch(
-      "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
-      {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          }
-      }
-    )
-    .then((response) => response.json())
-    .then((data1) => {
-      new Promise(function(resolve, reject) {
-        setLongPrompt(longPrompt.push(data1[0].Answer))
+    async function startup() {  
+      var LP = []
+      var SPs = []
+
+      fetch(
+        "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
+        {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+        }
+      )
+      .then((response) => response.json())
+      .then((data1) => {
+        LP.push(data1[0].Answer)
         data1[0].Answer.split("").forEach(character => 
           fetch(
             "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
@@ -40,23 +43,28 @@ export const PlayView = () => {
           )
           .then((response) => response.json())
           .then((data2) => {
-            setShortPrompts(shortPrompts.push(data2[0]))
+            SPs.push(data2[0])
           })
         )
-        return 1
       })
-      .then(() => {
-        console.log(longPrompt)
-        console.log(shortPrompts)
-        console.log(longPrompt[0].length)
-        console.log(shortPrompts.length)
-        if (shortPrompts.length == longPrompt[0].length) {
-          console.log(true)
-          setLoaded(true)
-        }
-      })
-    })
+      return [LP, SPs]
+    }
+      
+    async function asyncCall() {
+      const values = await startup()
+      setLongPrompt(values[0])
+      setShortPrompts(values[1])
+      await sleep(1000)
+      setLoaded(true)
+    }
+
+    asyncCall()
+
   }, []) 
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 
   const shortPromptArray = (word) => {  
     answer = []
