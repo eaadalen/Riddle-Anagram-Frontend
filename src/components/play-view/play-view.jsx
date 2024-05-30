@@ -8,15 +8,18 @@ import Row from "react-bootstrap/Row";
 import Container from 'react-bootstrap/Container';
 import { Card } from "react-bootstrap";
 import loading from '../../../media/loading-animation.gif';
+import ShortPrompt from './short-prompt.jsx'
+import LongPrompt from './long-prompt.jsx'
 
 export const PlayView = () => {
   const [shortPrompts, setShortPrompts] = useState([])
   const [longPrompt, setLongPrompt] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [activePrompt, setActivePrompt] = useState(false)
 
   useEffect(() => {
     async function startup() {  
-      var LP = []
+      var LPs = []
       var SPs = []
 
       fetch(
@@ -30,7 +33,7 @@ export const PlayView = () => {
       )
       .then((response) => response.json())
       .then((data1) => {
-        LP.push(data1[0].Answer)
+        LPs.push(data1[0])
         data1[0].Answer.split("").forEach(character => 
           fetch(
             "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
@@ -47,7 +50,7 @@ export const PlayView = () => {
           })
         )
       })
-      return [LP, SPs]
+      return [LPs, SPs]
     }
       
     async function asyncCall() {
@@ -62,16 +65,12 @@ export const PlayView = () => {
 
   }, []) 
 
+  useEffect(() => {
+
+  }, [activePrompt])
+
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  const shortPromptArray = (word) => {  
-    answer = []
-    for (let i = 0; i < word.length; i++) {
-      answer.push(word[i])
-    }
-    return answer
   }
     
   return (
@@ -83,31 +82,8 @@ export const PlayView = () => {
       }
       {loaded &&
         <div className="container-eka">
-          <div className="short-prompt-container">
-            {shortPrompts.map((prompt) => (
-              <div key={prompt._id} className="short-prompt">
-                {prompt.shortPrompt}
-                <br></br>
-                <div className="short-prompt-answer">
-                  {shortPromptArray(prompt.Answer).map(() => (
-                    <div className="answer-letter">
-                      __
-                    </div>
-                    ))
-                  }
-                </div>
-              </div>
-              ))
-            }
-          </div>
-          <div className="sub-container">
-            <div className="sub-container">
-              _ _ _ _
-            </div>
-            <div className="sub-container">
-              _ _ _ _
-            </div>
-          </div>
+          <ShortPrompt prompts={shortPrompts}/>
+          <LongPrompt prompt={longPrompt}/>
         </div>
       }
     </div>

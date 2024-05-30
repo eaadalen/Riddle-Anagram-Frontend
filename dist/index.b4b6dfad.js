@@ -48784,15 +48784,20 @@ var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
 var _loadingAnimationGif = require("../../../media/loading-animation.gif");
 var _loadingAnimationGifDefault = parcelHelpers.interopDefault(_loadingAnimationGif);
+var _shortPromptJsx = require("./short-prompt.jsx");
+var _shortPromptJsxDefault = parcelHelpers.interopDefault(_shortPromptJsx);
+var _longPromptJsx = require("./long-prompt.jsx");
+var _longPromptJsxDefault = parcelHelpers.interopDefault(_longPromptJsx);
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
     const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
     const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
     const [loaded, setLoaded] = (0, _react.useState)(false);
+    const [activePrompt, setActivePrompt] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         async function startup() {
-            var LP = [];
+            var LPs = [];
             var SPs = [];
             fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
                 method: "GET",
@@ -48800,7 +48805,7 @@ const PlayView = ()=>{
                     "Content-Type": "application/json"
                 }
             }).then((response)=>response.json()).then((data1)=>{
-                LP.push(data1[0].Answer);
+                LPs.push(data1[0]);
                 data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
                         method: "GET",
                         headers: {
@@ -48811,7 +48816,7 @@ const PlayView = ()=>{
                     }));
             });
             return [
-                LP,
+                LPs,
                 SPs
             ];
         }
@@ -48824,14 +48829,12 @@ const PlayView = ()=>{
         }
         asyncCall();
     }, []);
+    (0, _react.useEffect)(()=>{}, [
+        activePrompt
+    ]);
     function sleep(ms) {
         return new Promise((resolve)=>setTimeout(resolve, ms));
     }
-    const shortPromptArray = (word)=>{
-        answer = [];
-        for(let i = 0; i < word.length; i++)answer.push(word[i]);
-        return answer;
-    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             !loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -48840,93 +48843,45 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 81,
+                    lineNumber: 80,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 80,
+                lineNumber: 79,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "container-eka",
                 children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt-container",
-                        children: shortPrompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "short-prompt",
-                                children: [
-                                    prompt.shortPrompt,
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                                        fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 90,
-                                        columnNumber: 17
-                                    }, undefined),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                        className: "short-prompt-answer",
-                                        children: shortPromptArray(prompt.Answer).map(()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                                className: "answer-letter",
-                                                children: "__"
-                                            }, void 0, false, {
-                                                fileName: "src/components/play-view/play-view.jsx",
-                                                lineNumber: 93,
-                                                columnNumber: 21
-                                            }, undefined))
-                                    }, void 0, false, {
-                                        fileName: "src/components/play-view/play-view.jsx",
-                                        lineNumber: 91,
-                                        columnNumber: 17
-                                    }, undefined)
-                                ]
-                            }, prompt._id, true, {
-                                fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 88,
-                                columnNumber: 15
-                            }, undefined))
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptJsxDefault.default), {
+                        prompts: shortPrompts
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 85,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
+                        prompt: longPrompt
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
                         lineNumber: 86,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "sub-container",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "sub-container",
-                                children: "_ _ _ _"
-                            }, void 0, false, {
-                                fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 104,
-                                columnNumber: 13
-                            }, undefined),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "sub-container",
-                                children: "_ _ _ _"
-                            }, void 0, false, {
-                                fileName: "src/components/play-view/play-view.jsx",
-                                lineNumber: 107,
-                                columnNumber: 13
-                            }, undefined)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 103,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 85,
+                lineNumber: 84,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 78,
+        lineNumber: 77,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "vT54rwsB4TMoi8Xxor6bMkTYVSc=");
+_s(PlayView, "OeRw56yJLuTk9k3mxVJAlKF5s8Q=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -48936,7 +48891,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-bootstrap/Container":"hEdsw","../../../media/loading-animation.gif":"iSTV0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -48974,6 +48929,125 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{}],"cUgVj":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f5e2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$f5e2.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _shortPromptScss = require("./short-prompt.scss");
+var _react = require("react");
+var _s = $RefreshSig$();
+exports.default = ShortPrompt = _s(({ prompts })=>{
+    _s();
+    const [currentGuess, setCurrentGuess] = (0, _react.useState)("");
+    const [activeDiv, setActiveDiv] = (0, _react.useState)(prompts[0]._id);
+    (0, _react.useEffect)(()=>{
+        prompts.forEach((element)=>document.getElementById(element._id).classList.add("short-prompt-container-inactive"));
+        document.getElementById(prompts[0]._id).classList.remove("short-prompt-container-inactive");
+        document.getElementById(prompts[0]._id).classList.add("short-prompt-container-active");
+        document.body.addEventListener("click", (event)=>{
+            if (event.target.className == "short-prompt-container-inactive") {
+                updateActiveDiv(activeDiv, event.target.id);
+                setActiveDiv(event.target.id);
+            }
+        });
+    }, []);
+    const shortPromptArray = (word)=>{
+        answer = [];
+        for(let i = 0; i < word.length; i++)answer.push(word[i]);
+        return answer;
+    };
+    const test = ()=>{};
+    const updateActiveDiv = (oldActive, newActive)=>{
+        console.log("Old: " + String(oldActive));
+        console.log("New: " + String(newActive));
+        document.getElementById(oldActive).classList.remove("short-prompt-container-active");
+        document.getElementById(oldActive).classList.add("short-prompt-container-inactive");
+        document.getElementById(newActive).classList.remove("short-prompt-container-inactive");
+        document.getElementById(newActive).classList.add("short-prompt-container-active");
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: prompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: prompt._id,
+                children: [
+                    prompt.shortPrompt,
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/play-view/short-prompt.jsx",
+                        lineNumber: 48,
+                        columnNumber: 11
+                    }, undefined),
+                    prompt.Answer,
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                        fileName: "src/components/play-view/short-prompt.jsx",
+                        lineNumber: 50,
+                        columnNumber: 11
+                    }, undefined),
+                    shortPromptArray(prompt.Answer).map(()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "answer-letter",
+                            children: "__"
+                        }, Math.random(), false, {
+                            fileName: "src/components/play-view/short-prompt.jsx",
+                            lineNumber: 52,
+                            columnNumber: 13
+                        }, undefined))
+                ]
+            }, prompt._id, true, {
+                fileName: "src/components/play-view/short-prompt.jsx",
+                lineNumber: 46,
+                columnNumber: 9
+            }, undefined))
+    }, void 0, false, {
+        fileName: "src/components/play-view/short-prompt.jsx",
+        lineNumber: 44,
+        columnNumber: 5
+    }, undefined);
+}, "pd8GTr01COoyvlJXzWJwml+HjzE=");
+
+  $parcel$ReactRefreshHelpers$f5e2.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$dbb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$dbb1.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _longPromptScss = require("./long-prompt.scss");
+var _react = require("react");
+exports.default = LongPrompt = ({ prompt })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: [
+            prompt[0].longPrompt,
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+                fileName: "src/components/play-view/long-prompt.jsx",
+                lineNumber: 9,
+                columnNumber: 7
+            }, undefined),
+            prompt[0].Answer
+        ]
+    }, void 0, true, {
+        fileName: "src/components/play-view/long-prompt.jsx",
+        lineNumber: 7,
+        columnNumber: 5
+    }, undefined);
+};
+
+  $parcel$ReactRefreshHelpers$dbb1.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

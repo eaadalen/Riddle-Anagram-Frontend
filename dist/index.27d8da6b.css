@@ -152,9 +152,20 @@
   margin: 10px;
 }
 
-.short-prompt-container {
+.short-prompt-container-active {
   text-align: center;
-  border: 1px solid green;
+  border: 1px solid #ff0;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  margin: 100px;
+  display: flex;
+}
+
+.short-prompt-container-inactive {
+  text-align: center;
+  border: 1px solid #000;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -177,146 +188,7 @@
   margin: 10px;
 }
 
-.modal {
-  margin-top: 9%;
-}
 
-.modalContainer {
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  display: flex;
-}
-
-.bold {
-  padding-top: .75em;
-  font-weight: bold;
-}
-
-.rightCol {
-  justify-content: flex-end;
-  display: flex;
-}
-
-.modalSubContainer {
-  flex-direction: row;
-  justify-content: center;
-  display: flex;
-}
-
-.gameOver {
-  width: 250px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.playAgain {
-  padding-left: 30px;
-  padding-right: 30px;
-}
-
-.correct {
-  background: green;
-  border-radius: 7px;
-  align-items: center;
-  width: 275px;
-  height: 47px;
-  display: flex;
-}
-
-.incorrect {
-  background: red;
-  border-radius: 7px;
-  align-items: center;
-  width: 275px;
-  height: 47px;
-  display: flex;
-}
-
-.checkmark {
-  max-height: 30px;
-  margin: auto;
-  display: block;
-}
-
-.counter {
-  color: #fff;
-  background-color: #000;
-  border: 1px solid #000;
-  border-radius: 15px;
-  flex-direction: column;
-  margin: 10px;
-  padding: 10px;
-  font-family: Arial;
-  font-size: 20px;
-  display: flex;
-}
-
-.streak {
-  justify-content: center;
-  width: 125px;
-  display: flex;
-}
-
-.button {
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: .15rem;
-  z-index: 1;
-  border-radius: 10rem;
-  padding: .75rem 1.25rem;
-  font-size: 1rem;
-  transition: all .3s;
-  display: inline-block;
-  position: relative;
-  overflow: hidden;
-}
-
-.button:after {
-  content: "";
-  z-index: -2;
-  background-color: #000;
-  border-radius: 10rem;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.button:before {
-  content: "";
-  z-index: -1;
-  background-color: #404040;
-  border-radius: 10rem;
-  width: 0%;
-  height: 100%;
-  transition: all .3s;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.button:hover {
-  color: #fff;
-}
-
-.button:hover:before {
-  width: 100%;
-}
-
-* {
-  font-family: Arial;
-  font-size: 20px;
-}
-
-h1 {
-  text-transform: uppercase;
-  margin-bottom: 2rem;
-  font-size: .8rem;
-}
 
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
