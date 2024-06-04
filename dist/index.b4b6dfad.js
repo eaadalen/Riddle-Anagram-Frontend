@@ -48891,7 +48891,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Row":"cMC39","react-bootstrap/Container":"hEdsw","../../../media/loading-animation.gif":"iSTV0","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","react-bootstrap/Form":"iBZ80","react-router-dom":"9xmpe","react-bootstrap":"3AD9A","react-bootstrap/Col":"2L2I6","react-bootstrap/Container":"hEdsw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","react-bootstrap/Row":"cMC39","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -49013,7 +49013,7 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./short-prompt.scss":"jEoVi"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$dbb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
