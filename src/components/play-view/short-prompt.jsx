@@ -15,6 +15,8 @@ function reducer(state, action) {
 export default ShortPrompt = ({ prompts }) => {
   var activeDiv = null
   const [state, dispatch] = useReducer(reducer, { value: ''})
+  const [classArray, setClassArray] = useState([])
+  const [active, setActive] = useState('')
 
   const handleTyping = (e, AD) => {  
     if (e.key === 'Backspace') {
@@ -33,8 +35,6 @@ export default ShortPrompt = ({ prompts }) => {
     }
     return answer
   }
-
-  var classArray = []
 
   class _shortPrompt {
     constructor(id, active) {
@@ -69,7 +69,9 @@ export default ShortPrompt = ({ prompts }) => {
           <br></br>
           {prompt.Answer}
           <br></br>
-          <div>{state.value}</div>
+          {(prompt._id === active) && 
+            <div>{state.value}</div>
+          }
         </div>
         ))
       }

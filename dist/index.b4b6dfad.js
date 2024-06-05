@@ -37571,9 +37571,6 @@ const PlayView = ()=>{
         }
         asyncCall();
     }, []);
-    (0, _react.useEffect)(()=>{}, [
-        activePrompt
-    ]);
     function sleep(ms) {
         return new Promise((resolve)=>setTimeout(resolve, ms));
     }
@@ -37585,12 +37582,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 73,
+                    lineNumber: 69,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 72,
+                lineNumber: 68,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37600,30 +37597,30 @@ const PlayView = ()=>{
                         prompts: shortPrompts
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 78,
+                        lineNumber: 74,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
                         prompt: longPrompt
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 79,
+                        lineNumber: 75,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 77,
+                lineNumber: 73,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 70,
+        lineNumber: 66,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "OeRw56yJLuTk9k3mxVJAlKF5s8Q=");
+_s(PlayView, "Ofo623rKWVeZqeqDGXt25mhk2Y4=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -37704,6 +37701,8 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
     const [state, dispatch] = (0, _react.useReducer)(reducer, {
         value: ""
     });
+    const [classArray, setClassArray] = (0, _react.useState)([]);
+    const [active, setActive] = (0, _react.useState)("");
     const handleTyping = (e, AD)=>{
         if (e.key === "Backspace") {
             dispatch({
@@ -37720,7 +37719,6 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
         for(let i = 0; i < word.length; i++)answer.push(word[i]);
         return answer;
     };
-    var classArray = [];
     class _shortPrompt {
         constructor(id, active){
             this.id = id;
@@ -37760,12 +37758,12 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
                         lineNumber: 71,
                         columnNumber: 11
                     }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    prompt._id === active && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         children: state.value
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 72,
-                        columnNumber: 11
+                        lineNumber: 73,
+                        columnNumber: 13
                     }, undefined)
                 ]
             }, prompt._id, true, {
@@ -37778,7 +37776,7 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
         lineNumber: 65,
         columnNumber: 5
     }, undefined);
-}, "zWD5Lr0ha5cQ7r8i5vCYHdyx3Gk=");
+}, "7Elxt1AcK2a7Nulcp9qkDrHEMVY=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {
