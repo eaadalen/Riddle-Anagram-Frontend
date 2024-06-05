@@ -1,8 +1,30 @@
 import './short-prompt.scss'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'addLetter':
+      return {value: state.value + action.update}
+    case 'deleteLetter':
+      return {value: state.value.slice(0, -1)}
+    default:
+      return state
+  }
+}
 
 export default ShortPrompt = ({ prompts }) => {
   var activeDiv = null
+  const [state, dispatch] = useReducer(reducer, { value: ''})
+
+  const handleTyping = (e, AD) => {  
+    if (e.key === 'Backspace') {
+      dispatch({ type: 'deleteLetter'})
+      console.log(AD)
+    }
+    else if (/[a-zA-Z]/.test(e.key)) {
+      dispatch({ type: 'addLetter', update: e.key })
+    }
+  }
 
   const shortPromptArray = (word) => {  
     answer = []
@@ -12,10 +34,20 @@ export default ShortPrompt = ({ prompts }) => {
     return answer
   }
 
+  var classArray = []
+
+  class _shortPrompt {
+    constructor(id, active) {
+      this.id = id;
+      this.active = active;
+    }
+  }
+
   useEffect(() => {
-    window.addEventListener("keyup", event => handleTyping(event));
+    window.addEventListener("keyup", event => handleTyping(event, activeDiv));
     prompts.forEach((element) => {
       document.getElementById(element._id).addEventListener("click", event => handleClick(event));
+      classArray.push(new _shortPrompt(element._id, false))
     })
   }, []);
 
@@ -26,13 +58,7 @@ export default ShortPrompt = ({ prompts }) => {
       })
       document.getElementById(event.target.id).className = 'short-prompt-container-active'
       activeDiv = event.target.id
-      console.log(activeDiv)
     }
-  }
-
-  const handleTyping = (event) => {  
-    console.log(activeDiv)
-    document.getElementById("A").innerHTML = event.key
   }
 
   return (
@@ -43,12 +69,7 @@ export default ShortPrompt = ({ prompts }) => {
           <br></br>
           {prompt.Answer}
           <br></br>
-          {shortPromptArray(prompt.Answer).map((answer) => (
-            <div key={Math.random()} className='answer-letter'>
-              <span id={answer}>_</span>
-            </div>
-            ))
-          }
+          <div>{state.value}</div>
         </div>
         ))
       }
