@@ -5,6 +5,7 @@ export default ShortPrompt = ({ prompts }) => {
   const [activeDiv, setActiveDiv] = useState(prompts[0]._id)
   const [prevDiv, setPrevDiv] = useState(prompts[prompts.length-1]._id)
 
+  /*
   document.body.addEventListener('click', (event) => {
     if (event.target.className === 'short-prompt-container-inactive') {
       document.getElementById(activeDiv).classList.remove('short-prompt-container-inactive')
@@ -15,6 +16,7 @@ export default ShortPrompt = ({ prompts }) => {
       console.log(`state in active div handler: ${activeDiv}`)
     }
   })
+  */
 
   const shortPromptArray = (word) => {  
     answer = []
@@ -22,6 +24,21 @@ export default ShortPrompt = ({ prompts }) => {
       answer.push(word[i])
     }
     return answer
+  }
+
+  useEffect(() => {
+    prompts.forEach((element) => {
+      document.getElementById(element._id).addEventListener("click", event => handleClick(event));
+    })
+  }, []);
+
+  const handleClick = (event) => {  
+    if (event.target.className === 'short-prompt-container-inactive') {
+      prompts.forEach((element) => {
+        document.getElementById(element._id).className = 'short-prompt-container-inactive'
+      })
+      document.getElementById(event.target.id).className = 'short-prompt-container-active'
+    }
   }
 
   return (
