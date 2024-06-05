@@ -37686,47 +37686,38 @@ var _react = require("react");
 var _s = $RefreshSig$();
 exports.default = ShortPrompt = _s(({ prompts })=>{
     _s();
-    const [currentGuess, setCurrentGuess] = (0, _react.useState)("");
     const [activeDiv, setActiveDiv] = (0, _react.useState)(prompts[0]._id);
-    (0, _react.useEffect)(()=>{
-        prompts.forEach((element)=>document.getElementById(element._id).classList.add("short-prompt-container-inactive"));
-        document.getElementById(prompts[0]._id).classList.remove("short-prompt-container-inactive");
-        document.getElementById(prompts[0]._id).classList.add("short-prompt-container-active");
-        document.body.addEventListener("click", (event)=>{
-            if (event.target.className == "short-prompt-container-inactive") {
-                updateActiveDiv(activeDiv, event.target.id);
-                setActiveDiv(event.target.id);
-            }
-        });
-    }, []);
+    const [prevDiv, setPrevDiv] = (0, _react.useState)(prompts[prompts.length - 1]._id);
+    document.body.addEventListener("click", (event)=>{
+        if (event.target.className === "short-prompt-container-inactive") {
+            document.getElementById(activeDiv).classList.remove("short-prompt-container-inactive");
+            document.getElementById(activeDiv).classList.add("short-prompt-container-active");
+            document.getElementById(prevDiv).classList.remove("short-prompt-container-active");
+            document.getElementById(prevDiv).classList.add("short-prompt-container-inactive");
+            console.log(`state in prev   div handler: ${prevDiv}`);
+            console.log(`state in active div handler: ${activeDiv}`);
+        }
+    });
     const shortPromptArray = (word)=>{
         answer = [];
         for(let i = 0; i < word.length; i++)answer.push(word[i]);
         return answer;
     };
-    const test = ()=>{};
-    const updateActiveDiv = (oldActive, newActive)=>{
-        console.log("Old: " + String(oldActive));
-        console.log("New: " + String(newActive));
-        document.getElementById(oldActive).classList.remove("short-prompt-container-active");
-        document.getElementById(oldActive).classList.add("short-prompt-container-inactive");
-        document.getElementById(newActive).classList.remove("short-prompt-container-inactive");
-        document.getElementById(newActive).classList.add("short-prompt-container-active");
-    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: prompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: prompt._id,
+                className: "short-prompt-container-inactive",
                 children: [
                     prompt.shortPrompt,
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 48,
+                        lineNumber: 32,
                         columnNumber: 11
                     }, undefined),
                     prompt.Answer,
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 50,
+                        lineNumber: 34,
                         columnNumber: 11
                     }, undefined),
                     shortPromptArray(prompt.Answer).map(()=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37734,21 +37725,21 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
                             children: "__"
                         }, Math.random(), false, {
                             fileName: "src/components/play-view/short-prompt.jsx",
-                            lineNumber: 52,
+                            lineNumber: 36,
                             columnNumber: 13
                         }, undefined))
                 ]
             }, prompt._id, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 46,
+                lineNumber: 30,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 44,
+        lineNumber: 28,
         columnNumber: 5
     }, undefined);
-}, "pd8GTr01COoyvlJXzWJwml+HjzE=");
+}, "bdX2ulRWDPr2sJMoTGMclGNxSrU=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {
