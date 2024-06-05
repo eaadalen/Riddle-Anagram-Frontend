@@ -2,21 +2,7 @@ import './short-prompt.scss'
 import { useState, useEffect, useRef } from 'react';
 
 export default ShortPrompt = ({ prompts }) => {
-  const [activeDiv, setActiveDiv] = useState(prompts[0]._id)
-  const [prevDiv, setPrevDiv] = useState(prompts[prompts.length-1]._id)
-
-  /*
-  document.body.addEventListener('click', (event) => {
-    if (event.target.className === 'short-prompt-container-inactive') {
-      document.getElementById(activeDiv).classList.remove('short-prompt-container-inactive')
-      document.getElementById(activeDiv).classList.add('short-prompt-container-active')
-      document.getElementById(prevDiv).classList.remove('short-prompt-container-active')
-      document.getElementById(prevDiv).classList.add('short-prompt-container-inactive')
-      console.log(`state in prev   div handler: ${prevDiv}`)
-      console.log(`state in active div handler: ${activeDiv}`)
-    }
-  })
-  */
+  var activeDiv = null
 
   const shortPromptArray = (word) => {  
     answer = []
@@ -27,6 +13,7 @@ export default ShortPrompt = ({ prompts }) => {
   }
 
   useEffect(() => {
+    window.addEventListener("keyup", event => handleTyping(event));
     prompts.forEach((element) => {
       document.getElementById(element._id).addEventListener("click", event => handleClick(event));
     })
@@ -38,7 +25,14 @@ export default ShortPrompt = ({ prompts }) => {
         document.getElementById(element._id).className = 'short-prompt-container-inactive'
       })
       document.getElementById(event.target.id).className = 'short-prompt-container-active'
+      activeDiv = event.target.id
+      console.log(activeDiv)
     }
+  }
+
+  const handleTyping = (event) => {  
+    console.log(activeDiv)
+    document.getElementById("A").innerHTML = event.key
   }
 
   return (
@@ -49,9 +43,9 @@ export default ShortPrompt = ({ prompts }) => {
           <br></br>
           {prompt.Answer}
           <br></br>
-          {shortPromptArray(prompt.Answer).map(() => (
+          {shortPromptArray(prompt.Answer).map((answer) => (
             <div key={Math.random()} className='answer-letter'>
-              __
+              <span id={answer}>_</span>
             </div>
             ))
           }
