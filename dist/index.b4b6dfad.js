@@ -37536,7 +37536,6 @@ const PlayView = ()=>{
     const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
     const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
     const [loaded, setLoaded] = (0, _react.useState)(false);
-    const [activePrompt, setActivePrompt] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         async function startup() {
             var LPs = [];
@@ -37554,6 +37553,7 @@ const PlayView = ()=>{
                             "Content-Type": "application/json"
                         }
                     }).then((response)=>response.json()).then((data2)=>{
+                        data2[0]["activeLetter"] = data2[0].Answer.indexOf(String(character));
                         SPs.push(data2[0]);
                     }));
             });
@@ -37620,7 +37620,7 @@ const PlayView = ()=>{
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "Ofo623rKWVeZqeqDGXt25mhk2Y4=");
+_s(PlayView, "vT54rwsB4TMoi8Xxor6bMkTYVSc=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -37724,7 +37724,7 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
             document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
         });
     }, []);
-    const handleTyping = (e, AD)=>{
+    const handleTyping = (e)=>{
         if (e.key === "Backspace") dispatch1({
             type: "deleteLetter"
         });
@@ -37751,8 +37751,14 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
     };
     const shortPromptArray = (guess, answer)=>{
         returnValue = [];
-        for(let i = 0; i < answer.length; i++)if (guess[i] === undefined) returnValue.push("_");
-        else returnValue.push(guess[i]);
+        for(let i = 0; i < answer.length; i++)if (guess[i] === undefined) returnValue.push([
+            "_",
+            i
+        ]);
+        else returnValue.push([
+            guess[i],
+            i
+        ]);
         return returnValue;
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37764,8 +37770,8 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt-guess",
                         children: prompt._id === active.value && shortPromptArray(guess.value, prompt.Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "guess-letter",
-                                children: letter
+                                className: letter[1] == prompt.activeLetter ? "active-letter" : "guess-letter",
+                                children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
                                 lineNumber: 80,

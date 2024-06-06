@@ -180,6 +180,11 @@
   margin: 10px;
 }
 
+.active-letter {
+  border: 5px solid #2fff00;
+  margin: 10px;
+}
+
 
 
 :root, [data-bs-theme="light"] {

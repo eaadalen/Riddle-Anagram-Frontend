@@ -35,7 +35,7 @@ export default ShortPrompt = ({ prompts }) => {
     })
   }, []);
 
-  const handleTyping = (e, AD) => {  
+  const handleTyping = (e) => {  
     if (e.key === 'Backspace') {
       dispatch1({ type: 'deleteLetter'})
     }
@@ -60,10 +60,10 @@ export default ShortPrompt = ({ prompts }) => {
     returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess[i] === undefined) {
-        returnValue.push('_')
+        returnValue.push(['_',i])
       }
       else {
-        returnValue.push(guess[i])
+        returnValue.push([guess[i],i])
       }
     }
     return returnValue
@@ -77,7 +77,7 @@ export default ShortPrompt = ({ prompts }) => {
           <div className='short-prompt-guess'>
             {(prompt._id === active.value) && 
               shortPromptArray(guess.value, prompt.Answer).map((letter) => (
-                <div key={Math.random()} className='guess-letter'>{letter}</div>
+                <div key={Math.random()} className={letter[1] == prompt.activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
               ))
             }
           </div>
