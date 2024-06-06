@@ -39,6 +39,7 @@ export const PlayView = () => {
           .then((response) => response.json())
           .then((data2) => {
             data2[0]['activeLetter'] = data2[0].Answer.indexOf(String(character))
+            data2[0]['activeGuess'] = ''
             SPs.push(data2[0])
           })
         )

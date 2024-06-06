@@ -152,18 +152,16 @@
   justify-content: center;
   align-items: center;
   width: 400px;
-  margin: 100px;
+  margin: 10px;
 }
 
 .short-prompt-container-inactive {
   text-align: center;
   border: 1px solid #000;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   width: 400px;
-  margin: 100px;
-  display: flex;
+  margin: 10px;
 }
 
 .short-prompt-guess {

@@ -24,39 +24,51 @@ function updateActive(state, action) {
 }
 
 export default ShortPrompt = ({ prompts }) => {
-  var activeDiv = null
-  const [guess, dispatch1] = useReducer(updateGuess, { value: ''})
-  const [active, dispatch2] = useReducer(updateActive, { value: ''})
+  var activeDiv = prompts[0]._id
+  const [guess, dispatch1] = useReducer(updateGuess, { value: '' })
+  const [active, dispatch2] = useReducer(updateActive, { value: '' })
+  const [guessStorage, setGuessStorage] = useState({})
 
   useEffect(() => {
-    window.addEventListener("keyup", event => handleTyping(event, activeDiv));
+    window.addEventListener("keyup", event => handleTyping(event));
+    dispatch2({ type: 'updateDiv', newDiv: activeDiv})
+    document.getElementById(activeDiv).className = 'short-prompt-container-active'
     prompts.forEach((element) => {
+      var newStorage = guessStorage
+      newStorage[String(element._id)] = ''
+      setGuessStorage(newStorage)
       document.getElementById(element._id).addEventListener("click", event => handleClick(event));
     })
   }, []);
 
   const handleTyping = (e) => {  
     if (e.key === 'Backspace') {
-      dispatch1({ type: 'deleteLetter'})
+      dispatch1({ type: 'deleteLetter' })
+      var newStorage = guessStorage
+      newStorage[String(activeDiv)] = newStorage[String(activeDiv)].slice(0, -1)
+      setGuessStorage(newStorage)
     }
     else if (/[a-zA-Z]/.test(e.key)) {
       dispatch1({ type: 'addLetter', update: e.key })
+      var newStorage = guessStorage
+      newStorage[String(activeDiv)] = newStorage[String(activeDiv)] + e.key.toUpperCase()
+      setGuessStorage(newStorage)
     }
   }
 
   const handleClick = (event) => {  
     if (event.target.className === 'short-prompt-container-inactive') {
-      prompts.forEach((element) => {
-        document.getElementById(element._id).className = 'short-prompt-container-inactive'
-      })
+      document.getElementById(activeDiv).className = 'short-prompt-container-inactive'
       document.getElementById(event.target.id).className = 'short-prompt-container-active'
       activeDiv = event.target.id
-      dispatch1({ type: 'clearText'})
       dispatch2({ type: 'updateDiv', newDiv: event.target.id})
     }
   }
 
   const shortPromptArray = (guess, answer) => {  
+    if (guess === undefined) {
+      return ['h','i']
+    }
     returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess[i] === undefined) {
@@ -75,11 +87,9 @@ export default ShortPrompt = ({ prompts }) => {
         <div key={prompt._id} id={prompt._id} className='short-prompt-container-inactive'>
           {prompt.shortPrompt}
           <div className='short-prompt-guess'>
-            {(prompt._id === active.value) && 
-              shortPromptArray(guess.value, prompt.Answer).map((letter) => (
-                <div key={Math.random()} className={letter[1] == prompt.activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
-              ))
-            }
+            {shortPromptArray(guessStorage[prompt._id], prompt.Answer).map((letter) => (
+              <div key={Math.random()} className={letter[1] == prompt.activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
+            ))}
           </div>
         </div>
         ))

@@ -7,7 +7,7 @@
 
 .short-prompt-container-active {
   width: 400px;
-  margin: 100px;
+  margin: 10px;
   border: 1px solid yellow;
   justify-content: center;
   align-items: center;
@@ -16,10 +16,8 @@
 
 .short-prompt-container-inactive {
   width: 400px;
-  margin: 100px;
+  margin: 10px;
   border: 1px solid black;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
