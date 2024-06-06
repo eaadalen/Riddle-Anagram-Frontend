@@ -1,12 +1,23 @@
 import './short-prompt.scss'
 import { useState, useEffect, useReducer } from 'react';
 
-function reducer(state, action) {
+function updateGuess(state, action) {
   switch (action.type) {
     case 'addLetter':
       return {value: state.value + action.update}
     case 'deleteLetter':
       return {value: state.value.slice(0, -1)}
+    case 'clearText':
+      return {value: ''}
+    default:
+      return state
+  }
+}
+
+function updateActive(state, action) {
+  switch (action.type) {
+    case 'updateDiv':
+      return {value: action.newDiv}
     default:
       return state
   }
@@ -14,17 +25,28 @@ function reducer(state, action) {
 
 export default ShortPrompt = ({ prompts }) => {
   var activeDiv = null
-  const [state, dispatch] = useReducer(reducer, { value: ''})
-  const [classArray, setClassArray] = useState([])
-  const [active, setActive] = useState('')
+  const [guess, dispatch1] = useReducer(updateGuess, { value: ''})
+  const [active, dispatch2] = useReducer(updateActive, { value: ''})
 
   const handleTyping = (e, AD) => {  
     if (e.key === 'Backspace') {
-      dispatch({ type: 'deleteLetter'})
+      dispatch1({ type: 'deleteLetter'})
       console.log(AD)
     }
     else if (/[a-zA-Z]/.test(e.key)) {
-      dispatch({ type: 'addLetter', update: e.key })
+      dispatch1({ type: 'addLetter', update: e.key })
+    }
+  }
+
+  const handleClick = (event) => {  
+    if (event.target.className === 'short-prompt-container-inactive') {
+      prompts.forEach((element) => {
+        document.getElementById(element._id).className = 'short-prompt-container-inactive'
+      })
+      document.getElementById(event.target.id).className = 'short-prompt-container-active'
+      activeDiv = event.target.id
+      dispatch1({ type: 'clearText'})
+      dispatch2({ type: 'updateDiv', newDiv: event.target.id})
     }
   }
 
@@ -36,30 +58,12 @@ export default ShortPrompt = ({ prompts }) => {
     return answer
   }
 
-  class _shortPrompt {
-    constructor(id, active) {
-      this.id = id;
-      this.active = active;
-    }
-  }
-
   useEffect(() => {
     window.addEventListener("keyup", event => handleTyping(event, activeDiv));
     prompts.forEach((element) => {
       document.getElementById(element._id).addEventListener("click", event => handleClick(event));
-      classArray.push(new _shortPrompt(element._id, false))
     })
   }, []);
-
-  const handleClick = (event) => {  
-    if (event.target.className === 'short-prompt-container-inactive') {
-      prompts.forEach((element) => {
-        document.getElementById(element._id).className = 'short-prompt-container-inactive'
-      })
-      document.getElementById(event.target.id).className = 'short-prompt-container-active'
-      activeDiv = event.target.id
-    }
-  }
 
   return (
     <div>
@@ -69,8 +73,8 @@ export default ShortPrompt = ({ prompts }) => {
           <br></br>
           {prompt.Answer}
           <br></br>
-          {(prompt._id === active) && 
-            <div>{state.value}</div>
+          {(prompt._id === active.value) && 
+            <div>{guess.value}</div>
           }
         </div>
         ))
