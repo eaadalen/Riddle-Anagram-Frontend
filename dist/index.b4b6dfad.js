@@ -37729,32 +37729,46 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
         document.getElementById(activeDiv).className = "short-prompt-container-active";
         prompts.forEach((element)=>{
             var newStorage = guessStorage;
-            newStorage[String(element._id)] = "";
+            newStorage[String(element._id)] = {
+                "value": "",
+                "maxLength": element.Answer.length,
+                "answer": element.Answer,
+                "locked": false
+            };
             setGuessStorage(newStorage);
             document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
         });
     }, []);
     const handleTyping = (e)=>{
-        if (e.key === "Backspace") {
-            dispatch1({
-                type: "deleteLetter"
-            });
-            var newStorage = guessStorage;
-            newStorage[String(activeDiv)] = newStorage[String(activeDiv)].slice(0, -1);
-            setGuessStorage(newStorage);
-        } else if (/[a-zA-Z]/.test(e.key)) {
+        if (e.key === "Enter") {
+            if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
+                document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                guessStorage[String(activeDiv)].locked = true;
+            }
+        } else if (e.key === "Backspace") {
+            if (guessStorage[String(activeDiv)].locked != true) {
+                dispatch1({
+                    type: "deleteLetter"
+                });
+                var newStorage = guessStorage;
+                newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1);
+                setGuessStorage(newStorage);
+            }
+        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
             dispatch1({
                 type: "addLetter",
                 update: e.key
             });
-            var newStorage = guessStorage;
-            newStorage[String(activeDiv)] = newStorage[String(activeDiv)] + e.key.toUpperCase();
-            setGuessStorage(newStorage);
+            if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
+                var newStorage = guessStorage;
+                newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase();
+                setGuessStorage(newStorage);
+            }
         }
     };
     const handleClick = (event)=>{
         if (event.target.className === "short-prompt-container-inactive") {
-            document.getElementById(activeDiv).className = "short-prompt-container-inactive";
+            if (document.getElementById(activeDiv).className != "short-prompt-container-correct") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
             document.getElementById(event.target.id).className = "short-prompt-container-active";
             activeDiv = event.target.id;
             dispatch2({
@@ -37764,17 +37778,14 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
         }
     };
     const shortPromptArray = (guess, answer)=>{
-        if (guess === undefined) return [
-            "h",
-            "i"
-        ];
+        if (guess === undefined) return [];
         returnValue = [];
-        for(let i = 0; i < answer.length; i++)if (guess[i] === undefined) returnValue.push([
+        for(let i = 0; i < answer.length; i++)if (guess.value.charAt(i) === "") returnValue.push([
             "_",
             i
         ]);
         else returnValue.push([
-            guess[i],
+            guess.value.charAt(i),
             i
         ]);
         return returnValue;
@@ -37792,23 +37803,23 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 91,
+                                lineNumber: 108,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 89,
+                        lineNumber: 106,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt._id, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 87,
+                lineNumber: 104,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 85,
+        lineNumber: 102,
         columnNumber: 5
     }, undefined);
 }, "EMl7Nspj0LGX7pDuw27eh9mIVkw=");

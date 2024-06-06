@@ -151,16 +151,25 @@
   border: 1px solid #ff0;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 450px;
   margin: 10px;
 }
 
 .short-prompt-container-inactive {
   text-align: center;
-  border: 1px solid #000;
+  border: 1px solid #ce16ce;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 450px;
+  margin: 10px;
+}
+
+.short-prompt-container-correct {
+  text-align: center;
+  border: 3px solid green;
+  justify-content: center;
+  align-items: center;
+  width: 450px;
   margin: 10px;
 }
 
@@ -179,7 +188,7 @@
 }
 
 .active-letter {
-  border: 5px solid #2fff00;
+  border: 5px solid red;
   margin: 10px;
 }
 

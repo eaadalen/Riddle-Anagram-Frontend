@@ -1,1 +1,2 @@
 -fix page loading. Right now you're using a manual timeout
+-add upper limit to guess length
