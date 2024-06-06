@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
 import ShortPrompt from './short-prompt.jsx'
 import LongPrompt from './long-prompt.jsx'
+import Unscramble from './unscramble.jsx'
 
 export const PlayView = () => {
   const [shortPrompts, setShortPrompts] = useState([])
   const [longPrompt, setLongPrompt] = useState([])
   const [loaded, setLoaded] = useState(false)
+  const [test, setTest] = useState('')
 
   useEffect(() => {
     async function startup() {  
@@ -62,6 +64,10 @@ export const PlayView = () => {
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
+
+  handleLanguage = (langValue) => {
+    setTest(langValue)
+  }
     
   return (
     <div>
@@ -74,6 +80,7 @@ export const PlayView = () => {
         <div className="container-eka">
           <ShortPrompt prompts={shortPrompts}/>
           <LongPrompt prompt={longPrompt}/>
+          <Unscramble letters={test}/>
         </div>
       }
     </div>

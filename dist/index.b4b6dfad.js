@@ -37530,12 +37530,15 @@ var _shortPromptJsx = require("./short-prompt.jsx");
 var _shortPromptJsxDefault = parcelHelpers.interopDefault(_shortPromptJsx);
 var _longPromptJsx = require("./long-prompt.jsx");
 var _longPromptJsxDefault = parcelHelpers.interopDefault(_longPromptJsx);
+var _unscrambleJsx = require("./unscramble.jsx");
+var _unscrambleJsxDefault = parcelHelpers.interopDefault(_unscrambleJsx);
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
     const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
     const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
     const [loaded, setLoaded] = (0, _react.useState)(false);
+    const [test, setTest] = (0, _react.useState)("");
     (0, _react.useEffect)(()=>{
         async function startup() {
             var LPs = [];
@@ -37575,6 +37578,9 @@ const PlayView = ()=>{
     function sleep(ms) {
         return new Promise((resolve)=>setTimeout(resolve, ms));
     }
+    handleLanguage = (langValue)=>{
+        setTest(langValue);
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             !loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37583,12 +37589,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 70,
+                    lineNumber: 76,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 69,
+                lineNumber: 75,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37598,30 +37604,37 @@ const PlayView = ()=>{
                         prompts: shortPrompts
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 75,
+                        lineNumber: 81,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
                         prompt: longPrompt
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 76,
+                        lineNumber: 82,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _unscrambleJsxDefault.default), {
+                        letters: test
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 83,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 74,
+                lineNumber: 80,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 67,
+        lineNumber: 73,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "vT54rwsB4TMoi8Xxor6bMkTYVSc=");
+_s(PlayView, "dPD9DXl6tqNTcsHdpUxJ87nax04=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -37631,7 +37644,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx","./unscramble.jsx":"7fYMA"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -37864,6 +37877,33 @@ exports.default = LongPrompt = ({ prompt })=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"7fYMA":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$dbfa = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$dbfa.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _unscrambleScss = require("./unscramble.scss");
+var _react = require("react");
+exports.default = Unscramble = ({ letters })=>{
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: letters
+    }, void 0, false, {
+        fileName: "src/components/play-view/unscramble.jsx",
+        lineNumber: 7,
+        columnNumber: 5
+    }, undefined);
+};
+
+  $parcel$ReactRefreshHelpers$dbfa.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./unscramble.scss":"j2C8j","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"j2C8j":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
