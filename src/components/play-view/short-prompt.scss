@@ -5,26 +5,17 @@
   border: 1px solid black;
 }
 
-.short-prompt {
-  margin: 10px;
-  border: 1px solid blue;
-  margin: 10px;
-  height: 100px;
-}
-
 .short-prompt-container-active {
-  width: auto;
+  width: 400px;
   margin: 100px;
   border: 1px solid yellow;
-  display: flex;
-  flex-wrap: wrap;
-justify-content: center;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
 
 .short-prompt-container-inactive {
-  width: auto;
+  width: 400px;
   margin: 100px;
   border: 1px solid black;
   display: flex;
@@ -34,16 +25,16 @@ justify-content: center;
   text-align: center;
 }
 
-.short-prompt-answer {
-border: 1px solid orange;
-margin: 10px;
-display: flex;
-justify-content: center;
+.short-prompt-guess {
+  border: 1px solid orange;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.answer-letter {
-border: 1px solid cyan;
-margin: 10px;
+.guess-letter {
+  border: 1px solid cyan;
+  margin: 10px;
 }

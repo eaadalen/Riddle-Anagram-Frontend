@@ -146,21 +146,13 @@
   padding-right: 10px;
 }
 
-.short-prompt {
-  border: 1px solid #00f;
-  height: 100px;
-  margin: 10px;
-}
-
 .short-prompt-container-active {
   text-align: center;
   border: 1px solid #ff0;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: 400px;
   margin: 100px;
-  display: flex;
 }
 
 .short-prompt-container-inactive {
@@ -169,12 +161,12 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: auto;
+  width: 400px;
   margin: 100px;
   display: flex;
 }
 
-.short-prompt-answer {
+.short-prompt-guess {
   text-align: center;
   border: 1px solid orange;
   justify-content: center;
@@ -183,7 +175,7 @@
   display: flex;
 }
 
-.answer-letter {
+.guess-letter {
   border: 1px solid #0ff;
   margin: 10px;
 }

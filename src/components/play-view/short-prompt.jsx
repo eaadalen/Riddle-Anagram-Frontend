@@ -4,7 +4,7 @@ import { useState, useEffect, useReducer } from 'react';
 function updateGuess(state, action) {
   switch (action.type) {
     case 'addLetter':
-      return {value: state.value + action.update}
+      return {value: state.value + action.update.toUpperCase()}
     case 'deleteLetter':
       return {value: state.value.slice(0, -1)}
     case 'clearText':
@@ -28,10 +28,16 @@ export default ShortPrompt = ({ prompts }) => {
   const [guess, dispatch1] = useReducer(updateGuess, { value: ''})
   const [active, dispatch2] = useReducer(updateActive, { value: ''})
 
+  useEffect(() => {
+    window.addEventListener("keyup", event => handleTyping(event, activeDiv));
+    prompts.forEach((element) => {
+      document.getElementById(element._id).addEventListener("click", event => handleClick(event));
+    })
+  }, []);
+
   const handleTyping = (e, AD) => {  
     if (e.key === 'Backspace') {
       dispatch1({ type: 'deleteLetter'})
-      console.log(AD)
     }
     else if (/[a-zA-Z]/.test(e.key)) {
       dispatch1({ type: 'addLetter', update: e.key })
@@ -50,32 +56,31 @@ export default ShortPrompt = ({ prompts }) => {
     }
   }
 
-  const shortPromptArray = (word) => {  
-    answer = []
-    for (let i = 0; i < word.length; i++) {
-      answer.push(word[i])
+  const shortPromptArray = (guess, answer) => {  
+    returnValue = []
+    for (let i = 0; i < answer.length; i++) {
+      if (guess[i] === undefined) {
+        returnValue.push('_')
+      }
+      else {
+        returnValue.push(guess[i])
+      }
     }
-    return answer
+    return returnValue
   }
-
-  useEffect(() => {
-    window.addEventListener("keyup", event => handleTyping(event, activeDiv));
-    prompts.forEach((element) => {
-      document.getElementById(element._id).addEventListener("click", event => handleClick(event));
-    })
-  }, []);
 
   return (
     <div>
       {prompts.map((prompt) => (
         <div key={prompt._id} id={prompt._id} className='short-prompt-container-inactive'>
           {prompt.shortPrompt}
-          <br></br>
-          {prompt.Answer}
-          <br></br>
-          {(prompt._id === active.value) && 
-            <div>{guess.value}</div>
-          }
+          <div className='short-prompt-guess'>
+            {(prompt._id === active.value) && 
+              shortPromptArray(guess.value, prompt.Answer).map((letter) => (
+                <div key={Math.random()} className='guess-letter'>{letter}</div>
+              ))
+            }
+          </div>
         </div>
         ))
       }

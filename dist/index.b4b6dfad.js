@@ -37685,7 +37685,7 @@ function updateGuess(state, action) {
     switch(action.type){
         case "addLetter":
             return {
-                value: state.value + action.update
+                value: state.value + action.update.toUpperCase()
             };
         case "deleteLetter":
             return {
@@ -37718,13 +37718,17 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
     const [active, dispatch2] = (0, _react.useReducer)(updateActive, {
         value: ""
     });
+    (0, _react.useEffect)(()=>{
+        window.addEventListener("keyup", (event)=>handleTyping(event, activeDiv));
+        prompts.forEach((element)=>{
+            document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
+        });
+    }, []);
     const handleTyping = (e, AD)=>{
-        if (e.key === "Backspace") {
-            dispatch1({
-                type: "deleteLetter"
-            });
-            console.log(AD);
-        } else if (/[a-zA-Z]/.test(e.key)) dispatch1({
+        if (e.key === "Backspace") dispatch1({
+            type: "deleteLetter"
+        });
+        else if (/[a-zA-Z]/.test(e.key)) dispatch1({
             type: "addLetter",
             update: e.key
         });
@@ -37745,50 +37749,42 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
             });
         }
     };
-    const shortPromptArray = (word)=>{
-        answer = [];
-        for(let i = 0; i < word.length; i++)answer.push(word[i]);
-        return answer;
+    const shortPromptArray = (guess, answer)=>{
+        returnValue = [];
+        for(let i = 0; i < answer.length; i++)if (guess[i] === undefined) returnValue.push("_");
+        else returnValue.push(guess[i]);
+        return returnValue;
     };
-    (0, _react.useEffect)(()=>{
-        window.addEventListener("keyup", (event)=>handleTyping(event, activeDiv));
-        prompts.forEach((element)=>{
-            document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
-        });
-    }, []);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: prompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: prompt._id,
                 className: "short-prompt-container-inactive",
                 children: [
                     prompt.shortPrompt,
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                        fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 73,
-                        columnNumber: 11
-                    }, undefined),
-                    prompt.Answer,
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                        fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 75,
-                        columnNumber: 11
-                    }, undefined),
-                    prompt._id === active.value && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        children: guess.value
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt-guess",
+                        children: prompt._id === active.value && shortPromptArray(guess.value, prompt.Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "guess-letter",
+                                children: letter
+                            }, Math.random(), false, {
+                                fileName: "src/components/play-view/short-prompt.jsx",
+                                lineNumber: 80,
+                                columnNumber: 17
+                            }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
                         lineNumber: 77,
-                        columnNumber: 13
+                        columnNumber: 11
                     }, undefined)
                 ]
             }, prompt._id, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 71,
+                lineNumber: 75,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 69,
+        lineNumber: 73,
         columnNumber: 5
     }, undefined);
 }, "+iA6mxwls/roMNHFcoW6A6ewaIE=");
@@ -37798,7 +37794,7 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./short-prompt.scss":"jEoVi"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$dbb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
