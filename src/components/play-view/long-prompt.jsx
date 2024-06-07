@@ -1,12 +1,16 @@
 import "./long-prompt.scss"
 import { useState, useEffect } from "react";
+import Form from "react-bootstrap/Form";
 
 export default LongPrompt = ({ prompt, lettersSolved }) => {
   const [unscramble, setUnscramble] = useState()
 
-  const handleSubmit = (event) => {  
-    event.preventDefault()
-    if (unscramble === prompt[0].Answer) {
+  useEffect(() => {
+    handleSubmit(unscramble)
+  }, [unscramble]);
+
+  const handleSubmit = (word) => {  
+    if (word === prompt[0].Answer) {
       console.log('correct!')
     }
   }
@@ -16,9 +20,13 @@ export default LongPrompt = ({ prompt, lettersSolved }) => {
       {prompt[0].longPrompt}
       <br></br>
       {lettersSolved}
-      <form>
-        <input type="text" onSubmit={handleSubmit} value={unscramble}></input>
-      </form>
+      <Form.Group>
+        <Form.Control
+            type="text"
+            onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, ''))}
+            id="answer-form"
+        />
+      </Form.Group>
     </div>
   )
 }

@@ -37621,33 +37621,35 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToParent })=>{
         solvedLetters.value
     ]);
     const handleTyping = (e)=>{
-        if (e.key === "Enter") {
-            if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
-                document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                guessStorage[String(activeDiv)].locked = true;
-                dispatch3({
-                    type: "addLetter",
-                    update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)
-                });
-            }
-        } else if (e.key === "Backspace") {
-            if (guessStorage[String(activeDiv)].locked != true) {
+        if (e.target.id != "answer-form") {
+            if (e.key === "Enter") {
+                if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
+                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                    guessStorage[String(activeDiv)].locked = true;
+                    dispatch3({
+                        type: "addLetter",
+                        update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)
+                    });
+                }
+            } else if (e.key === "Backspace") {
+                if (guessStorage[String(activeDiv)].locked != true) {
+                    dispatch1({
+                        type: "deleteLetter"
+                    });
+                    var newStorage = guessStorage;
+                    newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1);
+                    setGuessStorage(newStorage);
+                }
+            } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
                 dispatch1({
-                    type: "deleteLetter"
+                    type: "addLetter",
+                    update: e.key
                 });
-                var newStorage = guessStorage;
-                newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1);
-                setGuessStorage(newStorage);
-            }
-        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-            dispatch1({
-                type: "addLetter",
-                update: e.key
-            });
-            if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
-                var newStorage = guessStorage;
-                newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase();
-                setGuessStorage(newStorage);
+                if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
+                    var newStorage = guessStorage;
+                    newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase();
+                    setGuessStorage(newStorage);
+                }
             }
         }
     };
@@ -37691,23 +37693,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToParent })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 128,
+                                lineNumber: 130,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 126,
+                        lineNumber: 128,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt._id, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 124,
+                lineNumber: 126,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 122,
+        lineNumber: 124,
         columnNumber: 5
     }, undefined);
 }, "L2KA+Xlm8ug4cxZZUL+TOykqlQk=");
@@ -37729,51 +37731,57 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _longPromptScss = require("./long-prompt.scss");
 var _react = require("react");
+var _form = require("react-bootstrap/Form");
+var _formDefault = parcelHelpers.interopDefault(_form);
 var _s = $RefreshSig$();
 exports.default = LongPrompt = _s(({ prompt, lettersSolved })=>{
     _s();
     const [unscramble, setUnscramble] = (0, _react.useState)();
-    const handleSubmit = (event)=>{
-        event.preventDefault();
-        if (unscramble === prompt[0].Answer) console.log("correct!");
+    (0, _react.useEffect)(()=>{
+        handleSubmit(unscramble);
+    }, [
+        unscramble
+    ]);
+    const handleSubmit = (word)=>{
+        if (word === prompt[0].Answer) console.log("correct!");
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             prompt[0].longPrompt,
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 17,
+                lineNumber: 21,
                 columnNumber: 7
             }, undefined),
             lettersSolved,
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                     type: "text",
-                    onSubmit: handleSubmit,
-                    value: unscramble
+                    onChange: (e)=>setUnscramble(e.target.value.replace(/\s/g, "")),
+                    id: "answer-form"
                 }, void 0, false, {
                     fileName: "src/components/play-view/long-prompt.jsx",
-                    lineNumber: 20,
+                    lineNumber: 24,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 19,
+                lineNumber: 23,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/long-prompt.jsx",
-        lineNumber: 15,
+        lineNumber: 19,
         columnNumber: 5
     }, undefined);
-}, "xzhmqdZo/b8kD6w07CbAtrQEAto=");
+}, "j6BzKzs3dwNR/GPMDice5oJkG2g=");
 
   $parcel$ReactRefreshHelpers$dbb1.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap/Form":"iBZ80"}],"4vwJ7":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

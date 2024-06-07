@@ -62,27 +62,29 @@ export default ShortPrompt = ({ prompts, sendDataToParent }) => {
   }, [solvedLetters.value]);
 
   const handleTyping = (e) => {  
-    if (e.key === 'Enter') {
-      if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
-        document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-        guessStorage[String(activeDiv)].locked = true
-        dispatch3({ type: 'addLetter', update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)})
+    if (e.target.id != 'answer-form') {
+      if (e.key === 'Enter') {
+        if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
+          document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+          guessStorage[String(activeDiv)].locked = true
+          dispatch3({ type: 'addLetter', update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)})
+        }
       }
-    }
-    else if (e.key === 'Backspace') {
-      if (guessStorage[String(activeDiv)].locked != true) {
-        dispatch1({ type: 'deleteLetter' })
-        var newStorage = guessStorage
-        newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1)
-        setGuessStorage(newStorage)
+      else if (e.key === 'Backspace') {
+        if (guessStorage[String(activeDiv)].locked != true) {
+          dispatch1({ type: 'deleteLetter' })
+          var newStorage = guessStorage
+          newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1)
+          setGuessStorage(newStorage)
+        }
       }
-    }
-    else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
-      dispatch1({ type: 'addLetter', update: e.key })
-      if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
-        var newStorage = guessStorage
-        newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase()
-        setGuessStorage(newStorage)
+      else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
+        dispatch1({ type: 'addLetter', update: e.key })
+        if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
+          var newStorage = guessStorage
+          newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase()
+          setGuessStorage(newStorage)
+        }
       }
     }
   }
