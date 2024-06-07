@@ -2,3 +2,5 @@
 -add selection without replacement to backend for short prompts
 -create dictionary of short prompts in play view, send to shortPromptsView. Don't create it again in shortpromptsview
 -figure out whether you actually need reducers
+-update parent/child function and variable names to be match this app
+-lock out short prompt answers after long prompt is answered

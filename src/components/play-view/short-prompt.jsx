@@ -32,7 +32,7 @@ function updateLetters(state, action) {
   }
 }
 
-export default ShortPrompt = ({ prompts, sendDataToParent }) => {
+export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   var activeDiv = prompts[0]._id
   const [guess, dispatch1] = useReducer(updateGuess, { value: '' })
   const [active, dispatch2] = useReducer(updateActive, { value: '' })
@@ -58,7 +58,7 @@ export default ShortPrompt = ({ prompts, sendDataToParent }) => {
   }, []);
 
   useEffect(() => {
-    sendDataToParent(solvedLetters.value);
+    sendDataToSP(solvedLetters.value);
   }, [solvedLetters.value]);
 
   const handleTyping = (e) => {  
@@ -117,7 +117,7 @@ export default ShortPrompt = ({ prompts, sendDataToParent }) => {
   }
 
   function handleClick1() {
-    sendDataToParent(data);
+    sendDataToSP(data);
   }
 
   return (

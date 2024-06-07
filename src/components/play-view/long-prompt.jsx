@@ -2,7 +2,7 @@ import "./long-prompt.scss"
 import { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 
-export default LongPrompt = ({ prompt, lettersSolved }) => {
+export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [unscramble, setUnscramble] = useState()
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default LongPrompt = ({ prompt, lettersSolved }) => {
 
   const handleSubmit = (word) => {  
     if (word === prompt[0].Answer) {
-      console.log('correct!')
+      sendDataToLP(true);
     }
   }
 

@@ -3,12 +3,14 @@ import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
 import ShortPrompt from './short-prompt.jsx'
 import LongPrompt from './long-prompt.jsx'
+import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
   const [shortPrompts, setShortPrompts] = useState([])
   const [longPrompt, setLongPrompt] = useState([])
   const [loaded, setLoaded] = useState(false)
-  const [dataFromChild, setDataFromChild] = useState("");
+  const [dataFromSP, setDataFromSP] = useState("");
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     async function startup() {  
@@ -64,9 +66,23 @@ export const PlayView = () => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  function handleDataFromChild(data) {
-    setDataFromChild(data);
+  function handleDataFromSP(data) {
+    setDataFromSP(data);
   }
+
+  function handleDataFromLP() {
+    setShowModal(true)
+  }
+
+  const toggleModal = () => {  
+    if (showModal == true) {
+      setShowModal(false)
+      //location.reload()
+    }
+    else {
+      setShowModal(true)
+    }
+  }  
     
   return (
     <div>
@@ -77,9 +93,20 @@ export const PlayView = () => {
       }
       {loaded &&
         <div className="container-eka">
-          <ShortPrompt prompts={shortPrompts} sendDataToParent={handleDataFromChild}/>
-          <LongPrompt prompt={longPrompt} lettersSolved={dataFromChild}/>
+          <ShortPrompt prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
+          <LongPrompt prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
         </div>
+      }
+      {showModal &&
+        <Modal show={true} onHide={toggleModal} className="modal">  
+          <Modal.Body className="modalContainer">
+            <div className="gameOver">
+              <div>
+                *insert score chart, like wordle*
+              </div> 
+            </div>
+          </Modal.Body>  
+        </Modal> 
       }
     </div>
   )
