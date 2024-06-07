@@ -23,10 +23,20 @@ function updateActive(state, action) {
   }
 }
 
-export default ShortPrompt = ({ prompts }) => {
+function updateLetters(state, action) {
+  switch (action.type) {
+    case 'addLetter':
+      return {value: state.value + action.update}
+    default:
+      return state
+  }
+}
+
+export default ShortPrompt = ({ prompts, sendDataToParent }) => {
   var activeDiv = prompts[0]._id
   const [guess, dispatch1] = useReducer(updateGuess, { value: '' })
   const [active, dispatch2] = useReducer(updateActive, { value: '' })
+  const [solvedLetters, dispatch3] = useReducer(updateLetters, { value: '' })
   const [guessStorage, setGuessStorage] = useState({})
 
   useEffect(() => {
@@ -37,6 +47,7 @@ export default ShortPrompt = ({ prompts }) => {
       var newStorage = guessStorage
       newStorage[String(element._id)] = {
         'value': '', 
+        'activeLetter': element.activeLetter,
         'maxLength': element.Answer.length, 
         'answer': element.Answer,
         'locked': false
@@ -46,11 +57,16 @@ export default ShortPrompt = ({ prompts }) => {
     })
   }, []);
 
+  useEffect(() => {
+    sendDataToParent(solvedLetters.value);
+  }, [solvedLetters.value]);
+
   const handleTyping = (e) => {  
     if (e.key === 'Enter') {
       if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
         document.getElementById(activeDiv).className = 'short-prompt-container-correct'
         guessStorage[String(activeDiv)].locked = true
+        dispatch3({ type: 'addLetter', update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)})
       }
     }
     else if (e.key === 'Backspace') {
@@ -96,6 +112,10 @@ export default ShortPrompt = ({ prompts }) => {
       }
     }
     return returnValue
+  }
+
+  function handleClick1() {
+    sendDataToParent(data);
   }
 
   return (

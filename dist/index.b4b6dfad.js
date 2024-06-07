@@ -26991,7 +26991,6 @@ var _react = require("react");
 var _loginView = require("../login-view/login-view");
 var _signupView = require("../signup-view/signup-view");
 var _welcomeView = require("../welcome-view/welcome-view");
-var _testView = require("../test-view/test-view");
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 var _playView = require("../play-view/play-view");
@@ -27012,13 +27011,13 @@ const MainView = ()=>{
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _welcomeView.WelcomeView), {}, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 24,
+                                lineNumber: 23,
                                 columnNumber: 17
                             }, void 0)
                         }, void 0, false)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 20,
+                        lineNumber: 19,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27028,7 +27027,7 @@ const MainView = ()=>{
                                 to: "/play"
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 33,
+                                lineNumber: 32,
                                 columnNumber: 19
                             }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                 md: 5,
@@ -27039,18 +27038,18 @@ const MainView = ()=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 36,
+                                    lineNumber: 35,
                                     columnNumber: 21
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 35,
+                                lineNumber: 34,
                                 columnNumber: 19
                             }, void 0)
                         }, void 0, false)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 28,
+                        lineNumber: 27,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27060,7 +27059,7 @@ const MainView = ()=>{
                                 to: "/play"
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 50,
+                                lineNumber: 49,
                                 columnNumber: 19
                             }, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Col), {
                                 md: 12,
@@ -27071,18 +27070,18 @@ const MainView = ()=>{
                                     }
                                 }, void 0, false, {
                                     fileName: "src/components/main-view/main-view.jsx",
-                                    lineNumber: 53,
+                                    lineNumber: 52,
                                     columnNumber: 21
                                 }, void 0)
                             }, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 52,
+                                lineNumber: 51,
                                 columnNumber: 19
                             }, void 0)
                         }, void 0, false)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 45,
+                        lineNumber: 44,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27090,43 +27089,29 @@ const MainView = ()=>{
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
                             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _playView.PlayView), {}, void 0, false, {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 66,
+                                lineNumber: 65,
                                 columnNumber: 17
                             }, void 0)
                         }, void 0, false)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 62,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
-                        path: "/test",
-                        element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-                            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _testView.TestView), {}, void 0, false, {
-                                fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 74,
-                                columnNumber: 17
-                            }, void 0)
-                        }, void 0, false)
-                    }, void 0, false, {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 70,
+                        lineNumber: 61,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 19,
+                lineNumber: 18,
                 columnNumber: 9
             }, undefined)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 18,
+            lineNumber: 17,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 17,
+        lineNumber: 16,
         columnNumber: 5
     }, undefined);
 };
@@ -27140,7 +27125,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../welcome-view/welcome-view":"6HdeQ","../test-view/test-view":"4sGrz","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","../play-view/play-view":"iLJCD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9YtA0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","../login-view/login-view":"9YtA0","../signup-view/signup-view":"4OGiN","../welcome-view/welcome-view":"6HdeQ","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","../play-view/play-view":"iLJCD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"9YtA0":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$9fee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -36988,136 +36973,7 @@ $RefreshReg$(_c, "WelcomeView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./welcome-view.scss":"esDIB","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"esDIB":[function() {},{}],"4sGrz":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$44d7 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$44d7.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "TestView", ()=>TestView);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-const TestView = ()=>{
-    async function generateWord() {
-        const response = await fetch("https://random-word-api.herokuapp.com/word");
-        const response_json = await response.json();
-        return response_json[0];
-    }
-    async function generateValidatedWord() {
-        const response = await fetch("https://spelling-game-ef1de28a171a.herokuapp.com/random");
-        const response_json = await response.json();
-        return response_json[0]["Spelling"];
-    }
-    async function getAudioID(random) {
-        var dict_url = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + random + "?key=aede8a6f-61af-4667-bd27-95b2786bca10";
-        const response = await fetch(dict_url);
-        const response_json = await response.json();
-        try {
-            var temp_word = response_json[0]["meta"]["id"];
-            if (temp_word.includes("-") == false && temp_word.includes(":") == false && temp_word.includes(" ") == false && /\d/.test(temp_word) == false) return [
-                String(response_json[0]["hwi"]["prs"][0]["sound"]["audio"]),
-                String(response_json[0]["meta"]["id"]).toLowerCase()
-            ];
-        } catch (error) {
-            return undefined;
-        }
-    }
-    async function generateAudioObject(raw_word, soundID) {
-        var sound_url = "https://media.merriam-webster.com/audio/prons/en/us/mp3/" + raw_word.charAt(0) + "/" + soundID + ".mp3";
-        //var sound_url = "https://media.merriam-webster.com/audio/prons/en/us/mp3/"  + "f" + "/" + "fruity01" + ".mp3";
-        var newAudioURL = null;
-        var a = null;
-        await fetch(sound_url).then((res)=>res.blob()).then((myBlob)=>{
-            newAudioURL = URL.createObjectURL(myBlob);
-            a = new Audio(newAudioURL);
-        }).catch((error)=>{
-            a = undefined;
-        });
-        return a;
-    }
-    async function getSound() {
-        const random_word = await generateWord();
-        const calc_soundID = await getAudioID(random_word);
-        try {
-            if (calc_soundID[0] != undefined) {
-                const audioObject = await generateAudioObject(random_word, calc_soundID[0]);
-                return [
-                    audioObject,
-                    calc_soundID[1]
-                ];
-            }
-        } catch  {
-        // do nothing
-        }
-    }
-    async function playSound() {
-        var i = 0;
-        var audio = null;
-        while(i < 10000){
-            await getSound().then((response)=>audio = response);
-            try {
-                //console.log("audio[0]: " + String(audio[0]) + " audio[1]: " + String(audio[1]))
-                if (audio[0] != undefined) generateWordBank(audio[1]);
-            } catch  {
-            // do nothing
-            }
-            i = i + 1;
-            audio = false;
-        }
-    }
-    const generateWordBank = (validated_word)=>{
-        const data = {
-            Spelling: validated_word
-        };
-        console.log(data);
-        fetch("https://spelling-game-ef1de28a171a.herokuapp.com/words", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-    };
-    var audio = null;
-    document.addEventListener("keypress", (event)=>{
-        getSound().then((response)=>audio = response);
-        try {
-            console.log("audio[0]: " + String(audio[0]) + " audio[1]: " + String(audio[1]));
-            audio[0].play();
-        } catch  {
-        // do nothing
-        }
-    });
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "container",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-            className: "button",
-            onClick: playSound,
-            children: "Play Sound"
-        }, void 0, false, {
-            fileName: "src/components/test-view/test-view.jsx",
-            lineNumber: 120,
-            columnNumber: 11
-        }, undefined)
-    }, void 0, false, {
-        fileName: "src/components/test-view/test-view.jsx",
-        lineNumber: 119,
-        columnNumber: 7
-    }, undefined);
-};
-_c = TestView;
-var _c;
-$RefreshReg$(_c, "TestView");
-
-  $parcel$ReactRefreshHelpers$44d7.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3AD9A":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./welcome-view.scss":"esDIB","react":"21dqq","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"esDIB":[function() {},{}],"3AD9A":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Accordion", ()=>(0, _accordionDefault.default));
@@ -37530,15 +37386,13 @@ var _shortPromptJsx = require("./short-prompt.jsx");
 var _shortPromptJsxDefault = parcelHelpers.interopDefault(_shortPromptJsx);
 var _longPromptJsx = require("./long-prompt.jsx");
 var _longPromptJsxDefault = parcelHelpers.interopDefault(_longPromptJsx);
-var _unscrambleJsx = require("./unscramble.jsx");
-var _unscrambleJsxDefault = parcelHelpers.interopDefault(_unscrambleJsx);
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
     const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
     const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
     const [loaded, setLoaded] = (0, _react.useState)(false);
-    const [test, setTest] = (0, _react.useState)("");
+    const [dataFromChild, setDataFromChild] = (0, _react.useState)("");
     (0, _react.useEffect)(()=>{
         async function startup() {
             var LPs = [];
@@ -37578,9 +37432,9 @@ const PlayView = ()=>{
     function sleep(ms) {
         return new Promise((resolve)=>setTimeout(resolve, ms));
     }
-    handleLanguage = (langValue)=>{
-        setTest(langValue);
-    };
+    function handleDataFromChild(data) {
+        setDataFromChild(data);
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             !loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -37589,52 +37443,47 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 76,
+                    lineNumber: 75,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 75,
+                lineNumber: 74,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "container-eka",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptJsxDefault.default), {
-                        prompts: shortPrompts
+                        prompts: shortPrompts,
+                        sendDataToParent: handleDataFromChild
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 81,
+                        lineNumber: 80,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
-                        prompt: longPrompt
+                        prompt: longPrompt,
+                        lettersSolved: dataFromChild
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 82,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _unscrambleJsxDefault.default), {
-                        letters: test
-                    }, void 0, false, {
-                        fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 83,
+                        lineNumber: 81,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 80,
+                lineNumber: 79,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 73,
+        lineNumber: 72,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "dPD9DXl6tqNTcsHdpUxJ87nax04=");
+_s(PlayView, "n639z3LCIxFrpr0cfWRHG9biVv8=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -37644,7 +37493,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx","./unscramble.jsx":"7fYMA"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -37723,13 +37572,26 @@ function updateActive(state, action) {
             return state;
     }
 }
-exports.default = ShortPrompt = _s(({ prompts })=>{
+function updateLetters(state, action) {
+    switch(action.type){
+        case "addLetter":
+            return {
+                value: state.value + action.update
+            };
+        default:
+            return state;
+    }
+}
+exports.default = ShortPrompt = _s(({ prompts, sendDataToParent })=>{
     _s();
     var activeDiv = prompts[0]._id;
     const [guess, dispatch1] = (0, _react.useReducer)(updateGuess, {
         value: ""
     });
     const [active, dispatch2] = (0, _react.useReducer)(updateActive, {
+        value: ""
+    });
+    const [solvedLetters, dispatch3] = (0, _react.useReducer)(updateLetters, {
         value: ""
     });
     const [guessStorage, setGuessStorage] = (0, _react.useState)({});
@@ -37744,6 +37606,7 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
             var newStorage = guessStorage;
             newStorage[String(element._id)] = {
                 "value": "",
+                "activeLetter": element.activeLetter,
                 "maxLength": element.Answer.length,
                 "answer": element.Answer,
                 "locked": false
@@ -37752,11 +37615,20 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
             document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
         });
     }, []);
+    (0, _react.useEffect)(()=>{
+        sendDataToParent(solvedLetters.value);
+    }, [
+        solvedLetters.value
+    ]);
     const handleTyping = (e)=>{
         if (e.key === "Enter") {
             if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
                 document.getElementById(activeDiv).className = "short-prompt-container-correct";
                 guessStorage[String(activeDiv)].locked = true;
+                dispatch3({
+                    type: "addLetter",
+                    update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)
+                });
             }
         } else if (e.key === "Backspace") {
             if (guessStorage[String(activeDiv)].locked != true) {
@@ -37803,6 +37675,9 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
         ]);
         return returnValue;
     };
+    function handleClick1() {
+        sendDataToParent(data);
+    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: prompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: prompt._id,
@@ -37816,26 +37691,26 @@ exports.default = ShortPrompt = _s(({ prompts })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 108,
+                                lineNumber: 128,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 106,
+                        lineNumber: 126,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt._id, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 104,
+                lineNumber: 124,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 102,
+        lineNumber: 122,
         columnNumber: 5
     }, undefined);
-}, "EMl7Nspj0LGX7pDuw27eh9mIVkw=");
+}, "L2KA+Xlm8ug4cxZZUL+TOykqlQk=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {
@@ -37854,56 +37729,51 @@ parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _longPromptScss = require("./long-prompt.scss");
 var _react = require("react");
-exports.default = LongPrompt = ({ prompt })=>{
+var _s = $RefreshSig$();
+exports.default = LongPrompt = _s(({ prompt, lettersSolved })=>{
+    _s();
+    const [unscramble, setUnscramble] = (0, _react.useState)();
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+        if (unscramble === prompt[0].Answer) console.log("correct!");
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             prompt[0].longPrompt,
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 9,
+                lineNumber: 17,
                 columnNumber: 7
             }, undefined),
-            prompt[0].Answer
+            lettersSolved,
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                    type: "text",
+                    onSubmit: handleSubmit,
+                    value: unscramble
+                }, void 0, false, {
+                    fileName: "src/components/play-view/long-prompt.jsx",
+                    lineNumber: 20,
+                    columnNumber: 9
+                }, undefined)
+            }, void 0, false, {
+                fileName: "src/components/play-view/long-prompt.jsx",
+                lineNumber: 19,
+                columnNumber: 7
+            }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/long-prompt.jsx",
-        lineNumber: 7,
+        lineNumber: 15,
         columnNumber: 5
     }, undefined);
-};
+}, "xzhmqdZo/b8kD6w07CbAtrQEAto=");
 
   $parcel$ReactRefreshHelpers$dbb1.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"7fYMA":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$dbfa = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$dbfa.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _unscrambleScss = require("./unscramble.scss");
-var _react = require("react");
-exports.default = Unscramble = ({ letters })=>{
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: letters
-    }, void 0, false, {
-        fileName: "src/components/play-view/unscramble.jsx",
-        lineNumber: 7,
-        columnNumber: 5
-    }, undefined);
-};
-
-  $parcel$ReactRefreshHelpers$dbfa.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","./unscramble.scss":"j2C8j","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"j2C8j":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
