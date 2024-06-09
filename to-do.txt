@@ -1,4 +1,3 @@
 -add selection without replacement to backend for short prompts
 -figure out whether you actually need reducers
 -style app
--change backend to return shortprompts as a whole instead of individually

@@ -14,7 +14,7 @@ export const PlayView = () => {
 
   useEffect(() => {
     fetch(
-      "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
+      "https://riddle-unscramble-game-f456ae714e99.herokuapp.com/random",
       {
           method: "GET",
           headers: {
@@ -23,35 +23,22 @@ export const PlayView = () => {
       }
     )
     .then((response) => response.json())
-    .then((data1) => {
-      setLongPrompt(data1[0])
-      data1[0].Answer.split("").forEach(character => 
-        fetch(
-          "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
-          {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              }
-          }
-        )
-        .then((response) => response.json())
-        .then((data2) => {
-          shortPrompts[data2[0]._id] = {
-            'shortPrompt': data2[0].shortPrompt,
-            'Answer': data2[0].Answer,
-            'activeLetter': data2[0].Answer.indexOf(String(character)),
-            'activeGuess': '',
-            'maxLength': data2[0].Answer.length,
-            'locked': false
-          }
-          console.log('SP Length: ' + String(Object.keys(shortPrompts).length))
-          console.log('LP Length: ' + String(data1[0].Answer.length))
-          if (Object.keys(shortPrompts).length === data1[0].Answer.length) {
-            setLoaded(true)
-          }
-        })
+    .then((LP) => {
+      setLongPrompt(LP[0])
+      fetch(
+        "https://riddle-unscramble-game-f456ae714e99.herokuapp.com/spL/" + String(LP[0].Answer),
+        {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+        }
       )
+      .then((response) => response.json())
+      .then((SP) => {
+        setShortPrompts(SP)
+        setLoaded(true)
+      })
     })
   }, []) 
 
@@ -60,13 +47,17 @@ export const PlayView = () => {
   }
 
   function handleDataFromLP() {
+    Object.keys(shortPrompts).forEach((element) => {
+      shortPrompts[element]['locked'] = true
+    })
+    console.log(shortPrompts)
     setShowModal(true)
   }
 
   const toggleModal = () => {  
     if (showModal == true) {
       setShowModal(false)
-      //location.reload()
+      location.reload()
     }
     else {
       setShowModal(true)

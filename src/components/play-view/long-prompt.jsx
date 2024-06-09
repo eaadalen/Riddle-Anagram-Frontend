@@ -6,14 +6,10 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [unscramble, setUnscramble] = useState()
 
   useEffect(() => {
-    handleSubmit(unscramble)
-  }, [unscramble]);
-
-  const handleSubmit = (word) => {  
-    if (word === prompt.Answer) {
+    if (unscramble === prompt.Answer) {
       sendDataToLP(true);
     }
-  }
+  }, [unscramble]);
 
   return (
     <div>

@@ -39710,42 +39710,39 @@ const PlayView = ()=>{
     const [dataFromSP, setDataFromSP] = (0, _react.useState)("");
     const [showModal, setShowModal] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
+        fetch("https://riddle-unscramble-game-f456ae714e99.herokuapp.com/random", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
-        }).then((response)=>response.json()).then((data1)=>{
-            setLongPrompt(data1[0]);
-            data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then((response)=>response.json()).then((data2)=>{
-                    shortPrompts[data2[0]._id] = {
-                        "shortPrompt": data2[0].shortPrompt,
-                        "Answer": data2[0].Answer,
-                        "activeLetter": data2[0].Answer.indexOf(String(character)),
-                        "activeGuess": "",
-                        "maxLength": data2[0].Answer.length,
-                        "locked": false
-                    };
-                    console.log("SP Length: " + String(Object.keys(shortPrompts).length));
-                    console.log("LP Length: " + String(data1[0].Answer.length));
-                    if (Object.keys(shortPrompts).length === data1[0].Answer.length) setLoaded(true);
-                }));
+        }).then((response)=>response.json()).then((LP)=>{
+            setLongPrompt(LP[0]);
+            fetch("https://riddle-unscramble-game-f456ae714e99.herokuapp.com/spL/" + String(LP[0].Answer), {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then((response)=>response.json()).then((SP)=>{
+                setShortPrompts(SP);
+                setLoaded(true);
+            });
         });
     }, []);
     function handleDataFromSP(data) {
         setDataFromSP(data);
     }
     function handleDataFromLP() {
+        Object.keys(shortPrompts).forEach((element)=>{
+            shortPrompts[element]["locked"] = true;
+        });
+        console.log(shortPrompts);
         setShowModal(true);
     }
     const toggleModal = ()=>{
-        if (showModal == true) setShowModal(false);
-        else setShowModal(true);
+        if (showModal == true) {
+            setShowModal(false);
+            location.reload();
+        } else setShowModal(true);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
@@ -39755,12 +39752,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 80,
+                    lineNumber: 71,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 79,
+                lineNumber: 70,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39771,7 +39768,7 @@ const PlayView = ()=>{
                         sendDataToSP: handleDataFromSP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 85,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
@@ -39780,13 +39777,13 @@ const PlayView = ()=>{
                         sendDataToLP: handleDataFromLP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 86,
+                        lineNumber: 77,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 84,
+                lineNumber: 75,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -39801,28 +39798,28 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 93,
+                            lineNumber: 84,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 92,
+                        lineNumber: 83,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 91,
+                    lineNumber: 82,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 90,
+                lineNumber: 81,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 77,
+        lineNumber: 68,
         columnNumber: 5
     }, undefined);
 };
@@ -39955,26 +39952,42 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     ]);
     const handleTyping = (e)=>{
         if (e.target.id != "answer-form") {
-            if (e.key === "Backspace") {
-                if (prompts[activeDiv].locked != true) {
+            if (prompts[activeDiv].locked != true) {
+                if (e.key === "Backspace") {
                     dispatch1({
                         type: "deleteLetter"
                     });
                     prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-                }
-            } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-                dispatch1({
-                    type: "addLetter",
-                    update: e.key
-                });
-                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
-                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                    prompts[activeDiv].locked = true;
-                    dispatch3({
+                } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
+                    dispatch1({
                         type: "addLetter",
-                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                        update: e.key
                     });
+                    if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
+                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                        prompts[activeDiv].locked = true;
+                        dispatch3({
+                            type: "addLetter",
+                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                        });
+                        var BreakException = {};
+                        try {
+                            Object.keys(prompts).forEach(function(element) {
+                                if (prompts[element]["locked"] != true) {
+                                    activeDiv = element;
+                                    dispatch2({
+                                        type: "updateDiv",
+                                        newDiv: element
+                                    });
+                                    document.getElementById(element).className = "short-prompt-container-active";
+                                    throw BreakException;
+                                }
+                            });
+                        } catch (e) {
+                            if (e !== BreakException) throw e;
+                        }
+                    }
                 }
             }
         }
@@ -40019,23 +40032,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 114,
+                                lineNumber: 127,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 112,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 110,
+                lineNumber: 123,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 108,
+        lineNumber: 121,
         columnNumber: 5
     }, undefined);
 }, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");
@@ -40064,19 +40077,16 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
     _s();
     const [unscramble, setUnscramble] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
-        handleSubmit(unscramble);
+        if (unscramble === prompt.Answer) sendDataToLP(true);
     }, [
         unscramble
     ]);
-    const handleSubmit = (word)=>{
-        if (word === prompt.Answer) sendDataToLP(true);
-    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             prompt.longPrompt,
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 21,
+                lineNumber: 17,
                 columnNumber: 7
             }, undefined),
             lettersSolved,
@@ -40088,18 +40098,18 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                     className: "answer-form"
                 }, void 0, false, {
                     fileName: "src/components/play-view/long-prompt.jsx",
-                    lineNumber: 24,
+                    lineNumber: 20,
                     columnNumber: 9
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 23,
+                lineNumber: 19,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/long-prompt.jsx",
-        lineNumber: 19,
+        lineNumber: 15,
         columnNumber: 5
     }, undefined);
 }, "j6BzKzs3dwNR/GPMDice5oJkG2g=");

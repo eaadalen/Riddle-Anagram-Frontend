@@ -53,21 +53,34 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
 
   const handleTyping = (e) => {  
     if (e.target.id != 'answer-form') {
-      if (e.key === 'Backspace') {
-        if (prompts[activeDiv].locked != true) {
+      if (prompts[activeDiv].locked != true) {
+        if (e.key === 'Backspace') {
           dispatch1({ type: 'deleteLetter' })
           prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
         }
-      }
-      else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
-        dispatch1({ type: 'addLetter', update: e.key })
-        if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-          prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase()
-        }
-        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-          document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-          prompts[activeDiv].locked = true
-          dispatch3({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+        else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
+          dispatch1({ type: 'addLetter', update: e.key })
+          if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase()
+          }
+          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+            prompts[activeDiv].locked = true
+            dispatch3({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+            var BreakException = {};
+            try {
+              Object.keys(prompts).forEach(function(element) {
+                if (prompts[element]['locked'] != true) {
+                  activeDiv = element
+                  dispatch2({ type: 'updateDiv', newDiv: element})
+                  document.getElementById(element).className = 'short-prompt-container-active'
+                  throw BreakException
+                }
+              });
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
+          }
         }
       }
     }
