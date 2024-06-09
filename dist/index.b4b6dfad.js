@@ -39735,7 +39735,6 @@ const PlayView = ()=>{
         Object.keys(shortPrompts).forEach((element)=>{
             shortPrompts[element]["locked"] = true;
         });
-        console.log(shortPrompts);
         setShowModal(true);
     }
     const toggleModal = ()=>{
@@ -39752,12 +39751,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 71,
+                    lineNumber: 70,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 70,
+                lineNumber: 69,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39768,7 +39767,7 @@ const PlayView = ()=>{
                         sendDataToSP: handleDataFromSP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 76,
+                        lineNumber: 75,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
@@ -39777,13 +39776,13 @@ const PlayView = ()=>{
                         sendDataToLP: handleDataFromLP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 77,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 75,
+                lineNumber: 74,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -39798,28 +39797,28 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 84,
+                            lineNumber: 83,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 83,
+                        lineNumber: 82,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 82,
+                    lineNumber: 81,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 81,
+                lineNumber: 80,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 68,
+        lineNumber: 67,
         columnNumber: 5
     }, undefined);
 };
@@ -39993,7 +39992,6 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         }
     };
     const handleClick = (event)=>{
-        console.log(event.target.className);
         if (event.target.className === "short-prompt-container-inactive") {
             if (document.getElementById(activeDiv).className != "short-prompt-container-correct") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
             document.getElementById(event.target.id).className = "short-prompt-container-active";
@@ -40008,7 +40006,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         if (guess === undefined) return [];
         returnValue = [];
         for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
-            "_",
+            "",
             i
         ]);
         else returnValue.push([
@@ -40033,23 +40031,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 128,
+                                lineNumber: 127,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 126,
+                        lineNumber: 125,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 124,
+                lineNumber: 123,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 122,
+        lineNumber: 121,
         columnNumber: 5
     }, undefined);
 }, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");

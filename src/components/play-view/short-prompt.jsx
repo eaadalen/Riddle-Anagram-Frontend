@@ -87,7 +87,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   }
 
   const handleClick = (event) => {  
-    console.log(event.target.className)
     if (event.target.className === 'short-prompt-container-inactive') {
       if (document.getElementById(activeDiv).className != 'short-prompt-container-correct') {
         document.getElementById(activeDiv).className = 'short-prompt-container-inactive'
@@ -105,7 +104,7 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
     returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess.activeGuess.charAt(i) === '') {
-        returnValue.push(['_', i])
+        returnValue.push(['', i])
       }
       else {
         returnValue.push([guess.activeGuess.charAt(i), i])

@@ -50,7 +50,6 @@ export const PlayView = () => {
     Object.keys(shortPrompts).forEach((element) => {
       shortPrompts[element]['locked'] = true
     })
-    console.log(shortPrompts)
     setShowModal(true)
   }
 
