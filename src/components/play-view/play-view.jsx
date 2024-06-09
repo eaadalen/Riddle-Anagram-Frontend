@@ -72,8 +72,15 @@ export const PlayView = () => {
       }
       {loaded &&
         <div className="container-eka">
-          <ShortPrompt prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
-          <LongPrompt prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
+          <div className="long-prompt">
+            <LongPrompt prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
+          </div>
+          <div className="transition-div">
+            
+          </div>
+          <div className="short-prompt">
+            <ShortPrompt prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
+          </div>
         </div>
       }
       {showModal &&

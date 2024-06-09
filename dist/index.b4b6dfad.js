@@ -39762,21 +39762,42 @@ const PlayView = ()=>{
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "container-eka",
                 children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptJsxDefault.default), {
-                        prompts: shortPrompts,
-                        sendDataToSP: handleDataFromSP
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "long-prompt",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
+                            prompt: longPrompt,
+                            lettersSolved: dataFromSP,
+                            sendDataToLP: handleDataFromLP
+                        }, void 0, false, {
+                            fileName: "src/components/play-view/play-view.jsx",
+                            lineNumber: 76,
+                            columnNumber: 13
+                        }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
                         lineNumber: 75,
                         columnNumber: 11
                     }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
-                        prompt: longPrompt,
-                        lettersSolved: dataFromSP,
-                        sendDataToLP: handleDataFromLP
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "transition-div"
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 76,
+                        lineNumber: 78,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptJsxDefault.default), {
+                            prompts: shortPrompts,
+                            sendDataToSP: handleDataFromSP
+                        }, void 0, false, {
+                            fileName: "src/components/play-view/play-view.jsx",
+                            lineNumber: 82,
+                            columnNumber: 13
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 81,
                         columnNumber: 11
                     }, undefined)
                 ]
@@ -39797,22 +39818,22 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 83,
+                            lineNumber: 90,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 82,
+                        lineNumber: 89,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 81,
+                    lineNumber: 88,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 80,
+                lineNumber: 87,
                 columnNumber: 9
             }, undefined)
         ]
@@ -40082,19 +40103,27 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
     ]);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            prompt.longPrompt,
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "prompt",
+                children: prompt.longPrompt
+            }, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
-                lineNumber: 17,
+                lineNumber: 16,
                 columnNumber: 7
             }, undefined),
-            lettersSolved,
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
-                    type: "text",
-                    onChange: (e)=>setUnscramble(e.target.value.replace(/\s/g, "").toUpperCase()),
-                    id: "answer-form",
-                    className: "answer-form"
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "answer-form",
+                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
+                        type: "text",
+                        onChange: (e)=>setUnscramble(e.target.value.replace(/\s/g, "").toUpperCase()),
+                        id: "answer-form",
+                        className: "answer-form"
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/long-prompt.jsx",
+                        lineNumber: 21,
+                        columnNumber: 11
+                    }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/long-prompt.jsx",
                     lineNumber: 20,
@@ -40103,6 +40132,21 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
             }, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
                 lineNumber: 19,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                children: lettersSolved ? lettersSolved : "?"
+            }, void 0, false, {
+                fileName: "src/components/play-view/long-prompt.jsx",
+                lineNumber: 29,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "unscramble",
+                children: "Unscramble the letters above to answer the riddle"
+            }, void 0, false, {
+                fileName: "src/components/play-view/long-prompt.jsx",
+                lineNumber: 32,
                 columnNumber: 7
             }, undefined)
         ]

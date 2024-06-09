@@ -13,17 +13,25 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
 
   return (
     <div>
-      {prompt.longPrompt}
-      <br></br>
-      {lettersSolved}
-      <Form.Group>
-        <Form.Control
-            type="text"
-            onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, '').toUpperCase())}
-            id="answer-form"
-            className="answer-form"
-        />
-      </Form.Group>
+      <div className="prompt">
+        {prompt.longPrompt}
+      </div>
+      <div className="answer-form">
+        <Form.Group >
+          <Form.Control
+              type="text"
+              onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, '').toUpperCase())}
+              id="answer-form"
+              className="answer-form"
+          />
+        </Form.Group>
+      </div>
+      <div>
+        {lettersSolved ? lettersSolved : '?'}
+      </div>
+      <div className="unscramble">
+        Unscramble the letters above to answer the riddle
+      </div>
     </div>
   )
 }

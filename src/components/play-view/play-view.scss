@@ -1,8 +1,22 @@
-$color: rgb(0, 0, 0);
-
 .container-eka {
-    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.long-prompt {
+    position: sticky; 
+    top: 0;
+    height: 175px;
+    background-color: white;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-radius: 7px;
+}
+
+.transition-div {
+    position: sticky; 
+    top: 175px;
+    height: 20px;
+    background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255, 255, 255));
 }

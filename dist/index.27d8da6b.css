@@ -135,7 +135,23 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  display: flex;
+}
+
+.long-prompt {
+  background-color: #fff;
+  border-radius: 7px;
+  height: 175px;
+  margin-top: 20px;
+  padding-top: 20px;
+  position: sticky;
+  top: 0;
+}
+
+.transition-div {
+  background-image: linear-gradient(to top, #f000, #fff);
+  height: 20px;
+  position: sticky;
+  top: 175px;
 }
 
 .sub-container {
@@ -183,6 +199,7 @@
   align-items: center;
   width: 40px;
   height: 40px;
+  margin: 2px;
   padding: 10px;
   display: flex;
 }
@@ -193,6 +210,18 @@
 
 .answer-form {
   text-transform: uppercase;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 150px;
+}
+
+.prompt, .unscramble {
+  font-family: Trebuchet MS, sans-serif;
+}
+
+.unscramble {
+  color: gray;
+  font-size: .75em;
 }
 
 :root, [data-bs-theme="light"] {
