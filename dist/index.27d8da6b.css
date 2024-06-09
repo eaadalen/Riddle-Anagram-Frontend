@@ -133,7 +133,6 @@
 
 .container-eka {
   text-align: center;
-  border: 1px solid red;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -148,7 +147,7 @@
 
 .short-prompt-container-active {
   text-align: center;
-  border: 1px solid #ff0;
+  border: 1px solid #1f0;
   justify-content: center;
   align-items: center;
   width: 450px;
@@ -157,7 +156,7 @@
 
 .short-prompt-container-inactive {
   text-align: center;
-  border: 1px solid #ce16ce;
+  border: 1px solid #000;
   justify-content: center;
   align-items: center;
   width: 450px;
@@ -175,7 +174,6 @@
 
 .short-prompt-guess {
   text-align: center;
-  border: 1px solid orange;
   justify-content: center;
   align-items: center;
   margin: 10px;
@@ -188,7 +186,7 @@
 }
 
 .active-letter {
-  border: 5px solid red;
+  border: 3px solid #000;
   margin: 10px;
 }
 

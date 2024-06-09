@@ -39993,6 +39993,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         }
     };
     const handleClick = (event)=>{
+        console.log(event.target.className);
         if (event.target.className === "short-prompt-container-inactive") {
             if (document.getElementById(activeDiv).className != "short-prompt-container-correct") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
             document.getElementById(event.target.id).className = "short-prompt-container-active";
@@ -40032,23 +40033,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 127,
+                                lineNumber: 128,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 125,
+                        lineNumber: 126,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 123,
+                lineNumber: 124,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 121,
+        lineNumber: 122,
         columnNumber: 5
     }, undefined);
 }, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");

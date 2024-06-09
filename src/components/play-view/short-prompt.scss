@@ -8,7 +8,7 @@
 .short-prompt-container-active {
   width: 450px;
   margin: 10px;
-  border: 1px solid yellow;
+  border: 1px solid rgb(17, 255, 0);
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -17,7 +17,7 @@
 .short-prompt-container-inactive {
   width: 450px;
   margin: 10px;
-  border: 1px solid rgb(206, 22, 206);
+  border: 1px solid rgb(0, 0, 0);
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -33,7 +33,6 @@
 }
 
 .short-prompt-guess {
-  border: 1px solid orange;
   margin: 10px;
   display: flex;
   justify-content: center;
@@ -47,6 +46,6 @@
 }
 
 .active-letter {
-  border: 5px solid rgb(255, 0, 0);
+  border: 3px solid rgb(0, 0, 0);
   margin: 10px;
 }

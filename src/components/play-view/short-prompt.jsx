@@ -87,6 +87,7 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   }
 
   const handleClick = (event) => {  
+    console.log(event.target.className)
     if (event.target.className === 'short-prompt-container-inactive') {
       if (document.getElementById(activeDiv).className != 'short-prompt-container-correct') {
         document.getElementById(activeDiv).className = 'short-prompt-container-inactive'

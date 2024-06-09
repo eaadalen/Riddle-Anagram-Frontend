@@ -1,3 +1,6 @@
 -add selection without replacement to backend for short prompts
 -figure out whether you actually need reducers
 -style app
+-revisit Heroku backend setup (Heroku is saying the wrong app is active)
+-set up 'daily' riddle
+-fix divs so that new divs are activated when clicked, regardless of whether sub divs (letters, etc.) are clicked
