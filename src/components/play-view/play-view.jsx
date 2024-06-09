@@ -75,9 +75,7 @@ export const PlayView = () => {
           <div className="long-prompt">
             <LongPrompt prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
           </div>
-          <div className="transition-div">
-            
-          </div>
+          <div className="transition-div"></div>
           <div className="short-prompt">
             <ShortPrompt prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
           </div>
@@ -86,11 +84,9 @@ export const PlayView = () => {
       {showModal &&
         <Modal show={true} onHide={toggleModal} className="modal">  
           <Modal.Body className="modalContainer">
-            <div className="gameOver">
-              <div>
-                *insert score chart, like wordle*
-              </div> 
-            </div>
+            <div>
+              *insert score chart, like wordle*
+            </div> 
           </Modal.Body>  
         </Modal> 
       }

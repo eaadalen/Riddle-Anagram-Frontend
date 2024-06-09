@@ -39792,12 +39792,12 @@ const PlayView = ()=>{
                             sendDataToSP: handleDataFromSP
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 82,
+                            lineNumber: 80,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 81,
+                        lineNumber: 79,
                         columnNumber: 11
                     }, undefined)
                 ]
@@ -39813,27 +39813,20 @@ const PlayView = ()=>{
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal).Body, {
                     className: "modalContainer",
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "gameOver",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            children: "*insert score chart, like wordle*"
-                        }, void 0, false, {
-                            fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 90,
-                            columnNumber: 15
-                        }, undefined)
+                        children: "*insert score chart, like wordle*"
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 89,
+                        lineNumber: 87,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 88,
+                    lineNumber: 86,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 87,
+                lineNumber: 85,
                 columnNumber: 9
             }, undefined)
         ]
