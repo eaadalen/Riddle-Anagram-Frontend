@@ -10,20 +10,21 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   }, [unscramble]);
 
   const handleSubmit = (word) => {  
-    if (word === prompt[0].Answer) {
+    if (word === prompt.Answer) {
       sendDataToLP(true);
     }
   }
 
   return (
     <div>
-      {prompt[0].longPrompt}
+      {prompt.longPrompt}
       <br></br>
       {lettersSolved}
       <Form.Group>
         <Form.Control
             type="text"
-            onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, ''))}
+            onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, '').toUpperCase())}
+            value={unscramble}
             id="answer-form"
         />
       </Form.Group>

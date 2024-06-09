@@ -33,27 +33,17 @@ function updateLetters(state, action) {
 }
 
 export default ShortPrompt = ({ prompts, sendDataToSP }) => {
-  var activeDiv = prompts[0]._id
+  var activeDiv = Object.keys(prompts)[0]
   const [guess, dispatch1] = useReducer(updateGuess, { value: '' })
   const [active, dispatch2] = useReducer(updateActive, { value: '' })
   const [solvedLetters, dispatch3] = useReducer(updateLetters, { value: '' })
-  const [guessStorage, setGuessStorage] = useState({})
 
   useEffect(() => {
     window.addEventListener("keyup", event => handleTyping(event));
     dispatch2({ type: 'updateDiv', newDiv: activeDiv})
     document.getElementById(activeDiv).className = 'short-prompt-container-active'
-    prompts.forEach((element) => {
-      var newStorage = guessStorage
-      newStorage[String(element._id)] = {
-        'value': '', 
-        'activeLetter': element.activeLetter,
-        'maxLength': element.Answer.length, 
-        'answer': element.Answer,
-        'locked': false
-      }
-      setGuessStorage(newStorage)
-      document.getElementById(element._id).addEventListener("click", event => handleClick(event));
+    Object.keys(prompts).forEach((element) => {
+      document.getElementById(element).addEventListener("click", event => handleClick(event));
     })
   }, []);
 
@@ -64,26 +54,22 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   const handleTyping = (e) => {  
     if (e.target.id != 'answer-form') {
       if (e.key === 'Enter') {
-        if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
+        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
           document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-          guessStorage[String(activeDiv)].locked = true
-          dispatch3({ type: 'addLetter', update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)})
+          prompts[activeDiv].locked = true
+          dispatch3({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
         }
       }
       else if (e.key === 'Backspace') {
-        if (guessStorage[String(activeDiv)].locked != true) {
+        if (prompts[activeDiv].locked != true) {
           dispatch1({ type: 'deleteLetter' })
-          var newStorage = guessStorage
-          newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1)
-          setGuessStorage(newStorage)
+          prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
         }
       }
       else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
         dispatch1({ type: 'addLetter', update: e.key })
-        if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
-          var newStorage = guessStorage
-          newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase()
-          setGuessStorage(newStorage)
+        if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+          prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase()
         }
       }
     }
@@ -106,11 +92,11 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
     }
     returnValue = []
     for (let i = 0; i < answer.length; i++) {
-      if (guess.value.charAt(i) === '') {
+      if (guess.activeGuess.charAt(i) === '') {
         returnValue.push(['_', i])
       }
       else {
-        returnValue.push([guess.value.charAt(i), i])
+        returnValue.push([guess.activeGuess.charAt(i), i])
       }
     }
     return returnValue
@@ -122,12 +108,12 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
 
   return (
     <div>
-      {prompts.map((prompt) => (
-        <div key={prompt._id} id={prompt._id} className={'short-prompt-container-inactive'}>
-          {prompt.shortPrompt}
+      {Object.keys(prompts).map((prompt) => (
+        <div key={prompt} id={prompt} className={'short-prompt-container-inactive'}>
+          {prompts[prompt].shortPrompt}
           <div className='short-prompt-guess'>
-            {shortPromptArray(guessStorage[prompt._id], prompt.Answer).map((letter) => (
-              <div key={Math.random()} className={letter[1] == prompt.activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
+            {shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter) => (
+              <div key={Math.random()} className={letter[1] == prompts[prompt].activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
             ))}
           </div>
         </div>

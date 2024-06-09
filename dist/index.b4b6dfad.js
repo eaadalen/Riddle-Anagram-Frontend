@@ -39704,42 +39704,44 @@ var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
-    const [shortPrompts, setShortPrompts] = (0, _react.useState)([]);
-    const [longPrompt, setLongPrompt] = (0, _react.useState)([]);
+    const [shortPrompts, setShortPrompts] = (0, _react.useState)({});
+    const [longPrompt, setLongPrompt] = (0, _react.useState)({});
     const [loaded, setLoaded] = (0, _react.useState)(false);
     const [dataFromSP, setDataFromSP] = (0, _react.useState)("");
     const [showModal, setShowModal] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         async function startup() {
-            var LPs = [];
-            var SPs = [];
+            var SPs = {};
             fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }
             }).then((response)=>response.json()).then((data1)=>{
-                LPs.push(data1[0]);
+                setLongPrompt(data1[0]);
+                console.log(data1[0]);
                 data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json"
                         }
                     }).then((response)=>response.json()).then((data2)=>{
-                        data2[0]["activeLetter"] = data2[0].Answer.indexOf(String(character));
-                        data2[0]["activeGuess"] = "";
-                        SPs.push(data2[0]);
+                        SPs[data2[0]._id] = {
+                            "shortPrompt": data2[0].shortPrompt,
+                            "Answer": data2[0].Answer,
+                            "activeLetter": data2[0].Answer.indexOf(String(character)),
+                            "activeGuess": "",
+                            "maxLength": data2[0].Answer.length,
+                            "locked": false
+                        };
                     }));
             });
-            return [
-                LPs,
-                SPs
-            ];
+            console.log(SPs);
+            return SPs;
         }
         async function asyncCall() {
             const values = await startup();
-            setLongPrompt(values[0]);
-            setShortPrompts(values[1]);
+            setShortPrompts(values);
             await sleep(1000);
             setLoaded(true);
         }
@@ -39766,12 +39768,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 91,
+                    lineNumber: 96,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 90,
+                lineNumber: 95,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39782,7 +39784,7 @@ const PlayView = ()=>{
                         sendDataToSP: handleDataFromSP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 96,
+                        lineNumber: 101,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
@@ -39791,13 +39793,13 @@ const PlayView = ()=>{
                         sendDataToLP: handleDataFromLP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 97,
+                        lineNumber: 102,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 95,
+                lineNumber: 100,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -39812,32 +39814,32 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 104,
+                            lineNumber: 109,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 103,
+                        lineNumber: 108,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 102,
+                    lineNumber: 107,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 101,
+                lineNumber: 106,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 88,
+        lineNumber: 93,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "iw9D2a43cg9YuEfb6cPWrYU45d4=");
+_s(PlayView, "Cn8CpbZ+Pz08Zt+lRBHZFmVri6M=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -39938,7 +39940,7 @@ function updateLetters(state, action) {
 }
 exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     _s();
-    var activeDiv = prompts[0]._id;
+    var activeDiv = Object.keys(prompts)[0];
     const [guess, dispatch1] = (0, _react.useReducer)(updateGuess, {
         value: ""
     });
@@ -39948,7 +39950,6 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     const [solvedLetters, dispatch3] = (0, _react.useReducer)(updateLetters, {
         value: ""
     });
-    const [guessStorage, setGuessStorage] = (0, _react.useState)({});
     (0, _react.useEffect)(()=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
         dispatch2({
@@ -39956,17 +39957,8 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
             newDiv: activeDiv
         });
         document.getElementById(activeDiv).className = "short-prompt-container-active";
-        prompts.forEach((element)=>{
-            var newStorage = guessStorage;
-            newStorage[String(element._id)] = {
-                "value": "",
-                "activeLetter": element.activeLetter,
-                "maxLength": element.Answer.length,
-                "answer": element.Answer,
-                "locked": false
-            };
-            setGuessStorage(newStorage);
-            document.getElementById(element._id).addEventListener("click", (event)=>handleClick(event));
+        Object.keys(prompts).forEach((element)=>{
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
         });
     }, []);
     (0, _react.useEffect)(()=>{
@@ -39977,33 +39969,27 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     const handleTyping = (e)=>{
         if (e.target.id != "answer-form") {
             if (e.key === "Enter") {
-                if (guessStorage[String(activeDiv)].value === guessStorage[String(activeDiv)].answer) {
+                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
                     document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                    guessStorage[String(activeDiv)].locked = true;
+                    prompts[activeDiv].locked = true;
                     dispatch3({
                         type: "addLetter",
-                        update: guessStorage[String(activeDiv)].value.charAt(guessStorage[String(activeDiv)].activeLetter)
+                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
                     });
                 }
             } else if (e.key === "Backspace") {
-                if (guessStorage[String(activeDiv)].locked != true) {
+                if (prompts[activeDiv].locked != true) {
                     dispatch1({
                         type: "deleteLetter"
                     });
-                    var newStorage = guessStorage;
-                    newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value.slice(0, -1);
-                    setGuessStorage(newStorage);
+                    prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
                 }
             } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
                 dispatch1({
                     type: "addLetter",
                     update: e.key
                 });
-                if (guessStorage[String(activeDiv)].value.length < guessStorage[String(activeDiv)].maxLength) {
-                    var newStorage = guessStorage;
-                    newStorage[String(activeDiv)].value = newStorage[String(activeDiv)].value + e.key.toUpperCase();
-                    setGuessStorage(newStorage);
-                }
+                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
             }
         }
     };
@@ -40021,12 +40007,12 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     const shortPromptArray = (guess, answer)=>{
         if (guess === undefined) return [];
         returnValue = [];
-        for(let i = 0; i < answer.length; i++)if (guess.value.charAt(i) === "") returnValue.push([
+        for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
             "_",
             i
         ]);
         else returnValue.push([
-            guess.value.charAt(i),
+            guess.activeGuess.charAt(i),
             i
         ]);
         return returnValue;
@@ -40035,38 +40021,38 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         sendDataToSP(data);
     }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: prompts.map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: prompt._id,
+        children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: prompt,
                 className: "short-prompt-container-inactive",
                 children: [
-                    prompt.shortPrompt,
+                    prompts[prompt].shortPrompt,
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt-guess",
-                        children: shortPromptArray(guessStorage[prompt._id], prompt.Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: letter[1] == prompt.activeLetter ? "active-letter" : "guess-letter",
+                        children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 130,
+                                lineNumber: 116,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 128,
+                        lineNumber: 114,
                         columnNumber: 11
                     }, undefined)
                 ]
-            }, prompt._id, true, {
+            }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 126,
+                lineNumber: 112,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 124,
+        lineNumber: 110,
         columnNumber: 5
     }, undefined);
-}, "L2KA+Xlm8ug4cxZZUL+TOykqlQk=");
+}, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {
@@ -40097,11 +40083,11 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
         unscramble
     ]);
     const handleSubmit = (word)=>{
-        if (word === prompt[0].Answer) sendDataToLP(true);
+        if (word === prompt.Answer) sendDataToLP(true);
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            prompt[0].longPrompt,
+            prompt.longPrompt,
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/play-view/long-prompt.jsx",
                 lineNumber: 21,
@@ -40111,7 +40097,8 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Group, {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _formDefault.default).Control, {
                     type: "text",
-                    onChange: (e)=>setUnscramble(e.target.value.replace(/\s/g, "")),
+                    onChange: (e)=>setUnscramble(e.target.value.replace(/\s/g, "").toUpperCase()),
+                    value: unscramble,
                     id: "answer-form"
                 }, void 0, false, {
                     fileName: "src/components/play-view/long-prompt.jsx",

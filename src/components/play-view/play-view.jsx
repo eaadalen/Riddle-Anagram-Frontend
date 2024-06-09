@@ -6,16 +6,15 @@ import LongPrompt from './long-prompt.jsx'
 import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
-  const [shortPrompts, setShortPrompts] = useState([])
-  const [longPrompt, setLongPrompt] = useState([])
+  const [shortPrompts, setShortPrompts] = useState({})
+  const [longPrompt, setLongPrompt] = useState({})
   const [loaded, setLoaded] = useState(false)
   const [dataFromSP, setDataFromSP] = useState("");
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     async function startup() {  
-      var LPs = []
-      var SPs = []
+      var SPs = {}
 
       fetch(
         "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
@@ -28,7 +27,8 @@ export const PlayView = () => {
       )
       .then((response) => response.json())
       .then((data1) => {
-        LPs.push(data1[0])
+        setLongPrompt(data1[0])
+        console.log(data1[0])
         data1[0].Answer.split("").forEach(character => 
           fetch(
             "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
@@ -41,19 +41,24 @@ export const PlayView = () => {
           )
           .then((response) => response.json())
           .then((data2) => {
-            data2[0]['activeLetter'] = data2[0].Answer.indexOf(String(character))
-            data2[0]['activeGuess'] = ''
-            SPs.push(data2[0])
+            SPs[data2[0]._id] = {
+              'shortPrompt': data2[0].shortPrompt,
+              'Answer': data2[0].Answer,
+              'activeLetter': data2[0].Answer.indexOf(String(character)),
+              'activeGuess': '',
+              'maxLength': data2[0].Answer.length,
+              'locked': false
+            }
           })
         )
       })
-      return [LPs, SPs]
+      console.log(SPs)
+      return SPs
     }
       
     async function asyncCall() {
       const values = await startup()
-      setLongPrompt(values[0])
-      setShortPrompts(values[1])
+      setShortPrompts(values)
       await sleep(1000)
       setLoaded(true)
     }
