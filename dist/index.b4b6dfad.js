@@ -39711,7 +39711,6 @@ const PlayView = ()=>{
     const [showModal, setShowModal] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
         async function startup() {
-            var SPs = {};
             fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
                 method: "GET",
                 headers: {
@@ -39719,14 +39718,13 @@ const PlayView = ()=>{
                 }
             }).then((response)=>response.json()).then((data1)=>{
                 setLongPrompt(data1[0]);
-                console.log(data1[0]);
                 data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json"
                         }
                     }).then((response)=>response.json()).then((data2)=>{
-                        SPs[data2[0]._id] = {
+                        shortPrompts[data2[0]._id] = {
                             "shortPrompt": data2[0].shortPrompt,
                             "Answer": data2[0].Answer,
                             "activeLetter": data2[0].Answer.indexOf(String(character)),
@@ -39736,12 +39734,9 @@ const PlayView = ()=>{
                         };
                     }));
             });
-            console.log(SPs);
-            return SPs;
         }
         async function asyncCall() {
-            const values = await startup();
-            setShortPrompts(values);
+            await startup();
             await sleep(1000);
             setLoaded(true);
         }
@@ -39768,12 +39763,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 96,
+                    lineNumber: 90,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 95,
+                lineNumber: 89,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39784,7 +39779,7 @@ const PlayView = ()=>{
                         sendDataToSP: handleDataFromSP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 101,
+                        lineNumber: 95,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
@@ -39793,13 +39788,13 @@ const PlayView = ()=>{
                         sendDataToLP: handleDataFromLP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 102,
+                        lineNumber: 96,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 100,
+                lineNumber: 94,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -39814,28 +39809,28 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 109,
+                            lineNumber: 103,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 108,
+                        lineNumber: 102,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 107,
+                    lineNumber: 101,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 106,
+                lineNumber: 100,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 93,
+        lineNumber: 87,
         columnNumber: 5
     }, undefined);
 };

@@ -14,8 +14,6 @@ export const PlayView = () => {
 
   useEffect(() => {
     async function startup() {  
-      var SPs = {}
-
       fetch(
         "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
         {
@@ -28,7 +26,6 @@ export const PlayView = () => {
       .then((response) => response.json())
       .then((data1) => {
         setLongPrompt(data1[0])
-        console.log(data1[0])
         data1[0].Answer.split("").forEach(character => 
           fetch(
             "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
@@ -41,7 +38,7 @@ export const PlayView = () => {
           )
           .then((response) => response.json())
           .then((data2) => {
-            SPs[data2[0]._id] = {
+            shortPrompts[data2[0]._id] = {
               'shortPrompt': data2[0].shortPrompt,
               'Answer': data2[0].Answer,
               'activeLetter': data2[0].Answer.indexOf(String(character)),
@@ -52,13 +49,10 @@ export const PlayView = () => {
           })
         )
       })
-      console.log(SPs)
-      return SPs
     }
       
     async function asyncCall() {
-      const values = await startup()
-      setShortPrompts(values)
+      await startup()
       await sleep(1000)
       setLoaded(true)
     }
