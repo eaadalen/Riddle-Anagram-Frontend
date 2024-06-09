@@ -45,6 +45,8 @@ export const PlayView = () => {
             'maxLength': data2[0].Answer.length,
             'locked': false
           }
+          console.log('SP Length: ' + String(Object.keys(shortPrompts).length))
+          console.log('LP Length: ' + String(data1[0].Answer.length))
           if (Object.keys(shortPrompts).length === data1[0].Answer.length) {
             setLoaded(true)
           }

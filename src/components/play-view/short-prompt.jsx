@@ -53,14 +53,7 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
 
   const handleTyping = (e) => {  
     if (e.target.id != 'answer-form') {
-      if (e.key === 'Enter') {
-        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-          document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-          prompts[activeDiv].locked = true
-          dispatch3({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
-        }
-      }
-      else if (e.key === 'Backspace') {
+      if (e.key === 'Backspace') {
         if (prompts[activeDiv].locked != true) {
           dispatch1({ type: 'deleteLetter' })
           prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
@@ -70,6 +63,11 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
         dispatch1({ type: 'addLetter', update: e.key })
         if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
           prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase()
+        }
+        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+          document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+          prompts[activeDiv].locked = true
+          dispatch3({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
         }
       }
     }

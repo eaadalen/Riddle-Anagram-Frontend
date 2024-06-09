@@ -24,8 +24,8 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
         <Form.Control
             type="text"
             onChange={(e) => setUnscramble(e.target.value.replace(/\s/g, '').toUpperCase())}
-            value={unscramble}
             id="answer-form"
+            className="answer-form"
         />
       </Form.Group>
     </div>
