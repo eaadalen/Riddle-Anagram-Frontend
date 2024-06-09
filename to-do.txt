@@ -1,4 +1,3 @@
--fix page loading. Right now you're using a manual timeout
 -add selection without replacement to backend for short prompts
 -figure out whether you actually need reducers
 -style app

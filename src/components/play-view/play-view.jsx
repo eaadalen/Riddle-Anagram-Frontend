@@ -13,57 +13,45 @@ export const PlayView = () => {
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
-    async function startup() {  
-      fetch(
-        "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
-        {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            }
-        }
-      )
-      .then((response) => response.json())
-      .then((data1) => {
-        setLongPrompt(data1[0])
-        data1[0].Answer.split("").forEach(character => 
-          fetch(
-            "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
-            {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                }
-            }
-          )
-          .then((response) => response.json())
-          .then((data2) => {
-            shortPrompts[data2[0]._id] = {
-              'shortPrompt': data2[0].shortPrompt,
-              'Answer': data2[0].Answer,
-              'activeLetter': data2[0].Answer.indexOf(String(character)),
-              'activeGuess': '',
-              'maxLength': data2[0].Answer.length,
-              'locked': false
-            }
-          })
+    fetch(
+      "https://riddle-anagram-game-01434420d487.herokuapp.com/random",
+      {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+      }
+    )
+    .then((response) => response.json())
+    .then((data1) => {
+      setLongPrompt(data1[0])
+      data1[0].Answer.split("").forEach(character => 
+        fetch(
+          "https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character),
+          {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              }
+          }
         )
-      })
-    }
-      
-    async function asyncCall() {
-      await startup()
-      await sleep(1000)
-      setLoaded(true)
-    }
-
-    asyncCall()
-
+        .then((response) => response.json())
+        .then((data2) => {
+          shortPrompts[data2[0]._id] = {
+            'shortPrompt': data2[0].shortPrompt,
+            'Answer': data2[0].Answer,
+            'activeLetter': data2[0].Answer.indexOf(String(character)),
+            'activeGuess': '',
+            'maxLength': data2[0].Answer.length,
+            'locked': false
+          }
+          if (Object.keys(shortPrompts).length === data1[0].Answer.length) {
+            setLoaded(true)
+          }
+        })
+      )
+    })
   }, []) 
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
 
   function handleDataFromSP(data) {
     setDataFromSP(data);

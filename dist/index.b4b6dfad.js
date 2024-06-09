@@ -39710,41 +39710,31 @@ const PlayView = ()=>{
     const [dataFromSP, setDataFromSP] = (0, _react.useState)("");
     const [showModal, setShowModal] = (0, _react.useState)(false);
     (0, _react.useEffect)(()=>{
-        async function startup() {
-            fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }).then((response)=>response.json()).then((data1)=>{
-                setLongPrompt(data1[0]);
-                data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
-                        method: "GET",
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    }).then((response)=>response.json()).then((data2)=>{
-                        shortPrompts[data2[0]._id] = {
-                            "shortPrompt": data2[0].shortPrompt,
-                            "Answer": data2[0].Answer,
-                            "activeLetter": data2[0].Answer.indexOf(String(character)),
-                            "activeGuess": "",
-                            "maxLength": data2[0].Answer.length,
-                            "locked": false
-                        };
-                    }));
-            });
-        }
-        async function asyncCall() {
-            await startup();
-            await sleep(1000);
-            setLoaded(true);
-        }
-        asyncCall();
+        fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/random", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then((response)=>response.json()).then((data1)=>{
+            setLongPrompt(data1[0]);
+            data1[0].Answer.split("").forEach((character)=>fetch("https://riddle-anagram-game-01434420d487.herokuapp.com/spL/" + String(character), {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then((response)=>response.json()).then((data2)=>{
+                    shortPrompts[data2[0]._id] = {
+                        "shortPrompt": data2[0].shortPrompt,
+                        "Answer": data2[0].Answer,
+                        "activeLetter": data2[0].Answer.indexOf(String(character)),
+                        "activeGuess": "",
+                        "maxLength": data2[0].Answer.length,
+                        "locked": false
+                    };
+                    if (Object.keys(shortPrompts).length === data1[0].Answer.length) setLoaded(true);
+                }));
+        });
     }, []);
-    function sleep(ms) {
-        return new Promise((resolve)=>setTimeout(resolve, ms));
-    }
     function handleDataFromSP(data) {
         setDataFromSP(data);
     }
@@ -39763,12 +39753,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 90,
+                    lineNumber: 78,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 89,
+                lineNumber: 77,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39779,7 +39769,7 @@ const PlayView = ()=>{
                         sendDataToSP: handleDataFromSP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 95,
+                        lineNumber: 83,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
@@ -39788,13 +39778,13 @@ const PlayView = ()=>{
                         sendDataToLP: handleDataFromLP
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 96,
+                        lineNumber: 84,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 94,
+                lineNumber: 82,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -39809,28 +39799,28 @@ const PlayView = ()=>{
                             children: "*insert score chart, like wordle*"
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 103,
+                            lineNumber: 91,
                             columnNumber: 15
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 102,
+                        lineNumber: 90,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 101,
+                    lineNumber: 89,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 100,
+                lineNumber: 88,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 87,
+        lineNumber: 75,
         columnNumber: 5
     }, undefined);
 };
