@@ -40016,7 +40016,6 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         }
     };
     const shortPromptArray = (guess, answer)=>{
-        if (guess === undefined) return [];
         returnValue = [];
         for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
             "",
@@ -40028,9 +40027,6 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         ]);
         return returnValue;
     };
-    function handleClick1() {
-        sendDataToSP(data);
-    }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 id: prompt,
@@ -40044,23 +40040,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 127,
+                                lineNumber: 120,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 125,
+                        lineNumber: 118,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 123,
+                lineNumber: 116,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 121,
+        lineNumber: 114,
         columnNumber: 5
     }, undefined);
 }, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");

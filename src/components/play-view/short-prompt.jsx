@@ -98,9 +98,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   }
 
   const shortPromptArray = (guess, answer) => {  
-    if (guess === undefined) {
-      return []
-    }
     returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess.activeGuess.charAt(i) === '') {
@@ -111,10 +108,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
       }
     }
     return returnValue
-  }
-
-  function handleClick1() {
-    sendDataToSP(data);
   }
 
   return (
