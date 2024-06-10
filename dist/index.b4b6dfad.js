@@ -39914,16 +39914,6 @@ function updateGuess(state, action) {
             return state;
     }
 }
-function updateActive(state, action) {
-    switch(action.type){
-        case "updateDiv":
-            return {
-                value: action.newDiv
-            };
-        default:
-            return state;
-    }
-}
 function updateLetters(state, action) {
     switch(action.type){
         case "addLetter":
@@ -39937,21 +39927,14 @@ function updateLetters(state, action) {
 exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     _s();
     var activeDiv = Object.keys(prompts)[0];
-    const [guess, dispatch1] = (0, _react.useReducer)(updateGuess, {
+    const [guess, guessDispatch] = (0, _react.useReducer)(updateGuess, {
         value: ""
     });
-    const [active, dispatch2] = (0, _react.useReducer)(updateActive, {
-        value: ""
-    });
-    const [solvedLetters, dispatch3] = (0, _react.useReducer)(updateLetters, {
+    const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
         value: ""
     });
     (0, _react.useEffect)(()=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
-        dispatch2({
-            type: "updateDiv",
-            newDiv: activeDiv
-        });
         document.getElementById(activeDiv).className = "short-prompt-container-active";
         Object.keys(prompts).forEach((element)=>{
             document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
@@ -39963,56 +39946,50 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         solvedLetters.value
     ]);
     const handleTyping = (e)=>{
-        if (e.target.id != "answer-form") {
-            if (prompts[activeDiv].locked != true) {
-                if (e.key === "Backspace") {
-                    dispatch1({
-                        type: "deleteLetter"
-                    });
-                    prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-                } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-                    dispatch1({
+        if (e.target.id != "answer-form" && prompts[activeDiv].locked != true) {
+            if (e.key === "Backspace") {
+                guessDispatch({
+                    type: "deleteLetter"
+                });
+                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
+            } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
+                guessDispatch({
+                    type: "addLetter",
+                    update: e.key
+                });
+                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
+                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                    prompts[activeDiv].locked = true;
+                    solvedLettersDispatch({
                         type: "addLetter",
-                        update: e.key
+                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
                     });
-                    if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
-                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                        prompts[activeDiv].locked = true;
-                        dispatch3({
-                            type: "addLetter",
-                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                    var BreakException = {};
+                    try {
+                        Object.keys(prompts).forEach(function(element) {
+                            if (prompts[element]["locked"] != true) {
+                                activeDiv = element;
+                                document.getElementById(element).className = "short-prompt-container-active";
+                                throw BreakException;
+                            }
                         });
-                        var BreakException = {};
-                        try {
-                            Object.keys(prompts).forEach(function(element) {
-                                if (prompts[element]["locked"] != true) {
-                                    activeDiv = element;
-                                    dispatch2({
-                                        type: "updateDiv",
-                                        newDiv: element
-                                    });
-                                    document.getElementById(element).className = "short-prompt-container-active";
-                                    throw BreakException;
-                                }
-                            });
-                        } catch (e) {
-                            if (e !== BreakException) throw e;
-                        }
+                    } catch (e) {
+                        if (e !== BreakException) throw e;
                     }
                 }
             }
         }
     };
     const handleClick = (event)=>{
-        if (event.target.className === "short-prompt-container-inactive") {
+        var node = null;
+        if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
+        else if (event.target.className === "short-prompt-guess") node = event.target.parentNode;
+        else node = event.target;
+        if (node.className === "short-prompt-container-inactive") {
             if (document.getElementById(activeDiv).className != "short-prompt-container-correct") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
-            document.getElementById(event.target.id).className = "short-prompt-container-active";
-            activeDiv = event.target.id;
-            dispatch2({
-                type: "updateDiv",
-                newDiv: event.target.id
-            });
+            document.getElementById(node.id).className = "short-prompt-container-active";
+            activeDiv = node.id;
         }
     };
     const shortPromptArray = (guess, answer)=>{
@@ -40040,26 +40017,26 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 120,
+                                lineNumber: 115,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 118,
+                        lineNumber: 113,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 116,
+                lineNumber: 111,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 114,
+        lineNumber: 109,
         columnNumber: 5
     }, undefined);
-}, "/iJMViWBfZjeyazAsL3fRjC/Wv8=");
+}, "t3T/ivIj3E9jSpG1K4/MyyoUDS8=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {

@@ -1,4 +1,3 @@
--figure out whether you actually need reducers
 -set up 'daily' riddle
--fix divs so that new divs are activated when clicked, regardless of whether sub divs (letters, etc.) are clicked
 -clean up all code, optimize
+-add comments to code where necessary
