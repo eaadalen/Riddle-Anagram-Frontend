@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
 import ShortPrompt from './short-prompt.jsx'
 import LongPrompt from './long-prompt.jsx'
+import GameOver from './game-over.jsx'
 import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
@@ -82,11 +83,9 @@ export const PlayView = () => {
         </div>
       }
       {showModal &&
-        <Modal show={true} onHide={toggleModal} className="modal">  
-          <Modal.Body className="modalContainer">
-            <div>
-              *insert score chart, like wordle*
-            </div> 
+        <Modal show={true} onHide={toggleModal} className="modal-container">  
+          <Modal.Body>
+            <GameOver/>
           </Modal.Body>  
         </Modal> 
       }

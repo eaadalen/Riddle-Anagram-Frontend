@@ -154,6 +154,13 @@
   top: 175px;
 }
 
+.modal-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30%;
+}
+
 .sub-container {
   border: 1px solid #000;
   margin: 100px;
@@ -223,6 +230,8 @@
   color: gray;
   font-size: .75em;
 }
+
+
 
 :root, [data-bs-theme="light"] {
   --bs-blue: #0d6efd;
