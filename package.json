@@ -25,7 +25,8 @@
     "react-router-dom": "^6.22.1",
     "react-scripts": "4.0.0",
     "reactjs-popup": "^2.0.6",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "sortablejs": "^1.15.2"
   },
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.11.0",

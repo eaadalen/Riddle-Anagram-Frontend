@@ -13,3 +13,24 @@
   color: gray;
   font-size: 0.75em;
 }
+
+.long-prompt-answer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.long-prompt-letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  margin: 2px;
+  border: 1px solid rgb(0, 0, 0);
+}

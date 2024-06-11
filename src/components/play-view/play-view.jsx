@@ -57,7 +57,7 @@ export const PlayView = () => {
   const toggleModal = () => {  
     if (showModal == true) {
       setShowModal(false)
-      location.reload()
+      //location.reload()
     }
     else {
       setShowModal(true)

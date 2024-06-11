@@ -140,7 +140,7 @@
 .long-prompt {
   background-color: #fff;
   border-radius: 7px;
-  height: 175px;
+  height: 220px;
   margin-top: 20px;
   padding-top: 20px;
   position: sticky;
@@ -151,14 +151,14 @@
   background-image: linear-gradient(to top, #f000, #fff);
   height: 20px;
   position: sticky;
-  top: 175px;
+  top: 220px;
 }
 
 .modal-container {
   text-align: center;
   justify-content: center;
   align-items: center;
-  margin-top: 30%;
+  margin-top: 200px;
 }
 
 .sub-container {
@@ -229,6 +229,27 @@
 .unscramble {
   color: gray;
   font-size: .75em;
+}
+
+.long-prompt-answer {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+}
+
+.long-prompt-letter {
+  text-align: center;
+  border: 1px solid #000;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin: 2px;
+  padding: 10px;
+  display: flex;
 }
 
 
