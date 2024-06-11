@@ -17,16 +17,19 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   }, [finalAnswer])
 
   useEffect(() => {
-    Sortable.create(longPromptAnswer, { direction: 'horizontal', });
+    Sortable.create(longPromptAnswer, {});
+    window.addEventListener('keyup', event => handleSubmit(event))
   }, [])
 
-  const handleSubmit = () => {
-    let letters = ''
-    document.getElementById('longPromptAnswer').childNodes.forEach((item) => {
-      letters = letters + item.textContent
-    })
-    console.log(letters)
-    setFinalAnswer(letters)
+  const handleSubmit = (event) => {
+    if (event.key === 'Enter') {
+      let letters = ''
+      document.getElementById('longPromptAnswer').childNodes.forEach((item) => {
+        letters = letters + item.textContent
+      })
+      console.log('here')
+      setFinalAnswer(letters)
+    }
   }
 
   const longPromptArray = (guess, answer) => {  
@@ -44,7 +47,6 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
 
   return (
     <div>
-      <button onClick={handleSubmit}>Click me</button>
       <div className='prompt'>
         {prompt.longPrompt}
       </div>
@@ -65,7 +67,7 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
       <div className='unscramble'>
         Unscramble the letters above to answer the riddle
         <br></br>
-        Answer clues to reveal letters
+        Press Enter to submit
       </div>
     </div>
   )

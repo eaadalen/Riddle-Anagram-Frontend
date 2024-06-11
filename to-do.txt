@@ -1,5 +1,5 @@
 -set up 'daily' riddle
--click and drag functionality to reorder solved letters?
 -add reveal answer functionality to short and long prompts
+-add manual keyboard smh
 -clean up all code, optimize
 -add comments to code where necessary
