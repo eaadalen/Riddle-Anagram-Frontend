@@ -168,7 +168,7 @@
   padding-right: 10px;
 }
 
-.short-prompt-container-active, .short-prompt-container-inactive, .short-prompt-container-correct {
+.short-prompt-container-active, .short-prompt-container-inactive, .short-prompt-container-correct, .short-prompt-container-revealed {
   text-align: center;
   border: 1px solid #000;
   border-radius: 7px;
@@ -188,6 +188,25 @@
 .short-prompt-container-correct {
   background-color: #2fde0c;
   box-shadow: 0 5px 15px #00000059;
+}
+
+.short-prompt-container-revealed {
+  background-color: #8f9791a9;
+  box-shadow: 0 5px 15px #00000059;
+}
+
+.short-prompt {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.reveal-answer {
+  color: gray;
+  cursor: pointer;
+  font-family: Trebuchet MS, sans-serif;
+  font-size: .75em;
 }
 
 .short-prompt-guess {

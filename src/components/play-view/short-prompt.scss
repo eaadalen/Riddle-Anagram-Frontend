@@ -7,7 +7,8 @@
 
 .short-prompt-container-active, 
 .short-prompt-container-inactive,
-.short-prompt-container-correct 
+.short-prompt-container-correct,
+.short-prompt-container-revealed 
 {
   width: auto;
   border-radius: 7px;
@@ -34,6 +35,25 @@
 .short-prompt-container-correct {
   background-color: rgb(47, 222, 12);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.short-prompt-container-revealed {
+  background-color: rgba(143, 151, 145, 0.664);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.short-prompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.reveal-answer {
+  font-family: 'Trebuchet MS', sans-serif;
+  color: gray;
+  font-size: 0.75em;
+  cursor: pointer;
 }
 
 .short-prompt-guess {

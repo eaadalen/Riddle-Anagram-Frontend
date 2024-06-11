@@ -39896,27 +39896,9 @@ try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _shortPromptScss = require("./short-prompt.scss");
 var _react = require("react");
+var _shortPromptScss = require("./short-prompt.scss");
 var _s = $RefreshSig$();
-function updateGuess(state, action) {
-    switch(action.type){
-        case "addLetter":
-            return {
-                value: state.value + action.update.toUpperCase()
-            };
-        case "deleteLetter":
-            return {
-                value: state.value.slice(0, -1)
-            };
-        case "clearText":
-            return {
-                value: ""
-            };
-        default:
-            return state;
-    }
-}
 function updateLetters(state, action) {
     switch(action.type){
         case "addLetter":
@@ -39930,12 +39912,10 @@ function updateLetters(state, action) {
 exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     _s();
     var activeDiv = Object.keys(prompts)[0];
-    const [guess, guessDispatch] = (0, _react.useReducer)(updateGuess, {
-        value: ""
-    });
     const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
         value: ""
     });
+    const [render, triggerRender] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
         document.getElementById(activeDiv).className = "short-prompt-container-active";
@@ -39948,54 +39928,69 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
     }, [
         solvedLetters.value
     ]);
+    const setNewActiveDiv = ()=>{
+        var BreakException = {};
+        try {
+            Object.keys(prompts).forEach(function(element) {
+                if (prompts[element].locked != true) {
+                    activeDiv = element;
+                    document.getElementById(element).className = "short-prompt-container-active";
+                    throw BreakException;
+                }
+            });
+        } catch (e) {
+            if (e !== BreakException) throw e;
+        }
+        console.log("setNewActiveDiv: " + prompts[activeDiv].Answer);
+    };
     const handleTyping = (e)=>{
         if (e.target.id != "answer-form" && prompts[activeDiv].locked != true) {
             if (e.key === "Backspace") {
-                guessDispatch({
-                    type: "deleteLetter"
-                });
+                triggerRender(Math.random());
                 prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
+                document.getElementById(activeDiv).classList.remove("horizontal-shake");
             } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-                guessDispatch({
-                    type: "addLetter",
-                    update: e.key
-                });
-                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
-                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
-                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                        prompts[activeDiv].locked = true;
-                        solvedLettersDispatch({
-                            type: "addLetter",
-                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
-                        });
-                        var BreakException = {};
-                        try {
-                            Object.keys(prompts).forEach(function(element) {
-                                if (prompts[element]["locked"] != true) {
-                                    activeDiv = element;
-                                    document.getElementById(element).className = "short-prompt-container-active";
-                                    throw BreakException;
-                                }
+                triggerRender(Math.random());
+                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+                    prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+                    ;
+                    if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+                        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                            document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                            prompts[activeDiv].locked = true;
+                            solvedLettersDispatch({
+                                type: "addLetter",
+                                update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
                             });
-                        } catch (e) {
-                            if (e !== BreakException) throw e;
+                            setNewActiveDiv();
+                        } else {
+                            document.getElementById(activeDiv).classList.add("horizontal-shake");
+                            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
                         }
-                    } else document.getElementById(activeDiv).classList.add("horizontal-shake");
-                } else document.getElementById(activeDiv).classList.remove("horizontal-shake");
+                    } else document.getElementById(activeDiv).classList.remove("horizontal-shake");
+                }
             }
         }
     };
     const handleClick = (event)=>{
+        console.log("prevDiv: " + prompts[activeDiv].Answer);
         var node = null;
         if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
-        else if (event.target.className === "short-prompt-guess") node = event.target.parentNode;
+        else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
         else node = event.target;
         if (node.className === "short-prompt-container-inactive") {
-            if (document.getElementById(activeDiv).className != "short-prompt-container-correct") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
+            if (document.getElementById(activeDiv).className != "short-prompt-container-correct" && document.getElementById(activeDiv).className != "short-prompt-container-revealed") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
             document.getElementById(node.id).className = "short-prompt-container-active";
             activeDiv = node.id;
         }
+        console.log("newDiv: " + prompts[activeDiv].Answer);
+    };
+    const showAnswer = (id)=>{
+        prompts[id].locked = true;
+        prompts[id].activeGuess = prompts[id].Answer;
+        document.getElementById(id).className = "short-prompt-container-revealed";
+        triggerRender(Math.random());
+        setNewActiveDiv();
     };
     const shortPromptArray = (guess, answer)=>{
         returnValue = [];
@@ -40014,7 +40009,24 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                 id: prompt,
                 className: "short-prompt-container-inactive",
                 children: [
-                    prompts[prompt].shortPrompt,
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt",
+                        children: prompts[prompt].shortPrompt
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/short-prompt.jsx",
+                        lineNumber: 125,
+                        columnNumber: 11
+                    }, undefined),
+                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: String(prompt) + "reveal",
+                        className: "reveal-answer",
+                        onClick: (event)=>showAnswer(prompt),
+                        children: "Reveal Answer?"
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/short-prompt.jsx",
+                        lineNumber: 129,
+                        columnNumber: 13
+                    }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt-guess",
                         children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -40022,26 +40034,26 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 124,
+                                lineNumber: 135,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 122,
+                        lineNumber: 133,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 120,
+                lineNumber: 124,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 118,
+        lineNumber: 122,
         columnNumber: 5
     }, undefined);
-}, "t3T/ivIj3E9jSpG1K4/MyyoUDS8=");
+}, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
 
   $parcel$ReactRefreshHelpers$f5e2.postlude(module);
 } finally {
