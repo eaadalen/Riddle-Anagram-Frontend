@@ -5,14 +5,18 @@ import Sortable from 'sortablejs';
 export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
   const [locked, setLocked] = useState(false)
+  const [guessesRemaining, setGuessesRemaining] = useState(4)
 
   useEffect(() => {
     if (finalAnswer === prompt.Answer) {
-      sendDataToLP(true)
+      sendDataToLP('correct')
       setLocked(true)
     }
     else {
-      // add a strike
+      setGuessesRemaining(prev => prev - 1)
+      if (guessesRemaining === 1) {
+        sendDataToLP('incorrect')
+      }
     }
   }, [finalAnswer])
 
@@ -27,7 +31,6 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
       document.getElementById('longPromptAnswer').childNodes.forEach((item) => {
         letters = letters + item.textContent
       })
-      console.log('here')
       setFinalAnswer(letters)
     }
   }
@@ -41,6 +44,14 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
       else {
         returnValue.push([guess.charAt(i), i])
       }
+    }
+    return returnValue
+  }
+
+  const strikesArray = (strikes) => {  
+    returnValue = []
+    for (let i = 0; i < strikes; i++) {
+      returnValue.push('⬤')
     }
     return returnValue
   }
@@ -66,8 +77,14 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
       }
       <div className='unscramble'>
         Unscramble the letters above to answer the riddle
-        <br></br>
-        Press Enter to submit
+      </div>
+      <div className='unscramble-bottom'>
+        Press Enter to Submit
+        <div className='guessesRemaining'>
+          {strikesArray(guessesRemaining).map((strike) => (
+            <div key={Math.random()} className='guess'>{strike}</div>
+          ))}
+        </div>
       </div>
     </div>
   )

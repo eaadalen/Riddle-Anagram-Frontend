@@ -5,13 +5,20 @@
   margin-top: 10px;
 }
 
-.prompt, .unscramble {
+.prompt, .unscramble, .unscramble-bottom {
   font-family: 'Trebuchet MS', sans-serif;
 }
 
-.unscramble {
+.unscramble, .unscramble-bottom {
   color: gray;
   font-size: 0.75em;
+}
+
+.unscramble-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .long-prompt-answer {
@@ -33,4 +40,17 @@
   padding: 10px;
   margin: 2px;
   border: 1px solid rgb(0, 0, 0);
+}
+
+.guessesRemaining {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.guess {
+  margin-left: 5px;
+  margin-right: 5px;
 }

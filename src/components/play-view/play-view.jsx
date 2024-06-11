@@ -12,6 +12,7 @@ export const PlayView = () => {
   const [loaded, setLoaded] = useState(false)
   const [dataFromSP, setDataFromSP] = useState("");
   const [showModal, setShowModal] = useState(false)
+  const [gameOverData, setGameOverData] = useState()
 
   useEffect(() => {
     fetch(
@@ -47,10 +48,16 @@ export const PlayView = () => {
     setDataFromSP(data);
   }
 
-  function handleDataFromLP() {
+  function handleDataFromLP(data) {
     Object.keys(shortPrompts).forEach((element) => {
       shortPrompts[element]['locked'] = true
     })
+    if (data === 'correct') {
+      setGameOverData(data)
+    }
+    else if (data === 'incorrect') {
+      setGameOverData(longPrompt.Answer)
+    }
     setShowModal(true)
   }
 
@@ -85,7 +92,7 @@ export const PlayView = () => {
       {showModal &&
         <Modal show={true} onHide={toggleModal} className="modal-container">  
           <Modal.Body>
-            <GameOver/>
+            <GameOver data={gameOverData}/>
           </Modal.Body>  
         </Modal> 
       }
