@@ -79,7 +79,7 @@ export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
         Unscramble the letters above to answer the riddle
       </div>
       <div className='unscramble-bottom'>
-        Press Enter to Submit
+        Guesses Remaining
         <div className='guessesRemaining'>
           {strikesArray(guessesRemaining).map((strike) => (
             <div key={Math.random()} className='guess'>{strike}</div>

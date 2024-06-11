@@ -1,5 +1,5 @@
 import './short-prompt.scss'
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 
 function updateGuess(state, action) {
   switch (action.type) {
@@ -46,27 +46,36 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
         guessDispatch({ type: 'deleteLetter' })
         prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
       }
-      else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){
+      else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
         guessDispatch({ type: 'addLetter', update: e.key })
-        if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+        if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
           prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase()
         }
-        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-          document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-          prompts[activeDiv].locked = true
-          solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
-          var BreakException = {};
-          try {
-            Object.keys(prompts).forEach(function(element) {
-              if (prompts[element]['locked'] != true) {
-                activeDiv = element
-                document.getElementById(element).className = 'short-prompt-container-active'
-                throw BreakException
-              }
-            });
-          } catch (e) {
-            if (e !== BreakException) throw e;
+        if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+            prompts[activeDiv].locked = true
+            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+            var BreakException = {};
+            try {
+              Object.keys(prompts).forEach(function(element) {
+                if (prompts[element]['locked'] != true) {
+                  activeDiv = element
+                  document.getElementById(element).className = 'short-prompt-container-active'
+                  throw BreakException
+                }
+              });
+            } catch (e) {
+              if (e !== BreakException) throw e;
+            }
           }
+          else {
+            document.getElementById(activeDiv).classList.add('horizontal-shake');
+            //prompts[activeDiv].guesses
+          }
+        }
+        else {
+          document.getElementById(activeDiv).classList.remove('horizontal-shake')
         }
       }
     }
@@ -108,7 +117,7 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   return (
     <div>
       {Object.keys(prompts).map((prompt) => (
-        <div key={prompt} id={prompt} className={'short-prompt-container-inactive'}>
+        <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
           {prompts[prompt].shortPrompt}
           <div className='short-prompt-guess'>
             {shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter) => (

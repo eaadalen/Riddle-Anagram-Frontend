@@ -39961,26 +39961,28 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                     update: e.key
                 });
                 if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase();
-                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                    prompts[activeDiv].locked = true;
-                    solvedLettersDispatch({
-                        type: "addLetter",
-                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
-                    });
-                    var BreakException = {};
-                    try {
-                        Object.keys(prompts).forEach(function(element) {
-                            if (prompts[element]["locked"] != true) {
-                                activeDiv = element;
-                                document.getElementById(element).className = "short-prompt-container-active";
-                                throw BreakException;
-                            }
+                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                        prompts[activeDiv].locked = true;
+                        solvedLettersDispatch({
+                            type: "addLetter",
+                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
                         });
-                    } catch (e) {
-                        if (e !== BreakException) throw e;
-                    }
-                }
+                        var BreakException = {};
+                        try {
+                            Object.keys(prompts).forEach(function(element) {
+                                if (prompts[element]["locked"] != true) {
+                                    activeDiv = element;
+                                    document.getElementById(element).className = "short-prompt-container-active";
+                                    throw BreakException;
+                                }
+                            });
+                        } catch (e) {
+                            if (e !== BreakException) throw e;
+                        }
+                    } else document.getElementById(activeDiv).classList.add("horizontal-shake");
+                } else document.getElementById(activeDiv).classList.remove("horizontal-shake");
             }
         }
     };
@@ -40020,23 +40022,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 115,
+                                lineNumber: 124,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 113,
+                        lineNumber: 122,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 111,
+                lineNumber: 120,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 109,
+        lineNumber: 118,
         columnNumber: 5
     }, undefined);
 }, "t3T/ivIj3E9jSpG1K4/MyyoUDS8=");
@@ -40160,7 +40162,7 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "unscramble-bottom",
                 children: [
-                    "Press Enter to Submit",
+                    "Guesses Remaining",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "guessesRemaining",
                         children: strikesArray(guessesRemaining).map((strike)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
