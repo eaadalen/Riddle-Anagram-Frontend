@@ -45,34 +45,28 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   }
 
   const handleTyping = (e) => {  
-    if (e.target.id != 'answer-form' && prompts[activeDiv].locked != true) {
-      if (e.key === 'Backspace') {
-        triggerRender(Math.random())
-        prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
-        document.getElementById(activeDiv).classList.remove('horizontal-shake')
-      }
-      else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
-        triggerRender(Math.random())
-        if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
-          prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
-          if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
-            if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
-              document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-              prompts[activeDiv].locked = true
-              solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
-              setNewActiveDiv()
-            }
-            else {  // If active guess doesn't match answer, display incorrect animation
-              document.getElementById(activeDiv).classList.add('horizontal-shake');
-              prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1
-            }
+    if (e.key === 'Backspace') {
+      prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
+      document.getElementById(activeDiv).classList.remove('horizontal-shake')
+    }
+    else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
+      if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
+        prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+        if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
+          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
+            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+            prompts[activeDiv].locked = true
+            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+            setNewActiveDiv()
           }
-          else {
-            document.getElementById(activeDiv).classList.remove('horizontal-shake')
+          else {  // If active guess doesn't match answer, display incorrect animation
+            document.getElementById(activeDiv).classList.add('horizontal-shake');
+            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1
           }
         }
       }
     }
+    triggerRender(Math.random())
   }
 
   const handleClick = (event) => { 
@@ -101,6 +95,7 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
     prompts[id].locked = true
     prompts[id].activeGuess = prompts[id].Answer
     document.getElementById(id).className = 'short-prompt-container-revealed'
+    solvedLettersDispatch({ type: 'addLetter', update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)})
     triggerRender(Math.random())
     setNewActiveDiv()
   }

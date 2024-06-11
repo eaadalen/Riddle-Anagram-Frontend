@@ -39944,33 +39944,30 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         console.log("setNewActiveDiv: " + prompts[activeDiv].Answer);
     };
     const handleTyping = (e)=>{
-        if (e.target.id != "answer-form" && prompts[activeDiv].locked != true) {
-            if (e.key === "Backspace") {
-                triggerRender(Math.random());
-                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-                document.getElementById(activeDiv).classList.remove("horizontal-shake");
-            } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-                triggerRender(Math.random());
-                if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-                    prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
-                    ;
-                    if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
-                        if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                            document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                            prompts[activeDiv].locked = true;
-                            solvedLettersDispatch({
-                                type: "addLetter",
-                                update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
-                            });
-                            setNewActiveDiv();
-                        } else {
-                            document.getElementById(activeDiv).classList.add("horizontal-shake");
-                            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
-                        }
-                    } else document.getElementById(activeDiv).classList.remove("horizontal-shake");
+        if (e.key === "Backspace") {
+            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
+            document.getElementById(activeDiv).classList.remove("horizontal-shake");
+        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
+            if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+                ;
+                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                        prompts[activeDiv].locked = true;
+                        solvedLettersDispatch({
+                            type: "addLetter",
+                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                        });
+                        setNewActiveDiv();
+                    } else {
+                        document.getElementById(activeDiv).classList.add("horizontal-shake");
+                        prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
+                    }
                 }
             }
         }
+        triggerRender(Math.random());
     };
     const handleClick = (event)=>{
         console.log("prevDiv: " + prompts[activeDiv].Answer);
@@ -39989,6 +39986,10 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
         prompts[id].locked = true;
         prompts[id].activeGuess = prompts[id].Answer;
         document.getElementById(id).className = "short-prompt-container-revealed";
+        solvedLettersDispatch({
+            type: "addLetter",
+            update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
+        });
         triggerRender(Math.random());
         setNewActiveDiv();
     };
@@ -40014,7 +40015,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                         children: prompts[prompt].shortPrompt
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 125,
+                        lineNumber: 120,
                         columnNumber: 11
                     }, undefined),
                     prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -40024,7 +40025,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                         children: "Reveal Answer?"
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 129,
+                        lineNumber: 124,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -40034,23 +40035,23 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/play-view/short-prompt.jsx",
-                                lineNumber: 135,
+                                lineNumber: 130,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/play-view/short-prompt.jsx",
-                        lineNumber: 133,
+                        lineNumber: 128,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/play-view/short-prompt.jsx",
-                lineNumber: 124,
+                lineNumber: 119,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/play-view/short-prompt.jsx",
-        lineNumber: 122,
+        lineNumber: 117,
         columnNumber: 5
     }, undefined);
 }, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
