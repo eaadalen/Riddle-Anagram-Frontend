@@ -27042,7 +27042,7 @@ $RefreshReg$(_c, "MainView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","../play-view/play-view":"iLJCD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"3AD9A":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","../play-view/play-view":"iLJCD","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3AD9A":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Accordion", ()=>(0, _accordionDefault.default));
@@ -38023,12 +38023,12 @@ var _playViewScss = require("./play-view.scss");
 var _react = require("react");
 var _loadingAnimationGif = require("../../../media/loading-animation.gif");
 var _loadingAnimationGifDefault = parcelHelpers.interopDefault(_loadingAnimationGif);
-var _shortPromptJsx = require("./short-prompt.jsx");
-var _shortPromptJsxDefault = parcelHelpers.interopDefault(_shortPromptJsx);
-var _longPromptJsx = require("./long-prompt.jsx");
-var _longPromptJsxDefault = parcelHelpers.interopDefault(_longPromptJsx);
-var _gameOverJsx = require("./game-over.jsx");
-var _gameOverJsxDefault = parcelHelpers.interopDefault(_gameOverJsx);
+var _shortPromptViewJsx = require("./short-prompt-view.jsx");
+var _shortPromptViewJsxDefault = parcelHelpers.interopDefault(_shortPromptViewJsx);
+var _longPromptViewJsx = require("./long-prompt-view.jsx");
+var _longPromptViewJsxDefault = parcelHelpers.interopDefault(_longPromptViewJsx);
+var _gameOverViewJsx = require("./game-over-view.jsx");
+var _gameOverViewJsxDefault = parcelHelpers.interopDefault(_gameOverViewJsx);
 var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const PlayView = ()=>{
@@ -38093,7 +38093,7 @@ const PlayView = ()=>{
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "long-prompt",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptJsxDefault.default), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptViewJsxDefault.default), {
                             prompt: longPrompt,
                             lettersSolved: dataFromSP,
                             sendDataToLP: handleDataFromLP
@@ -38116,7 +38116,7 @@ const PlayView = ()=>{
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptJsxDefault.default), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptViewJsxDefault.default), {
                             prompts: shortPrompts,
                             sendDataToSP: handleDataFromSP
                         }, void 0, false, {
@@ -38140,7 +38140,7 @@ const PlayView = ()=>{
                 onHide: toggleModal,
                 className: "modal-container",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal).Body, {
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gameOverJsxDefault.default), {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gameOverViewJsxDefault.default), {
                         answer: longPrompt.Answer,
                         data: gameOverData
                     }, void 0, false, {
@@ -38175,7 +38175,45 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx","react-bootstrap":"3AD9A","./game-over.jsx":"jXKbT"}],"koBHD":[function() {},{}],"km3Ru":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./short-prompt-view.jsx":"3H6Ch","./long-prompt-view.jsx":"8qwqP","./game-over-view.jsx":"doBL2"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
+
+},{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return "/";
+}
+function getBaseURL(url) {
+    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
+}
+// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
+    if (!matches) throw new Error("Origin not found");
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -38777,55 +38815,17 @@ module.exports = require("9e039173d01172ab");
     exports.setSignature = setSignature;
 })();
 
-},{}],"iSTV0":[function(require,module,exports) {
-module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
-
-},{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ("" + err.stack).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return "/";
-}
-function getBaseURL(url) {
-    return ("" + url).replace(/^((?:https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/.+)\/[^/]+$/, "$1") + "/";
-}
-// TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ("" + url).match(/(https?|file|ftp|(chrome|moz|safari-web)-extension):\/\/[^/]+/);
-    if (!matches) throw new Error("Origin not found");
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"cUgVj":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$f5e2 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"3H6Ch":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$f622 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$f5e2.prelude(module);
+$parcel$ReactRefreshHelpers$f622.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _shortPromptScss = require("./short-prompt.scss");
+var _shortPromptViewScss = require("./short-prompt-view.scss");
 var _react = require("react");
 var _s = $RefreshSig$();
 function updateLetters(state, action) {
@@ -38838,7 +38838,7 @@ function updateLetters(state, action) {
             return state;
     }
 }
-exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
+exports.default = ShortPromptView = _s(({ prompts, sendDataToSP })=>{
     _s();
     var activeDiv = Object.keys(prompts)[0];
     const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
@@ -38940,7 +38940,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                         className: "short-prompt",
                         children: prompts[prompt].shortPrompt
                     }, void 0, false, {
-                        fileName: "src/components/play-view/short-prompt.jsx",
+                        fileName: "src/components/play-view/short-prompt-view.jsx",
                         lineNumber: 116,
                         columnNumber: 11
                     }, undefined),
@@ -38950,7 +38950,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                         onClick: (event)=>showAnswer(prompt),
                         children: "Reveal Answer?"
                     }, void 0, false, {
-                        fileName: "src/components/play-view/short-prompt.jsx",
+                        fileName: "src/components/play-view/short-prompt-view.jsx",
                         lineNumber: 120,
                         columnNumber: 13
                     }, undefined),
@@ -38960,49 +38960,49 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
                                 className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
                                 children: letter[0]
                             }, Math.random(), false, {
-                                fileName: "src/components/play-view/short-prompt.jsx",
+                                fileName: "src/components/play-view/short-prompt-view.jsx",
                                 lineNumber: 126,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
-                        fileName: "src/components/play-view/short-prompt.jsx",
+                        fileName: "src/components/play-view/short-prompt-view.jsx",
                         lineNumber: 124,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
-                fileName: "src/components/play-view/short-prompt.jsx",
+                fileName: "src/components/play-view/short-prompt-view.jsx",
                 lineNumber: 115,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
-        fileName: "src/components/play-view/short-prompt.jsx",
+        fileName: "src/components/play-view/short-prompt-view.jsx",
         lineNumber: 113,
         columnNumber: 5
     }, undefined);
 }, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
 
-  $parcel$ReactRefreshHelpers$f5e2.postlude(module);
+  $parcel$ReactRefreshHelpers$f622.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$dbb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"czjiY","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"czjiY":[function() {},{}],"8qwqP":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$5343 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$dbb1.prelude(module);
+$parcel$ReactRefreshHelpers$5343.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _longPromptScss = require("./long-prompt.scss");
+var _longPromptViewScss = require("./long-prompt-view.scss");
 var _react = require("react");
 var _sortablejs = require("sortablejs");
 var _sortablejsDefault = parcelHelpers.interopDefault(_sortablejs);
 var _s = $RefreshSig$();
-exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
+exports.default = LongPromptView = _s(({ prompt, lettersSolved, sendDataToLP })=>{
     _s();
     const [finalAnswer, setFinalAnswer] = (0, _react.useState)("");
     const [locked, setLocked] = (0, _react.useState)(false);
@@ -39058,7 +39058,7 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                 className: "prompt",
                 children: prompt.longPrompt
             }, void 0, false, {
-                fileName: "src/components/play-view/long-prompt.jsx",
+                fileName: "src/components/play-view/long-prompt-view.jsx",
                 lineNumber: 67,
                 columnNumber: 7
             }, undefined),
@@ -39069,12 +39069,12 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                         className: "long-prompt-letter",
                         children: letter[0]
                     }, Math.random(), false, {
-                        fileName: "src/components/play-view/long-prompt.jsx",
+                        fileName: "src/components/play-view/long-prompt-view.jsx",
                         lineNumber: 73,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
-                fileName: "src/components/play-view/long-prompt.jsx",
+                fileName: "src/components/play-view/long-prompt-view.jsx",
                 lineNumber: 71,
                 columnNumber: 9
             }, undefined),
@@ -39085,12 +39085,12 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                         className: "long-prompt-letter",
                         children: letter[0]
                     }, Math.random(), false, {
-                        fileName: "src/components/play-view/long-prompt.jsx",
+                        fileName: "src/components/play-view/long-prompt-view.jsx",
                         lineNumber: 80,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
-                fileName: "src/components/play-view/long-prompt.jsx",
+                fileName: "src/components/play-view/long-prompt-view.jsx",
                 lineNumber: 78,
                 columnNumber: 9
             }, undefined),
@@ -39098,7 +39098,7 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                 className: "unscramble",
                 children: "Unscramble the letters above to answer the riddle"
             }, void 0, false, {
-                fileName: "src/components/play-view/long-prompt.jsx",
+                fileName: "src/components/play-view/long-prompt-view.jsx",
                 lineNumber: 84,
                 columnNumber: 7
             }, undefined),
@@ -39112,35 +39112,35 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
                                 className: "guess",
                                 children: strike
                             }, Math.random(), false, {
-                                fileName: "src/components/play-view/long-prompt.jsx",
+                                fileName: "src/components/play-view/long-prompt-view.jsx",
                                 lineNumber: 91,
                                 columnNumber: 13
                             }, undefined))
                     }, void 0, false, {
-                        fileName: "src/components/play-view/long-prompt.jsx",
+                        fileName: "src/components/play-view/long-prompt-view.jsx",
                         lineNumber: 89,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
-                fileName: "src/components/play-view/long-prompt.jsx",
+                fileName: "src/components/play-view/long-prompt-view.jsx",
                 lineNumber: 87,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
-        fileName: "src/components/play-view/long-prompt.jsx",
+        fileName: "src/components/play-view/long-prompt-view.jsx",
         lineNumber: 66,
         columnNumber: 5
     }, undefined);
 }, "vFKccWZlh81LAbkKk/Yw81KfrNI=");
 
-  $parcel$ReactRefreshHelpers$dbb1.postlude(module);
+  $parcel$ReactRefreshHelpers$5343.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","sortablejs":"4mik1"}],"4vwJ7":[function() {},{}],"4mik1":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","sortablejs":"4mik1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./long-prompt-view.scss":"g9ZVJ"}],"4mik1":[function(require,module,exports) {
 /**!
  * Sortable 1.15.2
  * @author	RubaXa   <trash@rubaxa.org>
@@ -41740,19 +41740,18 @@ Sortable.mount(new AutoScrollPlugin());
 Sortable.mount(Remove, Revert);
 exports.default = Sortable;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jXKbT":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$b305 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"g9ZVJ":[function() {},{}],"doBL2":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7679 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$b305.prelude(module);
+$parcel$ReactRefreshHelpers$7679.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _gameOverCss = require("./game-over.css");
-var _react = require("react");
-exports.default = GameOver = ({ answer, data })=>{
+var _gameOverViewCss = require("./game-over-view.css");
+exports.default = GameOverView = ({ answer, data })=>{
     const guessesArray = (guesses, answer)=>{
         let returnValue = [];
         for(let i = 0; i < guesses.length; i++){
@@ -41770,28 +41769,28 @@ exports.default = GameOver = ({ answer, data })=>{
                 children: guessesArray(data, answer).map((element)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         children: element
                     }, Math.random(), false, {
-                        fileName: "src/components/play-view/game-over.jsx",
-                        lineNumber: 27,
+                        fileName: "src/components/play-view/game-over-view.jsx",
+                        lineNumber: 26,
                         columnNumber: 11
                     }, undefined))
             }, void 0, false, {
-                fileName: "src/components/play-view/game-over.jsx",
-                lineNumber: 25,
+                fileName: "src/components/play-view/game-over-view.jsx",
+                lineNumber: 24,
                 columnNumber: 7
             }, undefined),
             data[data.length - 1] === answer && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: [
                     "Correct!",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                        fileName: "src/components/play-view/game-over.jsx",
-                        lineNumber: 35,
+                        fileName: "src/components/play-view/game-over-view.jsx",
+                        lineNumber: 34,
                         columnNumber: 11
                     }, undefined),
                     "Come back tomorrow for the next riddle"
                 ]
             }, void 0, true, {
-                fileName: "src/components/play-view/game-over.jsx",
-                lineNumber: 33,
+                fileName: "src/components/play-view/game-over-view.jsx",
+                lineNumber: 32,
                 columnNumber: 9
             }, undefined),
             !(data[data.length - 1] === answer) && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -41799,30 +41798,30 @@ exports.default = GameOver = ({ answer, data })=>{
                     "Correct Answer: ",
                     answer,
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
-                        fileName: "src/components/play-view/game-over.jsx",
-                        lineNumber: 42,
+                        fileName: "src/components/play-view/game-over-view.jsx",
+                        lineNumber: 41,
                         columnNumber: 11
                     }, undefined),
                     "Come back tomorrow for the next riddle"
                 ]
             }, void 0, true, {
-                fileName: "src/components/play-view/game-over.jsx",
-                lineNumber: 40,
+                fileName: "src/components/play-view/game-over-view.jsx",
+                lineNumber: 39,
                 columnNumber: 9
             }, undefined)
         ]
     }, void 0, true, {
-        fileName: "src/components/play-view/game-over.jsx",
-        lineNumber: 24,
+        fileName: "src/components/play-view/game-over-view.jsx",
+        lineNumber: 23,
         columnNumber: 5
     }, undefined);
 };
 
-  $parcel$ReactRefreshHelpers$b305.postlude(module);
+  $parcel$ReactRefreshHelpers$7679.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./game-over.css":"6Xh73","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6Xh73":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./game-over-view.css":"bZZr0"}],"bZZr0":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire5546")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

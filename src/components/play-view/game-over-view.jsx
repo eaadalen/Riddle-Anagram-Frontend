@@ -1,7 +1,6 @@
-import "./game-over.css"
-import { useState, useEffect } from "react";
+import "./game-over-view.css"
 
-export default GameOver = ({ answer, data }) => {
+export default GameOverView = ({ answer, data }) => {
 
   const guessesArray = (guesses, answer) => {  
     let returnValue = []

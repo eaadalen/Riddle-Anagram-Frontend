@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Col, Row } from 'react-bootstrap';
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Row } from 'react-bootstrap';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PlayView } from "../play-view/play-view";
 
 export const MainView = () => {

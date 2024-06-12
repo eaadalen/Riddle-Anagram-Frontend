@@ -1,9 +1,9 @@
 import "./play-view.scss"
 import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
-import ShortPrompt from './short-prompt.jsx'
-import LongPrompt from './long-prompt.jsx'
-import GameOver from './game-over.jsx'
+import ShortPromptView from './short-prompt-view.jsx'
+import LongPromptView from './long-prompt-view.jsx'
+import GameOverView from './game-over-view.jsx'
 import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
@@ -76,18 +76,18 @@ export const PlayView = () => {
       {loaded &&
         <div className="container-eka">
           <div className="long-prompt">
-            <LongPrompt prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
+            <LongPromptView prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
           </div>
           <div className="transition-div"></div>
           <div className="short-prompt">
-            <ShortPrompt prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
+            <ShortPromptView prompts={shortPrompts} sendDataToSP={handleDataFromSP}/>
           </div>
         </div>
       }
       {showModal &&
         <Modal show={true} onHide={toggleModal} className="modal-container">  
           <Modal.Body>
-            <GameOver answer={longPrompt.Answer} data={gameOverData}/>
+            <GameOverView answer={longPrompt.Answer} data={gameOverData}/>
           </Modal.Body>  
         </Modal> 
       }

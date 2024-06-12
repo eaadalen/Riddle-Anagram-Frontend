@@ -1,4 +1,4 @@
-import './short-prompt.scss'
+import './short-prompt-view.scss'
 import { useState, useEffect, useReducer } from 'react';
 
 function updateLetters(state, action) {
@@ -10,7 +10,7 @@ function updateLetters(state, action) {
   }
 }
 
-export default ShortPrompt = ({ prompts, sendDataToSP }) => {
+export default ShortPromptView = ({ prompts, sendDataToSP }) => {
   var activeDiv = Object.keys(prompts)[0]
   const [solvedLetters, solvedLettersDispatch] = useReducer(updateLetters, { value: '' })
   const [render, triggerRender] = useState()
