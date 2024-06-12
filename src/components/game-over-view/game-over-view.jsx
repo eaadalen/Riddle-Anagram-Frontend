@@ -1,6 +1,6 @@
 import "./game-over-view.css"
 
-export default GameOverView = ({ answer, data }) => {
+export const GameOverView = ({ answer, data }) => {
 
   const guessesArray = (guesses, answer) => {  
     let returnValue = []

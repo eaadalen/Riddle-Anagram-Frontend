@@ -10,7 +10,7 @@ function updateLetters(state, action) {
   }
 }
 
-export default ShortPromptView = ({ prompts, sendDataToSP }) => {
+export const ShortPromptView = ({ prompts, sendDataToSP }) => {
   var activeDiv = Object.keys(prompts)[0]
   const [solvedLetters, solvedLettersDispatch] = useReducer(updateLetters, { value: '' })
   const [render, triggerRender] = useState()

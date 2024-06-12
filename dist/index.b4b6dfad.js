@@ -38024,11 +38024,8 @@ var _react = require("react");
 var _loadingAnimationGif = require("../../../media/loading-animation.gif");
 var _loadingAnimationGifDefault = parcelHelpers.interopDefault(_loadingAnimationGif);
 var _shortPromptView = require("../short-prompt-view/short-prompt-view");
-var _shortPromptViewDefault = parcelHelpers.interopDefault(_shortPromptView);
 var _longPromptView = require("../long-prompt-view/long-prompt-view");
-var _longPromptViewDefault = parcelHelpers.interopDefault(_longPromptView);
 var _gameOverView = require("../game-over-view/game-over-view");
-var _gameOverViewDefault = parcelHelpers.interopDefault(_gameOverView);
 var _reactBootstrap = require("react-bootstrap");
 var _s = $RefreshSig$();
 const PlayView = ()=>{
@@ -38093,7 +38090,7 @@ const PlayView = ()=>{
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "long-prompt",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptViewDefault.default), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _longPromptView.LongPromptView), {
                             prompt: longPrompt,
                             lettersSolved: dataFromSP,
                             sendDataToLP: handleDataFromLP
@@ -38116,7 +38113,7 @@ const PlayView = ()=>{
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt",
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptViewDefault.default), {
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptView.ShortPromptView), {
                             prompts: shortPrompts,
                             sendDataToSP: handleDataFromSP
                         }, void 0, false, {
@@ -38140,7 +38137,7 @@ const PlayView = ()=>{
                 onHide: toggleModal,
                 className: "modal-container",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal).Body, {
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gameOverViewDefault.default), {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _gameOverView.GameOverView), {
                         answer: longPrompt.Answer,
                         data: gameOverData
                     }, void 0, false, {
@@ -38175,7 +38172,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../game-over-view/game-over-view":"0A806"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../game-over-view/game-over-view":"0A806","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -38213,7 +38210,184 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"km3Ru":[function(require,module,exports) {
+},{}],"dTZY8":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7acc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7acc.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ShortPromptView", ()=>ShortPromptView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _shortPromptViewScss = require("./short-prompt-view.scss");
+var _react = require("react");
+var _s = $RefreshSig$();
+function updateLetters(state, action) {
+    switch(action.type){
+        case "addLetter":
+            return {
+                value: state.value + action.update
+            };
+        default:
+            return state;
+    }
+}
+const ShortPromptView = ({ prompts, sendDataToSP })=>{
+    _s();
+    var activeDiv = Object.keys(prompts)[0];
+    const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
+        value: ""
+    });
+    const [render, triggerRender] = (0, _react.useState)();
+    (0, _react.useEffect)(()=>{
+        window.addEventListener("keyup", (event)=>handleTyping(event));
+        document.getElementById(activeDiv).className = "short-prompt-container-active";
+        Object.keys(prompts).forEach((element)=>{
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
+        });
+    }, []);
+    (0, _react.useEffect)(()=>{
+        sendDataToSP(solvedLetters.value);
+    }, [
+        solvedLetters.value
+    ]);
+    const setNewActiveDiv = ()=>{
+        var BreakException = {};
+        try {
+            Object.keys(prompts).forEach(function(element) {
+                if (prompts[element].locked != true) {
+                    activeDiv = element;
+                    document.getElementById(element).className = "short-prompt-container-active";
+                    throw BreakException;
+                }
+            });
+        } catch (e) {
+            if (e !== BreakException) throw e;
+        }
+        console.log("setNewActiveDiv: " + prompts[activeDiv].Answer);
+    };
+    const handleTyping = (e)=>{
+        if (e.key === "Backspace") {
+            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
+            document.getElementById(activeDiv).classList.remove("horizontal-shake");
+        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
+            if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+                ;
+                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                        prompts[activeDiv].locked = true;
+                        solvedLettersDispatch({
+                            type: "addLetter",
+                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                        });
+                        setNewActiveDiv();
+                    } else {
+                        document.getElementById(activeDiv).classList.add("horizontal-shake");
+                        prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
+                    }
+                }
+            }
+        }
+        triggerRender(Math.random());
+    };
+    const handleClick = (event)=>{
+        var node = null;
+        if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
+        else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
+        else node = event.target;
+        if (node.className === "short-prompt-container-inactive") {
+            if (document.getElementById(activeDiv).className != "short-prompt-container-correct" && document.getElementById(activeDiv).className != "short-prompt-container-revealed") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
+            document.getElementById(node.id).className = "short-prompt-container-active";
+            activeDiv = node.id;
+        }
+    };
+    const showAnswer = (id)=>{
+        prompts[id].locked = true;
+        prompts[id].activeGuess = prompts[id].Answer;
+        document.getElementById(id).className = "short-prompt-container-revealed";
+        solvedLettersDispatch({
+            type: "addLetter",
+            update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
+        });
+        triggerRender(Math.random());
+    };
+    const shortPromptArray = (guess, answer)=>{
+        returnValue = [];
+        for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
+            "",
+            i
+        ]);
+        else returnValue.push([
+            guess.activeGuess.charAt(i),
+            i
+        ]);
+        return returnValue;
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: prompt,
+                className: "short-prompt-container-inactive",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt",
+                        children: prompts[prompt].shortPrompt
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 116,
+                        columnNumber: 11
+                    }, undefined),
+                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: String(prompt) + "reveal",
+                        className: "reveal-answer",
+                        onClick: (event)=>showAnswer(prompt),
+                        children: "Reveal Answer?"
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 120,
+                        columnNumber: 13
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt-guess",
+                        children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
+                                children: letter[0]
+                            }, Math.random(), false, {
+                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                lineNumber: 126,
+                                columnNumber: 15
+                            }, undefined))
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 124,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, prompt, true, {
+                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                lineNumber: 115,
+                columnNumber: 9
+            }, undefined))
+    }, void 0, false, {
+        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+        lineNumber: 113,
+        columnNumber: 5
+    }, undefined);
+};
+_s(ShortPromptView, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
+_c = ShortPromptView;
+var _c;
+$RefreshReg$(_c, "ShortPromptView");
+
+  $parcel$ReactRefreshHelpers$7acc.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lQMwT":[function() {},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -38815,179 +38989,7 @@ module.exports = require("9e039173d01172ab");
     exports.setSignature = setSignature;
 })();
 
-},{}],"dTZY8":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7acc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7acc.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _shortPromptViewScss = require("./short-prompt-view.scss");
-var _react = require("react");
-var _s = $RefreshSig$();
-function updateLetters(state, action) {
-    switch(action.type){
-        case "addLetter":
-            return {
-                value: state.value + action.update
-            };
-        default:
-            return state;
-    }
-}
-exports.default = ShortPromptView = _s(({ prompts, sendDataToSP })=>{
-    _s();
-    var activeDiv = Object.keys(prompts)[0];
-    const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
-        value: ""
-    });
-    const [render, triggerRender] = (0, _react.useState)();
-    (0, _react.useEffect)(()=>{
-        window.addEventListener("keyup", (event)=>handleTyping(event));
-        document.getElementById(activeDiv).className = "short-prompt-container-active";
-        Object.keys(prompts).forEach((element)=>{
-            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
-        });
-    }, []);
-    (0, _react.useEffect)(()=>{
-        sendDataToSP(solvedLetters.value);
-    }, [
-        solvedLetters.value
-    ]);
-    const setNewActiveDiv = ()=>{
-        var BreakException = {};
-        try {
-            Object.keys(prompts).forEach(function(element) {
-                if (prompts[element].locked != true) {
-                    activeDiv = element;
-                    document.getElementById(element).className = "short-prompt-container-active";
-                    throw BreakException;
-                }
-            });
-        } catch (e) {
-            if (e !== BreakException) throw e;
-        }
-        console.log("setNewActiveDiv: " + prompts[activeDiv].Answer);
-    };
-    const handleTyping = (e)=>{
-        if (e.key === "Backspace") {
-            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-            document.getElementById(activeDiv).classList.remove("horizontal-shake");
-        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-            if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
-                ;
-                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
-                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                        prompts[activeDiv].locked = true;
-                        solvedLettersDispatch({
-                            type: "addLetter",
-                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
-                        });
-                        setNewActiveDiv();
-                    } else {
-                        document.getElementById(activeDiv).classList.add("horizontal-shake");
-                        prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
-                    }
-                }
-            }
-        }
-        triggerRender(Math.random());
-    };
-    const handleClick = (event)=>{
-        var node = null;
-        if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
-        else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
-        else node = event.target;
-        if (node.className === "short-prompt-container-inactive") {
-            if (document.getElementById(activeDiv).className != "short-prompt-container-correct" && document.getElementById(activeDiv).className != "short-prompt-container-revealed") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
-            document.getElementById(node.id).className = "short-prompt-container-active";
-            activeDiv = node.id;
-        }
-    };
-    const showAnswer = (id)=>{
-        prompts[id].locked = true;
-        prompts[id].activeGuess = prompts[id].Answer;
-        document.getElementById(id).className = "short-prompt-container-revealed";
-        solvedLettersDispatch({
-            type: "addLetter",
-            update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
-        });
-        triggerRender(Math.random());
-    };
-    const shortPromptArray = (guess, answer)=>{
-        returnValue = [];
-        for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
-            "",
-            i
-        ]);
-        else returnValue.push([
-            guess.activeGuess.charAt(i),
-            i
-        ]);
-        return returnValue;
-    };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: prompt,
-                className: "short-prompt-container-inactive",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt",
-                        children: prompts[prompt].shortPrompt
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 116,
-                        columnNumber: 11
-                    }, undefined),
-                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        id: String(prompt) + "reveal",
-                        className: "reveal-answer",
-                        onClick: (event)=>showAnswer(prompt),
-                        children: "Reveal Answer?"
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 120,
-                        columnNumber: 13
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt-guess",
-                        children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
-                                children: letter[0]
-                            }, Math.random(), false, {
-                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 126,
-                                columnNumber: 15
-                            }, undefined))
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 124,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, prompt, true, {
-                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 115,
-                columnNumber: 9
-            }, undefined))
-    }, void 0, false, {
-        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 113,
-        columnNumber: 5
-    }, undefined);
-}, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
-
-  $parcel$ReactRefreshHelpers$7acc.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lQMwT":[function() {},{}],"gylj4":[function(require,module,exports) {
+},{}],"gylj4":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4710 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -38996,13 +38998,14 @@ $parcel$ReactRefreshHelpers$4710.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "LongPromptView", ()=>LongPromptView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _longPromptViewScss = require("./long-prompt-view.scss");
 var _react = require("react");
 var _sortablejs = require("sortablejs");
 var _sortablejsDefault = parcelHelpers.interopDefault(_sortablejs);
 var _s = $RefreshSig$();
-exports.default = LongPromptView = _s(({ prompt, lettersSolved, sendDataToLP })=>{
+const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
     _s();
     const [finalAnswer, setFinalAnswer] = (0, _react.useState)("");
     const [locked, setLocked] = (0, _react.useState)(false);
@@ -39133,7 +39136,11 @@ exports.default = LongPromptView = _s(({ prompt, lettersSolved, sendDataToLP })=
         lineNumber: 66,
         columnNumber: 5
     }, undefined);
-}, "vFKccWZlh81LAbkKk/Yw81KfrNI=");
+};
+_s(LongPromptView, "vFKccWZlh81LAbkKk/Yw81KfrNI=");
+_c = LongPromptView;
+var _c;
+$RefreshReg$(_c, "LongPromptView");
 
   $parcel$ReactRefreshHelpers$4710.postlude(module);
 } finally {
@@ -41749,9 +41756,10 @@ $parcel$ReactRefreshHelpers$f69d.prelude(module);
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "GameOverView", ()=>GameOverView);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _gameOverViewCss = require("./game-over-view.css");
-exports.default = GameOverView = ({ answer, data })=>{
+const GameOverView = ({ answer, data })=>{
     const guessesArray = (guesses, answer)=>{
         let returnValue = [];
         for(let i = 0; i < guesses.length; i++){
@@ -41816,12 +41824,15 @@ exports.default = GameOverView = ({ answer, data })=>{
         columnNumber: 5
     }, undefined);
 };
+_c = GameOverView;
+var _c;
+$RefreshReg$(_c, "GameOverView");
 
   $parcel$ReactRefreshHelpers$f69d.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./game-over.css":"6Xh73","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"6Xh73":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire5546")
+},{"react/jsx-dev-runtime":"iTorj","./game-over-view.css":"3qGdO","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"3qGdO":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire5546")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

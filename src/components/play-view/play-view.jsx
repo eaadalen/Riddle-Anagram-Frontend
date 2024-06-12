@@ -1,9 +1,9 @@
 import "./play-view.scss"
 import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
-import ShortPromptView from '../short-prompt-view/short-prompt-view'
-import LongPromptView from '../long-prompt-view/long-prompt-view'
-import GameOverView from '../game-over-view/game-over-view'
+import { ShortPromptView } from '../short-prompt-view/short-prompt-view'
+import { LongPromptView } from '../long-prompt-view/long-prompt-view'
+import { GameOverView } from '../game-over-view/game-over-view'
 import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
