@@ -1,16 +1,16 @@
 import "./play-view.scss"
 import { useState, useEffect } from "react";
 import loading from '../../../media/loading-animation.gif';
-import ShortPromptView from './short-prompt-view.jsx'
-import LongPromptView from './long-prompt-view.jsx'
-import GameOverView from './game-over-view.jsx'
+import ShortPromptView from '../short-prompt-view/short-prompt-view'
+import LongPromptView from '../long-prompt-view/long-prompt-view'
+import GameOverView from '../game-over-view/game-over-view'
 import { Modal } from 'react-bootstrap'; 
 
 export const PlayView = () => {
   const [shortPrompts, setShortPrompts] = useState({})
   const [longPrompt, setLongPrompt] = useState({})
   const [loaded, setLoaded] = useState(false)
-  const [dataFromSP, setDataFromSP] = useState("");
+  const [dataFromSP, setDataFromSP] = useState('');
   const [showModal, setShowModal] = useState(false)
   const [gameOverData, setGameOverData] = useState()
 
