@@ -1,4 +1,4 @@
-import "./game-over-view.css"
+import "./game-over-view.scss"
 
 export const GameOverView = ({ answer, data }) => {
 
