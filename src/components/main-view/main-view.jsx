@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { WelcomeView } from "../welcome-view/welcome-view";
 import { Col, Row } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { PlayView } from "../play-view/play-view";
