@@ -1,6 +1,4 @@
 -set up 'daily' riddle
 -add manual keyboard smh
--add favicon, clean up standard items (package.json, index.html, etc.)
--update welcome page
 -clean up all code, optimize
 -add comments to code where necessary

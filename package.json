@@ -1,5 +1,5 @@
 {
-  "name": "myflix-client",
+  "name": "riddle-unscramble",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -12,10 +12,6 @@
   "license": "ISC",
   "dependencies": {
     "@parcel/reporter-dev-server": "^2.12.0",
-    "audio": "^1.2.0",
-    "bootstrap": "^5.3.3",
-    "csv": "^6.3.8",
-    "openai": "^4.38.5",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-bootstrap": "^2.10.1",
@@ -25,7 +21,6 @@
     "react-router-dom": "^6.22.1",
     "react-scripts": "4.0.0",
     "reactjs-popup": "^2.0.6",
-    "redux": "^4.2.1",
     "sortablejs": "^1.15.2"
   },
   "devDependencies": {
@@ -40,5 +35,6 @@
     "punycode": "^1.4.1",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0"
-  }
+  },
+  "main": "index.js"
 }
