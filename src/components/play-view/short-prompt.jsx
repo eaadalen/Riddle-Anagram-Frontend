@@ -1,4 +1,3 @@
-import { act } from 'react';
 import './short-prompt.scss'
 import { useState, useEffect, useReducer } from 'react';
 
@@ -70,7 +69,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
   }
 
   const handleClick = (event) => { 
-    console.log('prevDiv: ' + prompts[activeDiv].Answer) 
     var node = null
     if (event.target.className === 'guess-letter' || event.target.className === 'active-letter') {
       node = event.target.parentNode.parentNode
@@ -88,7 +86,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
       document.getElementById(node.id).className = 'short-prompt-container-active'
       activeDiv = node.id
     }
-    console.log('newDiv: ' + prompts[activeDiv].Answer) 
   }
 
   const showAnswer = (id) => {  
@@ -97,7 +94,6 @@ export default ShortPrompt = ({ prompts, sendDataToSP }) => {
     document.getElementById(id).className = 'short-prompt-container-revealed'
     solvedLettersDispatch({ type: 'addLetter', update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)})
     triggerRender(Math.random())
-    setNewActiveDiv()
   }
 
   const shortPromptArray = (guess, answer) => {  

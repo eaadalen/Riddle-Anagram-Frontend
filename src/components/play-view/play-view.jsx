@@ -52,12 +52,7 @@ export const PlayView = () => {
     Object.keys(shortPrompts).forEach((element) => {
       shortPrompts[element]['locked'] = true
     })
-    if (data === 'correct') {
-      setGameOverData(data)
-    }
-    else if (data === 'incorrect') {
-      setGameOverData(longPrompt.Answer)
-    }
+    setGameOverData(data)
     setShowModal(true)
   }
 
@@ -92,7 +87,7 @@ export const PlayView = () => {
       {showModal &&
         <Modal show={true} onHide={toggleModal} className="modal-container">  
           <Modal.Body>
-            <GameOver data={gameOverData}/>
+            <GameOver answer={longPrompt.Answer} data={gameOverData}/>
           </Modal.Body>  
         </Modal> 
       }

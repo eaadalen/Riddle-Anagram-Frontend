@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
 import { WelcomeView } from "../welcome-view/welcome-view";
 import { Col, Row } from 'react-bootstrap';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -18,48 +16,6 @@ export const MainView = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <>
-                <WelcomeView/>
-              </>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/play" />
-                ) : (
-                  <Col md={5}>
-                    <LoginView onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }} />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <>
-                {user ? (
-                  <Navigate to="/play" />
-                ) : (
-                  <Col md={12}>
-                    <SignupView onLoggedIn={(user, token) => {
-                        setUser(user);
-                        setToken(token);
-                      }} />
-                  </Col>
-                )}
-              </>
-            }
-          />
-          <Route
-            path="/play"
             element={
               <>
                 <PlayView/>

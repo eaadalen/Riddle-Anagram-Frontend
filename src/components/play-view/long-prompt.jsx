@@ -1,21 +1,27 @@
 import './long-prompt.scss'
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import Sortable from 'sortablejs';
 
 export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
   const [locked, setLocked] = useState(false)
   const [guessesRemaining, setGuessesRemaining] = useState(4)
+  const [guessRecord, setGuessRecord] = useState([])
 
   useEffect(() => {
     if (finalAnswer === prompt.Answer) {
-      sendDataToLP('correct')
+      guessRecord.push(finalAnswer)
+      sendDataToLP(guessRecord)
       setLocked(true)
     }
     else {
       setGuessesRemaining(prev => prev - 1)
+      if (finalAnswer != '') {
+        guessRecord.push(finalAnswer)
+      }
+      console.log(guessRecord)
       if (guessesRemaining === 1) {
-        sendDataToLP('incorrect')
+        sendDataToLP(guessRecord)
       }
     }
   }, [finalAnswer])

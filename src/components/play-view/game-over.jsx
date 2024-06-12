@@ -1,19 +1,44 @@
 import "./game-over.css"
 import { useState, useEffect } from "react";
 
-export default GameOver = ({ data }) => {
+export default GameOver = ({ answer, data }) => {
+
+  const guessesArray = (guesses, answer) => {  
+    let returnValue = []
+    for (let i = 0; i < guesses.length; i++) {
+      let emojis = ''
+      for (let j = 0; j < answer.length; j++) {
+        if (guesses[i].charAt(j) === answer.charAt(j)) {
+          emojis = emojis + '🟩'
+        }
+        else {
+          emojis = emojis + '🟥'
+        }
+      }
+      returnValue.push(emojis)
+    }
+    return returnValue
+  }
+
   return (
     <div>
-      {(data === 'correct') &&
+      <div className='guess-array'>
+        {guessesArray(data, answer).map((element) => 
+          <div key={Math.random()}>
+            {element}
+          </div>
+        )}
+      </div>
+      {(data[data.length - 1] === answer) &&
         <div>
           Correct!
           <br></br>
           Come back tomorrow for the next riddle
         </div>
       }
-      {!(data === 'correct') &&
+      {!(data[data.length - 1] === answer) &&
         <div>
-          Correct Answer: {data}
+          Correct Answer: {answer}
           <br></br>
           Come back tomorrow for the next riddle
         </div>

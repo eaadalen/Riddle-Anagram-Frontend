@@ -7,7 +7,7 @@
 .long-prompt {
     position: sticky; 
     top: 0;
-    height: 185px;
+    height: 195px;
     background-color: white;
     padding-top: 20px;
     margin-top: 20px;
@@ -16,7 +16,7 @@
 
 .transition-div {
     position: sticky; 
-    top: 185px;
+    top: 195px;
     height: 20px;
     background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255, 255, 255));
 }
@@ -27,3 +27,9 @@
     text-align: center;
     margin-top: 200px;
 }
+
+/* optional reset for presentation */
+* {
+    font-family: Arial;
+    font-size: 20px;
+  }
