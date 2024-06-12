@@ -42,7 +42,7 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   }
 
   const longPromptArray = (guess, answer) => {  
-    returnValue = []
+    let returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess.charAt(i) === '') {
         returnValue.push(['', i])
@@ -55,7 +55,7 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   }
 
   const strikesArray = (strikes) => {  
-    returnValue = []
+    let returnValue = []
     for (let i = 0; i < strikes; i++) {
       returnValue.push('⬤')
     }

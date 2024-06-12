@@ -38316,7 +38316,7 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
         triggerRender(Math.random());
     };
     const shortPromptArray = (guess, answer)=>{
-        returnValue = [];
+        let returnValue = [];
         for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
             "",
             i
@@ -39039,7 +39039,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
         }
     };
     const longPromptArray = (guess, answer)=>{
-        returnValue = [];
+        let returnValue = [];
         for(let i = 0; i < answer.length; i++)if (guess.charAt(i) === "") returnValue.push([
             "",
             i
@@ -39051,7 +39051,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
         return returnValue;
     };
     const strikesArray = (strikes)=>{
-        returnValue = [];
+        let returnValue = [];
         for(let i = 0; i < strikes; i++)returnValue.push("\u2B24");
         return returnValue;
     };

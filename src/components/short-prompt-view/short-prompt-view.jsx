@@ -97,7 +97,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP }) => {
   }
 
   const shortPromptArray = (guess, answer) => {  
-    returnValue = []
+    let returnValue = []
     for (let i = 0; i < answer.length; i++) {
       if (guess.activeGuess.charAt(i) === '') {
         returnValue.push(['', i])
