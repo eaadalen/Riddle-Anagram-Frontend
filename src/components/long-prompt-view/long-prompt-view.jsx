@@ -1,8 +1,8 @@
-import './long-prompt.scss'
+import './long-prompt-view.scss'
 import { useState, useEffect } from 'react';
 import Sortable from 'sortablejs';
 
-export default LongPrompt = ({ prompt, lettersSolved, sendDataToLP }) => {
+export default LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
   const [locked, setLocked] = useState(false)
   const [guessesRemaining, setGuessesRemaining] = useState(4)
