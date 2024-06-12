@@ -39848,7 +39848,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx","./game-over.jsx":"jXKbT","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../../../media/loading-animation.gif":"iSTV0","./short-prompt.jsx":"cUgVj","./long-prompt.jsx":"5qPBx","react-bootstrap":"3AD9A","./game-over.jsx":"jXKbT"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -40061,7 +40061,7 @@ exports.default = ShortPrompt = _s(({ prompts, sendDataToSP })=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
+},{"./short-prompt.scss":"jEoVi","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react/jsx-dev-runtime":"iTorj"}],"jEoVi":[function() {},{}],"5qPBx":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$dbb1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -40210,7 +40210,7 @@ exports.default = LongPrompt = _s(({ prompt, lettersSolved, sendDataToLP })=>{
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","sortablejs":"4mik1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4vwJ7":[function() {},{}],"4mik1":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./long-prompt.scss":"4vwJ7","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","sortablejs":"4mik1"}],"4vwJ7":[function() {},{}],"4mik1":[function(require,module,exports) {
 /**!
  * Sortable 1.15.2
  * @author	RubaXa   <trash@rubaxa.org>
