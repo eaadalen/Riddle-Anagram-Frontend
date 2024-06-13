@@ -38841,16 +38841,18 @@ function updateLetters(state, action) {
 }
 const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
     _s();
-    var activeDiv = Object.keys(prompts)[0];
+    const [activeDiv, setActiveDiv] = (0, _react.useState)(Object.keys(prompts)[0]);
+    const activeDivRef = (0, _react.useRef)();
+    activeDivRef.current = activeDiv;
     const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
         value: ""
     });
     const [render, triggerRender] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
-        document.getElementById(activeDiv).className = "short-prompt-container-active";
+        document.getElementById(activeDivRef.current).className = "short-prompt-container-active";
         Object.keys(prompts).forEach((element)=>{
-            document.getElementById(element).addEventListener("click", (event)=>handleClick(activeDiv, event));
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
         });
     }, []);
     (0, _react.useEffect)(()=>{
@@ -38868,7 +38870,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         try {
             Object.keys(prompts).forEach(function(element) {
                 if (prompts[element].locked != true) {
-                    activeDiv = element;
+                    setActiveDiv(element);
                     document.getElementById(element).className = "short-prompt-container-active";
                     throw BreakException;
                 }
@@ -38876,28 +38878,28 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         } catch (e) {
             if (e !== BreakException) throw e;
         }
-        console.log(prompts[activeDiv].Answer);
     };
     const handleTyping = (e)=>{
+        console.log(prompts[activeDivRef.current].Answer);
         if (e.key === "Backspace") {
-            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-            document.getElementById(activeDiv).classList.remove("horizontal-shake");
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
+            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
         } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-            if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-                prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+            if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
+                prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.key.toUpperCase() // Add letter
                 ;
-                if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
-                    if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                        document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                        prompts[activeDiv].locked = true;
+                if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
+                    if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
+                        document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
+                        prompts[activeDivRef.current].locked = true;
                         solvedLettersDispatch({
                             type: "addLetter",
-                            update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                            update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
                         });
                         setNewActiveDiv();
                     } else {
-                        document.getElementById(activeDiv).classList.add("horizontal-shake");
-                        prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
+                        document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
+                        prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
                     }
                 }
             }
@@ -38906,39 +38908,39 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
     };
     const handleMobileTyping = (e)=>{
         if (e === "\u232B") {
-            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
-            document.getElementById(activeDiv).classList.remove("horizontal-shake");
-        } else if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.toUpperCase() // Add letter
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
+            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
+        } else if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
             ;
-            if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
-                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
-                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
-                    prompts[activeDiv].locked = true;
+            if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
+                if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
+                    document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
+                    prompts[activeDivRef.current].locked = true;
                     solvedLettersDispatch({
                         type: "addLetter",
-                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                        update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
                     });
                     setNewActiveDiv();
                 } else {
-                    document.getElementById(activeDiv).classList.add("horizontal-shake");
-                    prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
+                    document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
+                    prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
                 }
             }
         }
         triggerRender(Math.random());
     };
-    const handleClick = (AD, event)=>{
+    const handleClick = (event)=>{
+        console.log(prompts[activeDivRef.current].Answer);
         if (event.target.textContent != "Reveal Answer?") {
             var node = null;
             if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
             else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
             else node = event.target;
             if (node.className === "short-prompt-container-inactive") {
-                if (document.getElementById(AD).className != "short-prompt-container-correct" && document.getElementById(AD).className != "short-prompt-container-revealed") document.getElementById(AD).className = "short-prompt-container-inactive";
+                if (document.getElementById(activeDivRef.current).className != "short-prompt-container-correct" && document.getElementById(activeDivRef.current).className != "short-prompt-container-revealed") document.getElementById(activeDivRef.current).className = "short-prompt-container-inactive";
                 document.getElementById(node.id).className = "short-prompt-container-active";
-                console.log("here");
-                activeDiv = node.id;
+                setActiveDiv(node.id);
             }
         }
     };
@@ -38966,56 +38968,59 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         return returnValue;
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                id: prompt,
-                className: "short-prompt-container-inactive",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt",
-                        children: prompts[prompt].shortPrompt
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 152,
-                        columnNumber: 11
-                    }, undefined),
-                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        id: String(prompt) + "reveal",
-                        className: "reveal-answer",
-                        onClick: (event)=>showAnswer(prompt),
-                        children: "Reveal Answer?"
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 156,
-                        columnNumber: 13
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt-guess",
-                        children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
-                                children: letter[0]
-                            }, Math.random(), false, {
-                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 162,
-                                columnNumber: 15
-                            }, undefined))
-                    }, void 0, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 160,
-                        columnNumber: 11
-                    }, undefined)
-                ]
-            }, prompt, true, {
-                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 151,
-                columnNumber: 9
-            }, undefined))
-    }, void 0, false, {
+        children: [
+            prompts[activeDiv].Answer,
+            Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    id: prompt,
+                    className: "short-prompt-container-inactive",
+                    children: [
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "short-prompt",
+                            children: prompts[prompt].shortPrompt
+                        }, void 0, false, {
+                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                            lineNumber: 155,
+                            columnNumber: 11
+                        }, undefined),
+                        prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            id: String(prompt) + "reveal",
+                            className: "reveal-answer",
+                            onClick: (event)=>showAnswer(prompt),
+                            children: "Reveal Answer?"
+                        }, void 0, false, {
+                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                            lineNumber: 159,
+                            columnNumber: 13
+                        }, undefined),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                            className: "short-prompt-guess",
+                            children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                    className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
+                                    children: letter[0]
+                                }, Math.random(), false, {
+                                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                    lineNumber: 165,
+                                    columnNumber: 15
+                                }, undefined))
+                        }, void 0, false, {
+                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                            lineNumber: 163,
+                            columnNumber: 11
+                        }, undefined)
+                    ]
+                }, prompt, true, {
+                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                    lineNumber: 154,
+                    columnNumber: 9
+                }, undefined))
+        ]
+    }, void 0, true, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 149,
+        lineNumber: 151,
         columnNumber: 5
     }, undefined);
 };
-_s(ShortPromptView, "XCr8rJT24jGy8jgi47zYoFSw+Cw=");
+_s(ShortPromptView, "sq8SZctt4pvg5UHjMlIyeLQ4SuA=");
 _c = ShortPromptView;
 var _c;
 $RefreshReg$(_c, "ShortPromptView");

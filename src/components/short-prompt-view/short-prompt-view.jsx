@@ -1,5 +1,5 @@
 import './short-prompt-view.scss'
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useRef } from 'react';
 
 function updateLetters(state, action) {
   switch (action.type) {
@@ -11,15 +11,17 @@ function updateLetters(state, action) {
 }
 
 export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
-  var activeDiv = Object.keys(prompts)[0]
+  const [activeDiv, setActiveDiv] = useState(Object.keys(prompts)[0])
+  const activeDivRef = useRef();
+  activeDivRef.current = activeDiv
   const [solvedLetters, solvedLettersDispatch] = useReducer(updateLetters, { value: '' })
   const [render, triggerRender] = useState()
 
   useEffect(() => {
     window.addEventListener("keyup", event => handleTyping(event));
-    document.getElementById(activeDiv).className = 'short-prompt-container-active'
+    document.getElementById(activeDivRef.current).className = 'short-prompt-container-active'
     Object.keys(prompts).forEach((element) => {
-      document.getElementById(element).addEventListener("click", event => handleClick(activeDiv, event));
+      document.getElementById(element).addEventListener("click", event => handleClick(event));
     })
   }, []);
 
@@ -38,7 +40,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     try {
       Object.keys(prompts).forEach(function(element) {
         if (prompts[element].locked != true) {
-          activeDiv = element
+          setActiveDiv(element)
           document.getElementById(element).className = 'short-prompt-container-active'
           throw BreakException
         }
@@ -46,27 +48,27 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     } catch (e) {
       if (e !== BreakException) throw e;
     }
-    console.log(prompts[activeDiv].Answer)
   }
 
   const handleTyping = (e) => {  
+    console.log(prompts[activeDivRef.current].Answer)
     if (e.key === 'Backspace') {
-      prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
-      document.getElementById(activeDiv).classList.remove('horizontal-shake')
+      prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
+      document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
     }
     else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
-      if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
-        prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
-        if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
-          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
-            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-            prompts[activeDiv].locked = true
-            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+      if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {  // Only add letter if guess length is less than answer length
+        prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.key.toUpperCase() // Add letter
+        if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {  // Check if active guess and answer are the same length
+          if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) { // Check if active guess matches answer
+            document.getElementById(activeDivRef.current).className = 'short-prompt-container-correct'
+            prompts[activeDivRef.current].locked = true
+            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)})
             setNewActiveDiv()
           }
           else {  // If active guess doesn't match answer, display incorrect animation
-            document.getElementById(activeDiv).classList.add('horizontal-shake');
-            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1
+            document.getElementById(activeDivRef.current).classList.add('horizontal-shake');
+            prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1
           }
         }
       }
@@ -76,23 +78,23 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
 
   const handleMobileTyping = (e) => {  
     if (e === '⌫') {
-      prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
-      document.getElementById(activeDiv).classList.remove('horizontal-shake')
+      prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
+      document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
     }
     else {
-      if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
-        prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.toUpperCase() // Add letter
-        if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
-          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
+      if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {  // Only add letter if guess length is less than answer length
+        prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
+        if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {  // Check if active guess and answer are the same length
+          if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) { // Check if active guess matches answer
   
-            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
-            prompts[activeDiv].locked = true
-            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+            document.getElementById(activeDivRef.current).className = 'short-prompt-container-correct'
+            prompts[activeDivRef.current].locked = true
+            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)})
             setNewActiveDiv()
           }
           else {  // If active guess doesn't match answer, display incorrect animation
-            document.getElementById(activeDiv).classList.add('horizontal-shake');
-            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1
+            document.getElementById(activeDivRef.current).classList.add('horizontal-shake');
+            prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1
           }
         }
       }
@@ -100,7 +102,8 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     triggerRender(Math.random())
   }
 
-  const handleClick = (AD, event) => { 
+  const handleClick = (event) => { 
+    console.log(prompts[activeDivRef.current].Answer)
     if (event.target.textContent != 'Reveal Answer?') {
       var node = null
       if (event.target.className === 'guess-letter' || event.target.className === 'active-letter') {
@@ -113,12 +116,11 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
         node = event.target
       }
       if (node.className === 'short-prompt-container-inactive') {
-        if (document.getElementById(AD).className != 'short-prompt-container-correct' && document.getElementById(AD).className != 'short-prompt-container-revealed') {
-          document.getElementById(AD).className = 'short-prompt-container-inactive'
+        if (document.getElementById(activeDivRef.current).className != 'short-prompt-container-correct' && document.getElementById(activeDivRef.current).className != 'short-prompt-container-revealed') {
+          document.getElementById(activeDivRef.current).className = 'short-prompt-container-inactive'
         }
         document.getElementById(node.id).className = 'short-prompt-container-active'
-        console.log('here')
-        activeDiv = node.id
+        setActiveDiv(node.id)
       }
     }
   }
@@ -147,6 +149,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
 
   return (
     <div>
+      {prompts[activeDiv].Answer}
       {Object.keys(prompts).map((prompt) => (
         <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
           <div className='short-prompt'>
