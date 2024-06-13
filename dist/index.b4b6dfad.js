@@ -38968,53 +38968,50 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         return returnValue;
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            prompts[activeDiv].Answer,
-            Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    id: prompt,
-                    className: "short-prompt-container-inactive",
-                    children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "short-prompt",
-                            children: prompts[prompt].shortPrompt
-                        }, void 0, false, {
-                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                            lineNumber: 155,
-                            columnNumber: 11
-                        }, undefined),
-                        prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            id: String(prompt) + "reveal",
-                            className: "reveal-answer",
-                            onClick: (event)=>showAnswer(prompt),
-                            children: "Reveal Answer?"
-                        }, void 0, false, {
-                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                            lineNumber: 159,
-                            columnNumber: 13
-                        }, undefined),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            className: "short-prompt-guess",
-                            children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
-                                    children: letter[0]
-                                }, Math.random(), false, {
-                                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                    lineNumber: 165,
-                                    columnNumber: 15
-                                }, undefined))
-                        }, void 0, false, {
-                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                            lineNumber: 163,
-                            columnNumber: 11
-                        }, undefined)
-                    ]
-                }, prompt, true, {
-                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                    lineNumber: 154,
-                    columnNumber: 9
-                }, undefined))
-        ]
-    }, void 0, true, {
+        children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                id: prompt,
+                className: "short-prompt-container-inactive",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt",
+                        children: prompts[prompt].shortPrompt
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 154,
+                        columnNumber: 11
+                    }, undefined),
+                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: String(prompt) + "reveal",
+                        className: "reveal-answer",
+                        onClick: (event)=>showAnswer(prompt),
+                        children: "Reveal Answer?"
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 158,
+                        columnNumber: 13
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt-guess",
+                        children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
+                                children: letter[0]
+                            }, Math.random(), false, {
+                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                lineNumber: 164,
+                                columnNumber: 15
+                            }, undefined))
+                    }, void 0, false, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 162,
+                        columnNumber: 11
+                    }, undefined)
+                ]
+            }, prompt, true, {
+                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                lineNumber: 153,
+                columnNumber: 9
+            }, undefined))
+    }, void 0, false, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
         lineNumber: 151,
         columnNumber: 5

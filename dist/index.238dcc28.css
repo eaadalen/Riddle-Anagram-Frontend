@@ -35,7 +35,7 @@
 
 .transition-div-bottom {
   background-image: linear-gradient(#f000, #fff);
-  height: 20px;
+  height: 40px;
   position: sticky;
   bottom: 225px;
 }

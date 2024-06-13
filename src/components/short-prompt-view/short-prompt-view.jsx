@@ -149,7 +149,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
 
   return (
     <div>
-      {prompts[activeDiv].Answer}
       {Object.keys(prompts).map((prompt) => (
         <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
           <div className='short-prompt'>
