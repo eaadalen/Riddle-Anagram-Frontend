@@ -26,24 +26,29 @@
   top: 195px;
 }
 
-.modal-container {
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  margin-top: 200px;
+.short-prompt {
+  max-height: 20vh;
+  overflow: auto;
 }
 
 .transition-div-bottom {
   background-image: linear-gradient(#f000, #fff);
   height: 40px;
   position: sticky;
-  bottom: 225px;
+  bottom: 375px;
 }
 
 .user-keyboard {
   background-color: #fff;
   position: sticky;
   bottom: 0;
+}
+
+.modal-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
 }
 
 .short-prompt-container-active, .short-prompt-container-inactive, .short-prompt-container-correct, .short-prompt-container-revealed {
@@ -217,10 +222,6 @@
   padding: 3px;
   font-size: 45px;
   display: flex;
-}
-
-#⌫ {
-  font-size: 35px;
 }
 
 .guess-array {

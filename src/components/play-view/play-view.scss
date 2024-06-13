@@ -27,16 +27,14 @@
     background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255, 255, 255));
 }
 
-.modal-container {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    margin-top: 200px;
+.short-prompt {
+    max-height: 20vh;
+    overflow: auto;
 }
 
 .transition-div-bottom {
     position: sticky; 
-    bottom: 225px;
+    bottom: 375px;
     height: 40px;
     background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgb(255, 255, 255));
 }
@@ -45,4 +43,11 @@
     position: sticky; 
     bottom: 0px;
     background-color: white;
+}
+
+.modal-container {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 200px;
 }
