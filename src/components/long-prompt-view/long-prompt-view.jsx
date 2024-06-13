@@ -19,7 +19,6 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
       if (finalAnswer != '') {
         guessRecord.push(finalAnswer)
       }
-      console.log(guessRecord)
       if (guessesRemaining === 1) {
         sendDataToLP(guessRecord)
       }

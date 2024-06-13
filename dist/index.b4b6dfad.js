@@ -38850,7 +38850,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
         document.getElementById(activeDiv).className = "short-prompt-container-active";
         Object.keys(prompts).forEach((element)=>{
-            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(activeDiv, event));
         });
     }, []);
     (0, _react.useEffect)(()=>{
@@ -38859,7 +38859,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         solvedLetters.value
     ]);
     (0, _react.useEffect)(()=>{
-        console.log(dataFromKV[0]);
         if (dataFromKV[0] != undefined) handleMobileTyping(dataFromKV[0]);
     }, [
         dataFromKV
@@ -38877,7 +38876,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         } catch (e) {
             if (e !== BreakException) throw e;
         }
-        console.log("setNewActiveDiv: " + prompts[activeDiv].Answer);
+        console.log(prompts[activeDiv].Answer);
     };
     const handleTyping = (e)=>{
         if (e.key === "Backspace") {
@@ -38885,7 +38884,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
             document.getElementById(activeDiv).classList.remove("horizontal-shake");
         } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
             if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-                console.log(prompts[activeDiv].Answer);
                 prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
                 ;
                 if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
@@ -38911,7 +38909,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
             prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
             document.getElementById(activeDiv).classList.remove("horizontal-shake");
         } else if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
-            console.log(prompts[activeDiv].Answer);
             prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.toUpperCase() // Add letter
             ;
             if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
@@ -38931,15 +38928,18 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         }
         triggerRender(Math.random());
     };
-    const handleClick = (event)=>{
-        var node = null;
-        if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
-        else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
-        else node = event.target;
-        if (node.className === "short-prompt-container-inactive") {
-            if (document.getElementById(activeDiv).className != "short-prompt-container-correct" && document.getElementById(activeDiv).className != "short-prompt-container-revealed") document.getElementById(activeDiv).className = "short-prompt-container-inactive";
-            document.getElementById(node.id).className = "short-prompt-container-active";
-            activeDiv = node.id;
+    const handleClick = (AD, event)=>{
+        if (event.target.textContent != "Reveal Answer?") {
+            var node = null;
+            if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
+            else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
+            else node = event.target;
+            if (node.className === "short-prompt-container-inactive") {
+                if (document.getElementById(AD).className != "short-prompt-container-correct" && document.getElementById(AD).className != "short-prompt-container-revealed") document.getElementById(AD).className = "short-prompt-container-inactive";
+                document.getElementById(node.id).className = "short-prompt-container-active";
+                console.log("here");
+                activeDiv = node.id;
+            }
         }
     };
     const showAnswer = (id)=>{
@@ -38950,6 +38950,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
             type: "addLetter",
             update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
         });
+        setNewActiveDiv();
         triggerRender(Math.random());
     };
     const shortPromptArray = (guess, answer)=>{
@@ -38974,7 +38975,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                         children: prompts[prompt].shortPrompt
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 150,
+                        lineNumber: 152,
                         columnNumber: 11
                     }, undefined),
                     prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38984,7 +38985,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                         children: "Reveal Answer?"
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 154,
+                        lineNumber: 156,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38994,23 +38995,23 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 160,
+                                lineNumber: 162,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 158,
+                        lineNumber: 160,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 149,
+                lineNumber: 151,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 147,
+        lineNumber: 149,
         columnNumber: 5
     }, undefined);
 };
@@ -39656,7 +39657,6 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
         } else {
             setGuessesRemaining((prev)=>prev - 1);
             if (finalAnswer != "") guessRecord.push(finalAnswer);
-            console.log(guessRecord);
             if (guessesRemaining === 1) sendDataToLP(guessRecord);
         }
     }, [
@@ -39699,7 +39699,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: prompt.longPrompt
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 67,
+                lineNumber: 66,
                 columnNumber: 7
             }, undefined),
             !locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39710,12 +39710,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 73,
+                        lineNumber: 72,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 71,
+                lineNumber: 70,
                 columnNumber: 9
             }, undefined),
             locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39726,12 +39726,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 80,
+                        lineNumber: 79,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 78,
+                lineNumber: 77,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39739,7 +39739,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: "Unscramble the letters above to answer the riddle"
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 84,
+                lineNumber: 83,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39753,24 +39753,24 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                                 children: strike
                             }, Math.random(), false, {
                                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                                lineNumber: 91,
+                                lineNumber: 90,
                                 columnNumber: 13
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 89,
+                        lineNumber: 88,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 87,
+                lineNumber: 86,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-        lineNumber: 66,
+        lineNumber: 65,
         columnNumber: 5
     }, undefined);
 };
