@@ -1,4 +1,7 @@
 -set up 'daily' riddle
 -optimize app/text size for mobile, optimize use of screen space
+-add submit button to mobile
+-add animations to letter entry and deletion (see wordle)
+-figure out why it's so slow on mobile, and fix it
 -clean up all code, optimize
 -add comments to code where necessary
