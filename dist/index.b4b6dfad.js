@@ -31388,7 +31388,7 @@ function renderTransition(component, runTransition, props) {
     return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _noopTransitionDefault.default), Object.assign({}, props));
 }
 
-},{"@restart/hooks/useMergedRefs":"6hhuo","@restart/hooks/useEventCallback":"7ONdq","@restart/hooks/useIsomorphicEffect":"e8blq","react":"21dqq","./NoopTransition":"cwnaj","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./RTGTransition":"IPK9l"}],"e8blq":[function(require,module,exports) {
+},{"@restart/hooks/useMergedRefs":"6hhuo","@restart/hooks/useEventCallback":"7ONdq","@restart/hooks/useIsomorphicEffect":"e8blq","react":"21dqq","./NoopTransition":"cwnaj","./RTGTransition":"IPK9l","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8blq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
@@ -31572,7 +31572,7 @@ function getReactVersion() {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react":"21dqq"}],"lr1Yp":[function(require,module,exports) {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lr1Yp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getSharedManager", ()=>getSharedManager);
@@ -38603,9 +38603,9 @@ var _loadingAnimationGif = require("../../../media/loading-animation.gif");
 var _loadingAnimationGifDefault = parcelHelpers.interopDefault(_loadingAnimationGif);
 var _shortPromptView = require("../short-prompt-view/short-prompt-view");
 var _longPromptView = require("../long-prompt-view/long-prompt-view");
+var _keyboardView = require("../keyboard-view/keyboard-view");
 var _gameOverView = require("../game-over-view/game-over-view");
 var _reactBootstrap = require("react-bootstrap");
-var _reactResponsive = require("react-responsive");
 var _s = $RefreshSig$();
 const PlayView = ()=>{
     _s();
@@ -38613,13 +38613,10 @@ const PlayView = ()=>{
     const [longPrompt, setLongPrompt] = (0, _react.useState)({});
     const [loaded, setLoaded] = (0, _react.useState)(false);
     const [dataFromSP, setDataFromSP] = (0, _react.useState)("");
+    const [dataFromKV, setDataFromKV] = (0, _react.useState)("");
     const [showModal, setShowModal] = (0, _react.useState)(false);
     const [gameOverData, setGameOverData] = (0, _react.useState)();
-    const isMobile = (0, _reactResponsive.useMediaQuery)({
-        query: `(max-width: 760px)`
-    });
     (0, _react.useEffect)(()=>{
-        console.log(isMobile);
         fetch("https://riddle-unscramble-game-f456ae714e99.herokuapp.com/random", {
             method: "GET",
             headers: {
@@ -38648,6 +38645,9 @@ const PlayView = ()=>{
         setGameOverData(data);
         setShowModal(true);
     }
+    function handleDataFromKV(data) {
+        setDataFromKV(data);
+    }
     const toggleModal = ()=>{
         if (showModal == true) setShowModal(false);
         else setShowModal(true);
@@ -38660,12 +38660,12 @@ const PlayView = ()=>{
                     src: (0, _loadingAnimationGifDefault.default)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 76,
+                    lineNumber: 79,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 75,
+                lineNumber: 78,
                 columnNumber: 9
             }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38679,40 +38679,62 @@ const PlayView = ()=>{
                             sendDataToLP: handleDataFromLP
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 82,
+                            lineNumber: 85,
                             columnNumber: 13
                         }, undefined)
-                    }, void 0, false, {
-                        fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 81,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "transition-div"
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
                         lineNumber: 84,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "transition-div-top"
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 87,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt",
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptView.ShortPromptView), {
                             prompts: shortPrompts,
-                            sendDataToSP: handleDataFromSP
+                            sendDataToSP: handleDataFromSP,
+                            dataFromKV: dataFromKV
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 86,
+                            lineNumber: 89,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 85,
+                        lineNumber: 88,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "transition-div-bottom"
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 91,
+                        columnNumber: 11
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "user-keyboard",
+                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _keyboardView.KeyboardView), {
+                            sendDataToKV: handleDataFromKV
+                        }, void 0, false, {
+                            fileName: "src/components/play-view/play-view.jsx",
+                            lineNumber: 93,
+                            columnNumber: 13
+                        }, undefined)
+                    }, void 0, false, {
+                        fileName: "src/components/play-view/play-view.jsx",
+                        lineNumber: 92,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 80,
+                lineNumber: 83,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -38725,21 +38747,14 @@ const PlayView = ()=>{
                         data: gameOverData
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 93,
+                        lineNumber: 100,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 92,
+                    lineNumber: 99,
                     columnNumber: 11
                 }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 91,
-                columnNumber: 9
-            }, undefined),
-            isMobile && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                children: "Test"
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
                 lineNumber: 98,
@@ -38748,15 +38763,11 @@ const PlayView = ()=>{
         ]
     }, void 0, true, {
         fileName: "src/components/play-view/play-view.jsx",
-        lineNumber: 73,
+        lineNumber: 76,
         columnNumber: 5
     }, undefined);
 };
-_s(PlayView, "2KFHFC07MhWIQ9HiqxGIf+kfmkg=", false, function() {
-    return [
-        (0, _reactResponsive.useMediaQuery)
-    ];
-});
+_s(PlayView, "g26Sj9p+XLcm0pAmxJdh6KkK/z0=");
 _c = PlayView;
 var _c;
 $RefreshReg$(_c, "PlayView");
@@ -38766,7 +38777,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../game-over-view/game-over-view":"0A806","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-bootstrap":"3AD9A","react-responsive":"voTBD"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../keyboard-view/keyboard-view":"qUS3t","../game-over-view/game-over-view":"0A806","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -38828,7 +38839,7 @@ function updateLetters(state, action) {
             return state;
     }
 }
-const ShortPromptView = ({ prompts, sendDataToSP })=>{
+const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
     _s();
     var activeDiv = Object.keys(prompts)[0];
     const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
@@ -38846,6 +38857,12 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
         sendDataToSP(solvedLetters.value);
     }, [
         solvedLetters.value
+    ]);
+    (0, _react.useEffect)(()=>{
+        console.log(dataFromKV[0]);
+        if (dataFromKV[0] != undefined) handleMobileTyping(dataFromKV[0]);
+    }, [
+        dataFromKV
     ]);
     const setNewActiveDiv = ()=>{
         var BreakException = {};
@@ -38868,6 +38885,7 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
             document.getElementById(activeDiv).classList.remove("horizontal-shake");
         } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
             if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+                console.log(prompts[activeDiv].Answer);
                 prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
                 ;
                 if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
@@ -38883,6 +38901,31 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
                         document.getElementById(activeDiv).classList.add("horizontal-shake");
                         prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
                     }
+                }
+            }
+        }
+        triggerRender(Math.random());
+    };
+    const handleMobileTyping = (e)=>{
+        if (e === "\u232B") {
+            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1);
+            document.getElementById(activeDiv).classList.remove("horizontal-shake");
+        } else if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {
+            console.log(prompts[activeDiv].Answer);
+            prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.toUpperCase() // Add letter
+            ;
+            if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {
+                if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) {
+                    document.getElementById(activeDiv).className = "short-prompt-container-correct";
+                    prompts[activeDiv].locked = true;
+                    solvedLettersDispatch({
+                        type: "addLetter",
+                        update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)
+                    });
+                    setNewActiveDiv();
+                } else {
+                    document.getElementById(activeDiv).classList.add("horizontal-shake");
+                    prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1;
                 }
             }
         }
@@ -38931,7 +38974,7 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
                         children: prompts[prompt].shortPrompt
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 116,
+                        lineNumber: 150,
                         columnNumber: 11
                     }, undefined),
                     prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38941,7 +38984,7 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
                         children: "Reveal Answer?"
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 120,
+                        lineNumber: 154,
                         columnNumber: 13
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38951,27 +38994,27 @@ const ShortPromptView = ({ prompts, sendDataToSP })=>{
                                 children: letter[0]
                             }, Math.random(), false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 126,
+                                lineNumber: 160,
                                 columnNumber: 15
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 124,
+                        lineNumber: 158,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, prompt, true, {
                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 115,
+                lineNumber: 149,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 113,
+        lineNumber: 147,
         columnNumber: 5
     }, undefined);
 };
-_s(ShortPromptView, "PCByKjXCr7czlSwZQ0XKWehYW2M=");
+_s(ShortPromptView, "XCr8rJT24jGy8jgi47zYoFSw+Cw=");
 _c = ShortPromptView;
 var _c;
 $RefreshReg$(_c, "ShortPromptView");
@@ -42341,7 +42384,141 @@ Sortable.mount(new AutoScrollPlugin());
 Sortable.mount(Remove, Revert);
 exports.default = Sortable;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"0A806":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"qUS3t":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$183b = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$183b.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "KeyboardView", ()=>KeyboardView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _keyboardViewScss = require("./keyboard-view.scss");
+var _react = require("react");
+var _s = $RefreshSig$();
+const KeyboardView = ({ sendDataToKV })=>{
+    _s();
+    const [keysRow1, KeysRow1] = (0, _react.useState)([
+        "Q",
+        "W",
+        "E",
+        "R",
+        "T",
+        "Y",
+        "U",
+        "I",
+        "O",
+        "P"
+    ]);
+    const [keysRow2, KeysRow2] = (0, _react.useState)([
+        "A",
+        "S",
+        "D",
+        "F",
+        "G",
+        "H",
+        "J",
+        "K",
+        "L"
+    ]);
+    const [keysRow3, KeysRow3] = (0, _react.useState)([
+        "Z",
+        "X",
+        "C",
+        "V",
+        "B",
+        "N",
+        "M",
+        "\u232B"
+    ]);
+    (0, _react.useEffect)(()=>{
+        keysRow1.forEach((element)=>{
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
+        });
+        keysRow2.forEach((element)=>{
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
+        });
+        keysRow3.forEach((element)=>{
+            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
+        });
+    }, []);
+    const handleClick = (event)=>{
+        sendDataToKV([
+            event.target.textContent,
+            Math.random()
+        ]);
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "user-keyboard",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "letters-row",
+                children: keysRow1.map((element)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: element,
+                        className: "letter",
+                        children: element
+                    }, element, false, {
+                        fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                        lineNumber: 29,
+                        columnNumber: 11
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                lineNumber: 27,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "letters-row",
+                children: keysRow2.map((element)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: element,
+                        className: "letter",
+                        children: element
+                    }, element, false, {
+                        fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                        lineNumber: 34,
+                        columnNumber: 11
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                lineNumber: 32,
+                columnNumber: 7
+            }, undefined),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "letters-row",
+                children: keysRow3.map((element)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: element,
+                        className: "letter",
+                        children: element
+                    }, element, false, {
+                        fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                        lineNumber: 39,
+                        columnNumber: 11
+                    }, undefined))
+            }, void 0, false, {
+                fileName: "src/components/keyboard-view/keyboard-view.jsx",
+                lineNumber: 37,
+                columnNumber: 7
+            }, undefined)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/keyboard-view/keyboard-view.jsx",
+        lineNumber: 26,
+        columnNumber: 5
+    }, undefined);
+};
+_s(KeyboardView, "12DzpkywPWf8xhQwJQYzOlHEfNA=");
+_c = KeyboardView;
+var _c;
+$RefreshReg$(_c, "KeyboardView");
+
+  $parcel$ReactRefreshHelpers$183b.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./keyboard-view.scss":"4Qu3e","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"4Qu3e":[function() {},{}],"0A806":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f69d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -42427,435 +42604,6 @@ $RefreshReg$(_c, "GameOverView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./game-over-view.scss":"8rYl6"}],"8rYl6":[function() {},{}],"voTBD":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Context", ()=>Context);
-parcelHelpers.export(exports, "default", ()=>MediaQuery);
-parcelHelpers.export(exports, "toQuery", ()=>toQuery);
-parcelHelpers.export(exports, "useMediaQuery", ()=>useMediaQuery);
-var _react = require("react");
-var _matchmediaquery = require("matchmediaquery");
-var _matchmediaqueryDefault = parcelHelpers.interopDefault(_matchmediaquery);
-var _hyphenateStyleName = require("hyphenate-style-name");
-var _hyphenateStyleNameDefault = parcelHelpers.interopDefault(_hyphenateStyleName);
-var _shallowEqual = require("shallow-equal");
-var _propTypes = require("prop-types");
-var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
-const stringOrNumber = (0, _propTypesDefault.default).oneOfType([
-    (0, _propTypesDefault.default).string,
-    (0, _propTypesDefault.default).number
-]);
-// media types
-const types = {
-    all: (0, _propTypesDefault.default).bool,
-    grid: (0, _propTypesDefault.default).bool,
-    aural: (0, _propTypesDefault.default).bool,
-    braille: (0, _propTypesDefault.default).bool,
-    handheld: (0, _propTypesDefault.default).bool,
-    print: (0, _propTypesDefault.default).bool,
-    projection: (0, _propTypesDefault.default).bool,
-    screen: (0, _propTypesDefault.default).bool,
-    tty: (0, _propTypesDefault.default).bool,
-    tv: (0, _propTypesDefault.default).bool,
-    embossed: (0, _propTypesDefault.default).bool
-};
-// properties that match media queries
-const matchers = {
-    orientation: (0, _propTypesDefault.default).oneOf([
-        "portrait",
-        "landscape"
-    ]),
-    scan: (0, _propTypesDefault.default).oneOf([
-        "progressive",
-        "interlace"
-    ]),
-    aspectRatio: (0, _propTypesDefault.default).string,
-    deviceAspectRatio: (0, _propTypesDefault.default).string,
-    height: stringOrNumber,
-    deviceHeight: stringOrNumber,
-    width: stringOrNumber,
-    deviceWidth: stringOrNumber,
-    color: (0, _propTypesDefault.default).bool,
-    colorIndex: (0, _propTypesDefault.default).bool,
-    monochrome: (0, _propTypesDefault.default).bool,
-    resolution: stringOrNumber,
-    type: Object.keys(types)
-};
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const { type, ...featureMatchers } = matchers;
-// media features
-const features = {
-    minAspectRatio: (0, _propTypesDefault.default).string,
-    maxAspectRatio: (0, _propTypesDefault.default).string,
-    minDeviceAspectRatio: (0, _propTypesDefault.default).string,
-    maxDeviceAspectRatio: (0, _propTypesDefault.default).string,
-    minHeight: stringOrNumber,
-    maxHeight: stringOrNumber,
-    minDeviceHeight: stringOrNumber,
-    maxDeviceHeight: stringOrNumber,
-    minWidth: stringOrNumber,
-    maxWidth: stringOrNumber,
-    minDeviceWidth: stringOrNumber,
-    maxDeviceWidth: stringOrNumber,
-    minColor: (0, _propTypesDefault.default).number,
-    maxColor: (0, _propTypesDefault.default).number,
-    minColorIndex: (0, _propTypesDefault.default).number,
-    maxColorIndex: (0, _propTypesDefault.default).number,
-    minMonochrome: (0, _propTypesDefault.default).number,
-    maxMonochrome: (0, _propTypesDefault.default).number,
-    minResolution: stringOrNumber,
-    maxResolution: stringOrNumber,
-    ...featureMatchers
-};
-const all = {
-    ...types,
-    ...features
-};
-var mq = {
-    all: all,
-    types: types,
-    matchers: matchers,
-    features: features
-};
-const negate = (cond)=>`not ${cond}`;
-const keyVal = (k, v)=>{
-    const realKey = (0, _hyphenateStyleNameDefault.default)(k);
-    // px shorthand
-    if (typeof v === "number") v = `${v}px`;
-    if (v === true) return realKey;
-    if (v === false) return negate(realKey);
-    return `(${realKey}: ${v})`;
-};
-const join = (conds)=>conds.join(" and ");
-const toQuery = (obj)=>{
-    const rules = [];
-    Object.keys(mq.all).forEach((k)=>{
-        const v = obj[k];
-        if (v != null) rules.push(keyVal(k, v));
-    });
-    return join(rules);
-};
-const Context = (0, _react.createContext)(undefined);
-const makeQuery = (settings)=>settings.query || toQuery(settings);
-const hyphenateKeys = (obj)=>{
-    if (!obj) return undefined;
-    const keys = Object.keys(obj);
-    return keys.reduce((result, key)=>{
-        result[(0, _hyphenateStyleNameDefault.default)(key)] = obj[key];
-        return result;
-    }, {});
-};
-const useIsUpdate = ()=>{
-    const ref = (0, _react.useRef)(false);
-    (0, _react.useEffect)(()=>{
-        ref.current = true;
-    }, []);
-    return ref.current;
-};
-const useDevice = (deviceFromProps)=>{
-    const deviceFromContext = (0, _react.useContext)(Context);
-    const getDevice = ()=>hyphenateKeys(deviceFromProps) || hyphenateKeys(deviceFromContext);
-    const [device, setDevice] = (0, _react.useState)(getDevice);
-    (0, _react.useEffect)(()=>{
-        const newDevice = getDevice();
-        if (!(0, _shallowEqual.shallowEqualObjects)(device, newDevice)) setDevice(newDevice);
-    }, [
-        deviceFromProps,
-        deviceFromContext
-    ]);
-    return device;
-};
-const useQuery = (settings)=>{
-    const getQuery = ()=>makeQuery(settings);
-    const [query, setQuery] = (0, _react.useState)(getQuery);
-    (0, _react.useEffect)(()=>{
-        const newQuery = getQuery();
-        if (query !== newQuery) setQuery(newQuery);
-    }, [
-        settings
-    ]);
-    return query;
-};
-const useMatchMedia = (query, device)=>{
-    const getMatchMedia = ()=>(0, _matchmediaqueryDefault.default)(query, device || {}, !!device);
-    const [mq, setMq] = (0, _react.useState)(getMatchMedia);
-    const isUpdate = useIsUpdate();
-    (0, _react.useEffect)(()=>{
-        if (isUpdate) {
-            // skip on mounting, it has already been set
-            const newMq = getMatchMedia();
-            setMq(newMq);
-            return ()=>{
-                if (newMq) newMq.dispose();
-            };
-        }
-    }, [
-        query,
-        device
-    ]);
-    return mq;
-};
-const useMatches = (mediaQuery)=>{
-    const [matches, setMatches] = (0, _react.useState)(mediaQuery.matches);
-    (0, _react.useEffect)(()=>{
-        const updateMatches = (ev)=>{
-            setMatches(ev.matches);
-        };
-        mediaQuery.addListener(updateMatches);
-        setMatches(mediaQuery.matches);
-        return ()=>{
-            mediaQuery.removeListener(updateMatches);
-        };
-    }, [
-        mediaQuery
-    ]);
-    return matches;
-};
-const useMediaQuery = (settings, device, onChange)=>{
-    const deviceSettings = useDevice(device);
-    const query = useQuery(settings);
-    if (!query) throw new Error("Invalid or missing MediaQuery!");
-    const mq = useMatchMedia(query, deviceSettings);
-    const matches = useMatches(mq);
-    const isUpdate = useIsUpdate();
-    (0, _react.useEffect)(()=>{
-        if (isUpdate && onChange) onChange(matches);
-    }, [
-        matches
-    ]);
-    (0, _react.useEffect)(()=>()=>{
-            if (mq) mq.dispose();
-        }, []);
-    return matches;
-};
-// ReactNode and ReactElement typings are a little funky for functional components, so the ReactElement cast is needed on the return
-const MediaQuery = ({ children, device, onChange, ...settings })=>{
-    const matches = useMediaQuery(settings, device, onChange);
-    if (typeof children === "function") return children(matches);
-    return matches ? children : null;
-};
-
-},{"react":"21dqq","matchmediaquery":"1EPvY","hyphenate-style-name":"4gYfC","shallow-equal":"dCeW8","prop-types":"7wKI2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1EPvY":[function(require,module,exports) {
-"use strict";
-var staticMatch = require("575cc3ae9b2a1fac").match;
-var dynamicMatch = typeof window !== "undefined" ? window.matchMedia : null;
-// our fake MediaQueryList
-function Mql(query, values, forceStatic) {
-    var self = this;
-    var mql;
-    // matchMedia will return null in FF when it's called in a hidden iframe
-    // ref: https://stackoverflow.com/a/12330568
-    if (dynamicMatch && !forceStatic) mql = dynamicMatch.call(window, query);
-    if (mql) {
-        this.matches = mql.matches;
-        this.media = mql.media;
-        // TODO: is there a time it makes sense to remove this listener?
-        mql.addListener(update);
-    } else {
-        this.matches = staticMatch(query, values);
-        this.media = query;
-    }
-    this.addListener = addListener;
-    this.removeListener = removeListener;
-    this.dispose = dispose;
-    function addListener(listener) {
-        if (mql) mql.addListener(listener);
-    }
-    function removeListener(listener) {
-        if (mql) mql.removeListener(listener);
-    }
-    // update ourselves!
-    function update(evt) {
-        self.matches = evt.matches;
-        self.media = evt.media;
-    }
-    function dispose() {
-        if (mql) mql.removeListener(update);
-    }
-}
-function matchMedia(query, values, forceStatic) {
-    return new Mql(query, values, forceStatic);
-}
-module.exports = matchMedia;
-
-},{"575cc3ae9b2a1fac":"5wGDH"}],"5wGDH":[function(require,module,exports) {
-/*
-Copyright (c) 2014, Yahoo! Inc. All rights reserved.
-Copyrights licensed under the New BSD License.
-See the accompanying LICENSE file for terms.
-*/ "use strict";
-exports.match = matchQuery;
-exports.parse = parseQuery;
-// -----------------------------------------------------------------------------
-var RE_MEDIA_QUERY = /(?:(only|not)?\s*([^\s\(\)]+)(?:\s*and)?\s*)?(.+)?/i, RE_MQ_EXPRESSION = /\(\s*([^\s\:\)]+)\s*(?:\:\s*([^\s\)]+))?\s*\)/, RE_MQ_FEATURE = /^(?:(min|max)-)?(.+)/, RE_LENGTH_UNIT = /(em|rem|px|cm|mm|in|pt|pc)?$/, RE_RESOLUTION_UNIT = /(dpi|dpcm|dppx)?$/;
-function matchQuery(mediaQuery, values) {
-    return parseQuery(mediaQuery).some(function(query) {
-        var inverse = query.inverse;
-        // Either the parsed or specified `type` is "all", or the types must be
-        // equal for a match.
-        var typeMatch = query.type === "all" || values.type === query.type;
-        // Quit early when `type` doesn't match, but take "not" into account.
-        if (typeMatch && inverse || !(typeMatch || inverse)) return false;
-        var expressionsMatch = query.expressions.every(function(expression) {
-            var feature = expression.feature, modifier = expression.modifier, expValue = expression.value, value = values[feature];
-            // Missing or falsy values don't match.
-            if (!value) return false;
-            switch(feature){
-                case "orientation":
-                case "scan":
-                    return value.toLowerCase() === expValue.toLowerCase();
-                case "width":
-                case "height":
-                case "device-width":
-                case "device-height":
-                    expValue = toPx(expValue);
-                    value = toPx(value);
-                    break;
-                case "resolution":
-                    expValue = toDpi(expValue);
-                    value = toDpi(value);
-                    break;
-                case "aspect-ratio":
-                case "device-aspect-ratio":
-                case /* Deprecated */ "device-pixel-ratio":
-                    expValue = toDecimal(expValue);
-                    value = toDecimal(value);
-                    break;
-                case "grid":
-                case "color":
-                case "color-index":
-                case "monochrome":
-                    expValue = parseInt(expValue, 10) || 1;
-                    value = parseInt(value, 10) || 0;
-                    break;
-            }
-            switch(modifier){
-                case "min":
-                    return value >= expValue;
-                case "max":
-                    return value <= expValue;
-                default:
-                    return value === expValue;
-            }
-        });
-        return expressionsMatch && !inverse || !expressionsMatch && inverse;
-    });
-}
-function parseQuery(mediaQuery) {
-    return mediaQuery.split(",").map(function(query) {
-        query = query.trim();
-        var captures = query.match(RE_MEDIA_QUERY), modifier = captures[1], type = captures[2], expressions = captures[3] || "", parsed = {};
-        parsed.inverse = !!modifier && modifier.toLowerCase() === "not";
-        parsed.type = type ? type.toLowerCase() : "all";
-        // Split expressions into a list.
-        expressions = expressions.match(/\([^\)]+\)/g) || [];
-        parsed.expressions = expressions.map(function(expression) {
-            var captures = expression.match(RE_MQ_EXPRESSION), feature = captures[1].toLowerCase().match(RE_MQ_FEATURE);
-            return {
-                modifier: feature[1],
-                feature: feature[2],
-                value: captures[2]
-            };
-        });
-        return parsed;
-    });
-}
-// -- Utilities ----------------------------------------------------------------
-function toDecimal(ratio) {
-    var decimal = Number(ratio), numbers;
-    if (!decimal) {
-        numbers = ratio.match(/^(\d+)\s*\/\s*(\d+)$/);
-        decimal = numbers[1] / numbers[2];
-    }
-    return decimal;
-}
-function toDpi(resolution) {
-    var value = parseFloat(resolution), units = String(resolution).match(RE_RESOLUTION_UNIT)[1];
-    switch(units){
-        case "dpcm":
-            return value / 2.54;
-        case "dppx":
-            return value * 96;
-        default:
-            return value;
-    }
-}
-function toPx(length) {
-    var value = parseFloat(length), units = String(length).match(RE_LENGTH_UNIT)[1];
-    switch(units){
-        case "em":
-            return value * 16;
-        case "rem":
-            return value * 16;
-        case "cm":
-            return value * 96 / 2.54;
-        case "mm":
-            return value * 96 / 2.54 / 10;
-        case "in":
-            return value * 96;
-        case "pt":
-            return value * 72;
-        case "pc":
-            return value * 72 / 12;
-        default:
-            return value;
-    }
-}
-
-},{}],"4gYfC":[function(require,module,exports) {
-/* eslint-disable no-var, prefer-template */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var uppercasePattern = /[A-Z]/g;
-var msPattern = /^ms-/;
-var cache = {};
-function toHyphenLower(match) {
-    return "-" + match.toLowerCase();
-}
-function hyphenateStyleName(name) {
-    if (cache.hasOwnProperty(name)) return cache[name];
-    var hName = name.replace(uppercasePattern, toHyphenLower);
-    return cache[name] = msPattern.test(hName) ? "-" + hName : hName;
-}
-exports.default = hyphenateStyleName;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dCeW8":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "shallowEqual", ()=>shallowEqual);
-parcelHelpers.export(exports, "shallowEqualArrays", ()=>shallowEqualArrays);
-parcelHelpers.export(exports, "shallowEqualObjects", ()=>shallowEqualObjects);
-function shallowEqualArrays(arrA, arrB) {
-    if (arrA === arrB) return true;
-    if (!arrA || !arrB) return false;
-    const len = arrA.length;
-    if (arrB.length !== len) return false;
-    for(let i = 0; i < len; i++){
-        if (arrA[i] !== arrB[i]) return false;
-    }
-    return true;
-}
-function shallowEqualObjects(objA, objB) {
-    if (objA === objB) return true;
-    if (!objA || !objB) return false;
-    const aKeys = Object.keys(objA);
-    const bKeys = Object.keys(objB);
-    const len = aKeys.length;
-    if (bKeys.length !== len) return false;
-    for(let i = 0; i < len; i++){
-        const key = aKeys[i];
-        if (objA[key] !== objB[key] || !Object.prototype.hasOwnProperty.call(objB, key)) return false;
-    }
-    return true;
-}
-function shallowEqual(a, b) {
-    const aIsArr = Array.isArray(a);
-    const bIsArr = Array.isArray(b);
-    if (aIsArr !== bIsArr) return false;
-    if (aIsArr && bIsArr) return shallowEqualArrays(a, b);
-    return shallowEqualObjects(a, b);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire5546")
+},{"react/jsx-dev-runtime":"iTorj","./game-over-view.scss":"8rYl6","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"8rYl6":[function() {},{}],"lJZlQ":[function() {},{}]},["5qIsR","1xC6H","d8Dch"], "d8Dch", "parcelRequire5546")
 
 //# sourceMappingURL=index.b4b6dfad.js.map

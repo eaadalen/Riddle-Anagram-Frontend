@@ -10,7 +10,7 @@ function updateLetters(state, action) {
   }
 }
 
-export const ShortPromptView = ({ prompts, sendDataToSP }) => {
+export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
   var activeDiv = Object.keys(prompts)[0]
   const [solvedLetters, solvedLettersDispatch] = useReducer(updateLetters, { value: '' })
   const [render, triggerRender] = useState()
@@ -26,6 +26,13 @@ export const ShortPromptView = ({ prompts, sendDataToSP }) => {
   useEffect(() => {
     sendDataToSP(solvedLetters.value);
   }, [solvedLetters.value]);
+
+  useEffect(() => {
+    console.log(dataFromKV[0])
+    if (dataFromKV[0] != undefined) {
+      handleMobileTyping(dataFromKV[0])
+    }
+  }, [dataFromKV]);
 
   const setNewActiveDiv = () => {
     var BreakException = {};
@@ -50,7 +57,34 @@ export const ShortPromptView = ({ prompts, sendDataToSP }) => {
     }
     else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
       if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
+        console.log(prompts[activeDiv].Answer)
         prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.key.toUpperCase() // Add letter
+        if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
+          if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
+            document.getElementById(activeDiv).className = 'short-prompt-container-correct'
+            prompts[activeDiv].locked = true
+            solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDiv].activeGuess.charAt(prompts[activeDiv].activeLetter)})
+            setNewActiveDiv()
+          }
+          else {  // If active guess doesn't match answer, display incorrect animation
+            document.getElementById(activeDiv).classList.add('horizontal-shake');
+            prompts[activeDiv].guessesSubmitted = prompts[activeDiv].guessesSubmitted + 1
+          }
+        }
+      }
+    }
+    triggerRender(Math.random())
+  }
+
+  const handleMobileTyping = (e) => {  
+    if (e === '⌫') {
+      prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess.slice(0, -1)
+      document.getElementById(activeDiv).classList.remove('horizontal-shake')
+    }
+    else {
+      if (prompts[activeDiv].activeGuess.length < prompts[activeDiv].maxLength) {  // Only add letter if guess length is less than answer length
+        console.log(prompts[activeDiv].Answer)
+        prompts[activeDiv].activeGuess = prompts[activeDiv].activeGuess + e.toUpperCase() // Add letter
         if (prompts[activeDiv].activeGuess.length === prompts[activeDiv].Answer.length) {  // Check if active guess and answer are the same length
           if (prompts[activeDiv].activeGuess === prompts[activeDiv].Answer) { // Check if active guess matches answer
             document.getElementById(activeDiv).className = 'short-prompt-container-correct'

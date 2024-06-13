@@ -1,3 +1,9 @@
+/* optional reset for presentation */
+* {
+    font-family: Arial;
+    font-size: 20px;
+}
+
 .container-eka {
     justify-content: center;
     align-items: center;
@@ -14,7 +20,7 @@
     border-radius: 7px;
 }
 
-.transition-div {
+.transition-div-top {
     position: sticky; 
     top: 195px;
     height: 20px;
@@ -28,8 +34,15 @@
     margin-top: 200px;
 }
 
-/* optional reset for presentation */
-* {
-    font-family: Arial;
-    font-size: 20px;
-  }
+.transition-div-bottom {
+    position: sticky; 
+    bottom: 225px;
+    height: 20px;
+    background-image: linear-gradient(to bottom, rgba(255,0,0,0), rgb(255, 255, 255));
+}
+
+.user-keyboard {
+    position: sticky; 
+    bottom: 0px;
+    background-color: white;
+}
