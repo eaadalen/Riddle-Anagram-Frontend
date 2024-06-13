@@ -1,4 +1,5 @@
 -set up 'daily' riddle
 -add manual keyboard smh
+-optimize app/text size for mobile, optimize use of screen space
 -clean up all code, optimize
 -add comments to code where necessary
