@@ -216,7 +216,7 @@
   border-radius: 7px;
   justify-content: center;
   align-items: center;
-  width: 60px;
+  width: 90px;
   height: 120px;
   margin: 3px;
   padding: 3px;
@@ -13424,6 +13424,11 @@ textarea.form-control-lg {
 
 html {
   touch-action: manipulation;
+}
+
+body {
+  position: absolute;
+  left: 25%;
 }
 
 /*# sourceMappingURL=index.238dcc28.css.map */

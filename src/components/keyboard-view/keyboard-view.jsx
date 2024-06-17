@@ -2,9 +2,9 @@ import './keyboard-view.scss'
 import { useState, useEffect } from 'react';
 
 export const KeyboardView = ({ sendDataToKV }) => {
-  const [keysRow1, KeysRow1] = useState(['Q','W','E','R','T','Y','U','I','O','P'])
-  const [keysRow2, KeysRow2] = useState(['A','S','D','F','G','H','J','K','L'])
-  const [keysRow3, KeysRow3] = useState(['Z','X','C','V','B','N','M','⌫'])
+  const keysRow1 = ['Q','W','E','R','T','Y','U','I','O','P']
+  const keysRow2 = ['A','S','D','F','G','H','J','K','L']
+  const keysRow3 = ['Z','X','C','V','B','N','M','⌫']
 
   useEffect(() => {
     keysRow1.forEach((element) => {

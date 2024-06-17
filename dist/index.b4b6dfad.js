@@ -42402,7 +42402,7 @@ var _react = require("react");
 var _s = $RefreshSig$();
 const KeyboardView = ({ sendDataToKV })=>{
     _s();
-    const [keysRow1, KeysRow1] = (0, _react.useState)([
+    const keysRow1 = [
         "Q",
         "W",
         "E",
@@ -42413,8 +42413,8 @@ const KeyboardView = ({ sendDataToKV })=>{
         "I",
         "O",
         "P"
-    ]);
-    const [keysRow2, KeysRow2] = (0, _react.useState)([
+    ];
+    const keysRow2 = [
         "A",
         "S",
         "D",
@@ -42424,8 +42424,8 @@ const KeyboardView = ({ sendDataToKV })=>{
         "J",
         "K",
         "L"
-    ]);
-    const [keysRow3, KeysRow3] = (0, _react.useState)([
+    ];
+    const keysRow3 = [
         "Z",
         "X",
         "C",
@@ -42434,7 +42434,7 @@ const KeyboardView = ({ sendDataToKV })=>{
         "N",
         "M",
         "\u232B"
-    ]);
+    ];
     (0, _react.useEffect)(()=>{
         keysRow1.forEach((element)=>{
             document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
@@ -42510,7 +42510,7 @@ const KeyboardView = ({ sendDataToKV })=>{
         columnNumber: 5
     }, undefined);
 };
-_s(KeyboardView, "12DzpkywPWf8xhQwJQYzOlHEfNA=");
+_s(KeyboardView, "OD7bBpZva5O2jO+Puf00hKivP7c=");
 _c = KeyboardView;
 var _c;
 $RefreshReg$(_c, "KeyboardView");
