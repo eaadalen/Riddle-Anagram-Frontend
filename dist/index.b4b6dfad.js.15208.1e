@@ -38695,7 +38695,7 @@ const PlayView = ()=>{
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "short-prompt-container",
+                        className: "short-prompt",
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptView.ShortPromptView), {
                             prompts: shortPrompts,
                             sendDataToSP: handleDataFromSP,
@@ -38973,6 +38973,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                 className: "short-prompt-container-inactive",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "short-prompt",
                         children: prompts[prompt].shortPrompt
                     }, void 0, false, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",

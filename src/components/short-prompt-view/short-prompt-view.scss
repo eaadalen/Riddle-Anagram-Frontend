@@ -6,8 +6,8 @@
   border-radius: 7px;
   margin-top: 30px;
   margin-bottom: 30px;
-  margin-right: 100px;
-  margin-left: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
   padding-right: 30px;
   padding-left: 30px;
   padding-top: 5px;
@@ -17,7 +17,6 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 365px;
 }
 
 .short-prompt-container-inactive {
@@ -33,13 +32,6 @@
 .short-prompt-container-revealed {
   background-color: rgba(143, 151, 145, 0.664);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-
-.short-prompt {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .reveal-answer {

@@ -85,7 +85,7 @@ export const PlayView = () => {
             <LongPromptView prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
           </div>
           <div className="transition-div-top"></div>
-          <div className="short-prompt">
+          <div className="short-prompt-container">
             <ShortPromptView prompts={shortPrompts} sendDataToSP={handleDataFromSP} dataFromKV={dataFromKV}/>
           </div>
           <div className="transition-div-bottom"></div>

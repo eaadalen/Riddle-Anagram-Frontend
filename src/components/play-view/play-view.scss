@@ -27,8 +27,8 @@
     background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255, 255, 255));
 }
 
-.short-prompt {
-    max-height: 200vh;
+.short-prompt-container {
+    max-width: fit-content;
     overflow: auto;
 }
 
