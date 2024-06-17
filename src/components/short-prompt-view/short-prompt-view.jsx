@@ -154,7 +154,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
           <div className='short-prompt'>
             {prompts[prompt].shortPrompt}
           </div>
-          {(prompts[prompt].guessesSubmitted > 2) && (prompts[prompt].locked != true) &&
+          {(prompts[prompt].guessesSubmitted > 0) && (prompts[prompt].locked != true) &&
             <div id={String(prompt)+'reveal'} className='reveal-answer' onClick={event => showAnswer(prompt)}>
               Reveal Answer?
             </div>

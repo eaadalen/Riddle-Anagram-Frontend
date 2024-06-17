@@ -38980,7 +38980,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                         lineNumber: 154,
                         columnNumber: 11
                     }, undefined),
-                    prompts[prompt].guessesSubmitted > 2 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    prompts[prompt].guessesSubmitted > 0 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         id: String(prompt) + "reveal",
                         className: "reveal-answer",
                         onClick: (event)=>showAnswer(prompt),

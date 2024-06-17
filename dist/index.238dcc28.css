@@ -13422,4 +13422,8 @@ textarea.form-control-lg {
   }
 }
 
+html {
+  touch-action: manipulation;
+}
+
 /*# sourceMappingURL=index.238dcc28.css.map */
