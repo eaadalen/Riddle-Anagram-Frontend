@@ -216,12 +216,16 @@
   border-radius: 7px;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 110px;
+  width: 30px;
+  height: 80px;
   margin: 3px;
   padding: 3px;
-  font-size: 45px;
+  font-size: 30px;
   display: flex;
+}
+
+#⌫ {
+  width: 50px;
 }
 
 .guess-array {
