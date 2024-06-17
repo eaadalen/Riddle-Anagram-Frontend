@@ -35,7 +35,7 @@
   background-image: linear-gradient(#f000, #fff);
   height: 40px;
   position: sticky;
-  bottom: 375px;
+  bottom: 225px;
 }
 
 .user-keyboard {
@@ -57,6 +57,7 @@
   border-radius: 7px;
   justify-content: center;
   align-items: center;
+  width: 365px;
   margin: 30px 100px;
   padding: 5px 30px;
   box-shadow: 0 1px 4px #00000029, 0 0 0 2px #333;
@@ -104,8 +105,8 @@
   border: 1px solid #000;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 2px;
   padding: 10px;
   display: flex;
@@ -216,8 +217,8 @@
   border-radius: 7px;
   justify-content: center;
   align-items: center;
-  width: 30px;
-  height: 80px;
+  width: 32px;
+  height: 70px;
   margin: 3px;
   padding: 3px;
   font-size: 30px;
@@ -225,7 +226,7 @@
 }
 
 #⌫ {
-  width: 50px;
+  font-size: 20px;
 }
 
 .guess-array {

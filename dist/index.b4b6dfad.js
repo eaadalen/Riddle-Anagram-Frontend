@@ -39738,7 +39738,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "unscramble",
-                children: "Unscramble the letters above to answer the riddle"
+                children: "Unscramble to answer the riddle"
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
                 lineNumber: 83,

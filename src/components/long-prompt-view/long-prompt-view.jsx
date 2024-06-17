@@ -81,7 +81,7 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
         </div>
       }
       <div className='unscramble'>
-        Unscramble the letters above to answer the riddle
+        Unscramble to answer the riddle
       </div>
       <div className='unscramble-bottom'>
         Guesses Remaining
