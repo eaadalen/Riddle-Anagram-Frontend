@@ -1,5 +1,5 @@
 import './keyboard-view.scss'
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 export const KeyboardView = ({ sendDataToKV }) => {
   const keysRow1 = ['Q','W','E','R','T','Y','U','I','O','P']
