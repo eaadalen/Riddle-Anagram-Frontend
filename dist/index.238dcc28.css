@@ -12,11 +12,8 @@
 .long-prompt {
   background-color: #fff;
   border-radius: 7px;
-  height: 195px;
   margin-top: 20px;
   padding-top: 20px;
-  position: sticky;
-  top: 0;
 }
 
 .short-prompt-container {
@@ -28,7 +25,6 @@
 .user-keyboard {
   background-color: #fff;
   position: sticky;
-  bottom: 10px;
 }
 
 .modal-container {
@@ -61,7 +57,6 @@
 
 .short-prompt-container-revealed {
   background-color: #8f9791a9;
-  box-shadow: 0 5px 15px #00000059;
 }
 
 .reveal-answer {

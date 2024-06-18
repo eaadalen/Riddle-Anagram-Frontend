@@ -11,21 +11,11 @@
 }
 
 .long-prompt {
-    position: sticky; 
-    top: 0;
-    height: 195px;
     background-color: white;
     padding-top: 20px;
     margin-top: 20px;
     border-radius: 7px;
 }
-
-/*.transition-div-top {
-    position: sticky; 
-    top: 195px;
-    height: 20px;
-    background-image: linear-gradient(to top, rgba(255,0,0,0), rgb(255, 255, 255));
-}*/
 
 .short-prompt-container {
     max-width: fit-content;
@@ -34,7 +24,6 @@
 
 .user-keyboard {
     position: sticky; 
-    bottom: 10px;
     background-color: white;
 }
 

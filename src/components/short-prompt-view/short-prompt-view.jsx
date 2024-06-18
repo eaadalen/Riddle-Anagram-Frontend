@@ -35,21 +35,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     }
   }, [dataFromKV]);
 
-  const setNewActiveDiv = () => {
-    var BreakException = {};
-    try {
-      Object.keys(prompts).forEach(function(element) {
-        if (prompts[element].locked != true) {
-          setActiveDiv(element)
-          document.getElementById(element).className = 'short-prompt-container-active'
-          throw BreakException
-        }
-      });
-    } catch (e) {
-      if (e !== BreakException) throw e;
-    }
-  }
-
   const handleTyping = (e) => {  
     if (e.key === 'Backspace') {
       prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
@@ -106,7 +91,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     prompts[id].activeGuess = prompts[id].Answer
     document.getElementById(id).className = 'short-prompt-container-revealed'
     solvedLettersDispatch({ type: 'addLetter', update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)})
-    setNewActiveDiv()
     triggerRender(Math.random())
   }
 
@@ -128,9 +112,13 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     if (direction > 0) {  // swipe left
       Object.keys(prompts).forEach((element) => {
         if (element === activeDivRef.current) {
+          if (prompts[Object.keys(prompts)[i]].locked === false) {
+            document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
+          }
+          if (prompts[Object.keys(prompts)[i-1]].locked === false) {
+            document.getElementById(Object.keys(prompts)[i-1]).className = 'short-prompt-container-active'
+          }
           setActiveDiv(Object.keys(prompts)[i-1])
-          document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
-          document.getElementById(Object.keys(prompts)[i-1]).className = 'short-prompt-container-active'
         }
         i++
       })
@@ -138,9 +126,13 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     else {  // swipe right
       Object.keys(prompts).forEach((element) => {
         if (element === activeDivRef.current) {
+          if (prompts[Object.keys(prompts)[i]].locked === false) {
+            document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
+          }
+          if (prompts[Object.keys(prompts)[i+1]].locked === false) {
+            document.getElementById(Object.keys(prompts)[i+1]).className = 'short-prompt-container-active'
+          }
           setActiveDiv(Object.keys(prompts)[i+1])
-          document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
-          document.getElementById(Object.keys(prompts)[i+1]).className = 'short-prompt-container-active'
         }
         i++
       })
