@@ -15,12 +15,6 @@
   padding-top: 20px;
 }
 
-.short-prompt-container {
-  max-width: -moz-fit-content;
-  max-width: fit-content;
-  overflow: auto;
-}
-
 .user-keyboard {
   position: sticky;
   bottom: 1%;
@@ -40,6 +34,7 @@
   justify-content: center;
   align-items: center;
   max-width: 340px;
+  height: 130px;
   margin: 20px;
   padding: 20px;
   display: flex;
@@ -913,7 +908,7 @@ button.swiper-pagination-bullet {
   text-align: center;
   justify-content: center;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .letters-row {
