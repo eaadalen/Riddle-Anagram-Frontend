@@ -22,8 +22,8 @@
 }
 
 .user-keyboard {
-  position: sticky;
-  bottom: 0;
+  position: fixed;
+  bottom: 1%;
 }
 
 .modal-container {
