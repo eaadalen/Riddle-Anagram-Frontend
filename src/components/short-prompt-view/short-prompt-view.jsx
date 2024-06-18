@@ -1,5 +1,8 @@
 import './short-prompt-view.scss'
 import { useState, useEffect, useReducer, useRef } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
 
 function updateLetters(state, action) {
   switch (action.type) {
@@ -149,24 +152,34 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
 
   return (
     <div>
-      {Object.keys(prompts).map((prompt) => (
-        <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
-          <div>
-            {prompts[prompt].shortPrompt}
-          </div>
-          {(prompts[prompt].guessesSubmitted > 0) && (prompts[prompt].locked != true) &&
-            <div id={String(prompt)+'reveal'} className='reveal-answer' onClick={event => showAnswer(prompt)}>
-              Reveal Answer?
+      <Swiper
+        spaceBetween={1000}
+        slidesPerView={1}
+        centeredSlides
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={swiper => console.log(swiper)}
+      >
+        {Object.keys(prompts).map((prompt) => (
+        <SwiperSlide>
+          <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
+            <div>
+              {prompts[prompt].shortPrompt}
             </div>
-          }        
-          <div className='short-prompt-guess'>
-            {shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter) => (
-              <div key={Math.random()} className={letter[1] == prompts[prompt].activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
-            ))}
+            {(prompts[prompt].guessesSubmitted > 0) && (prompts[prompt].locked != true) &&
+              <div id={String(prompt)+'reveal'} className='reveal-answer' onClick={event => showAnswer(prompt)}>
+                Reveal Answer?
+              </div>
+            }        
+            <div className='short-prompt-guess'>
+              {shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter) => (
+                <div key={Math.random()} className={letter[1] == prompts[prompt].activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
+              ))}
+            </div>
           </div>
-        </div>
+        </SwiperSlide>
         ))
       }
+      </Swiper>
     </div>
   )
 }
