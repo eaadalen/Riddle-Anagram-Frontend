@@ -28,10 +28,11 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   useEffect(() => {
     Sortable.create(longPromptAnswer, {});
     window.addEventListener('keyup', event => handleSubmit(event))
+    document.getElementById('Enter').addEventListener('click', event => handleSubmit(event))
   }, [])
 
   const handleSubmit = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' || event.srcElement.id === 'Enter') {
       let letters = ''
       document.getElementById('longPromptAnswer').childNodes.forEach((item) => {
         letters = letters + item.textContent

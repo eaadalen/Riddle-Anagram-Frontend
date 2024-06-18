@@ -38881,7 +38881,8 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         if (e === "\u232B") {
             prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
             document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
-        } else if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
+        } else if (e === "Enter") ;
+        else if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
             prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
             ;
             if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
@@ -38958,7 +38959,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                 children: prompts[prompt].shortPrompt
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 154,
+                                lineNumber: 157,
                                 columnNumber: 13
                             }, undefined),
                             prompts[prompt].guessesSubmitted > 0 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38968,7 +38969,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                 children: "Reveal Answer?"
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 158,
+                                lineNumber: 161,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38978,33 +38979,33 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                         children: letter[0]
                                     }, Math.random(), false, {
                                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                        lineNumber: 164,
+                                        lineNumber: 167,
                                         columnNumber: 17
                                     }, undefined))
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 162,
+                                lineNumber: 165,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, prompt, true, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 153,
+                        lineNumber: 156,
                         columnNumber: 11
                     }, undefined)
                 }, prompt, false, {
                     fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                    lineNumber: 152,
+                    lineNumber: 155,
                     columnNumber: 9
                 }, undefined))
         }, void 0, false, {
             fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-            lineNumber: 144,
+            lineNumber: 147,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 143,
+        lineNumber: 146,
         columnNumber: 5
     }, undefined);
 };
@@ -45331,9 +45332,10 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
     (0, _react.useEffect)(()=>{
         (0, _sortablejsDefault.default).create(longPromptAnswer, {});
         window.addEventListener("keyup", (event)=>handleSubmit(event));
+        document.getElementById("Enter").addEventListener("click", (event)=>handleSubmit(event));
     }, []);
     const handleSubmit = (event)=>{
-        if (event.key === "Enter") {
+        if (event.key === "Enter" || event.srcElement.id === "Enter") {
             let letters = "";
             document.getElementById("longPromptAnswer").childNodes.forEach((item)=>{
                 letters = letters + item.textContent;
@@ -45365,7 +45367,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: prompt.longPrompt
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 66,
+                lineNumber: 67,
                 columnNumber: 7
             }, undefined),
             !locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45376,12 +45378,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 72,
+                        lineNumber: 73,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 70,
+                lineNumber: 71,
                 columnNumber: 9
             }, undefined),
             locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45392,12 +45394,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 79,
+                        lineNumber: 80,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 77,
+                lineNumber: 78,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45405,7 +45407,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: "Unscramble to answer the riddle"
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 83,
+                lineNumber: 84,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45419,24 +45421,24 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                                 children: strike
                             }, Math.random(), false, {
                                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                                lineNumber: 90,
+                                lineNumber: 91,
                                 columnNumber: 13
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 88,
+                        lineNumber: 89,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 86,
+                lineNumber: 87,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-        lineNumber: 65,
+        lineNumber: 66,
         columnNumber: 5
     }, undefined);
 };
