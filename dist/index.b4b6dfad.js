@@ -38955,7 +38955,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                         className: "short-prompt-container-inactive",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "short-prompt-text",
                                 children: prompts[prompt].shortPrompt
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
