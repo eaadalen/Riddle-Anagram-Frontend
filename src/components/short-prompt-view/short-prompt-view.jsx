@@ -154,7 +154,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
         {Object.keys(prompts).map((prompt) => (
         <SwiperSlide key={prompt} >
           <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
-            <div>
+            <div className='short-prompt-text'>
               {prompts[prompt].shortPrompt}
             </div>
             {(prompts[prompt].guessesSubmitted > 0) && (prompts[prompt].locked != true) &&
