@@ -1,7 +1,6 @@
 -set up 'daily' riddle
--optimize app/text size for mobile, optimize use of screen space
 -add keyboard animations when letters are pressed
 -add letter animations when letters are added to guess
 -fix submission before all letters are solved bug
--autoscroll after correct answer or revealed answer
+-auto scroll after correct answer or revealed answer
 -reveal correct/incorrect letter positions after a submitted guess

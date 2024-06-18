@@ -1,4 +1,5 @@
 .user-keyboard {
+  margin-top: 20px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -12,6 +13,12 @@
 }
 
 .letter, #⌫, #Enter {
+  cursor: pointer;
+	display: inline-block;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
   border: 1px solid black;
   margin: 3px;
   padding: 3px;
@@ -25,8 +32,13 @@
   text-align: center;
 }
 
+.letter:active , #⌫:active , #Enter:active  {
+  background: #2980b9;
+	top: 2px;
+}
+
 #⌫ {
-  font-size: 20px;
+  font-size: 30px;
 }
 
 #Enter {

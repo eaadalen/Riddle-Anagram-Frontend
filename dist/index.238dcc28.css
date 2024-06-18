@@ -909,6 +909,7 @@ button.swiper-pagination-bullet {
   text-align: center;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .letters-row {
@@ -919,6 +920,7 @@ button.swiper-pagination-bullet {
 }
 
 .letter, #⌫, #Enter {
+  cursor: pointer;
   text-align: center;
   border: 1px solid #000;
   border-radius: 7px;
@@ -929,11 +931,18 @@ button.swiper-pagination-bullet {
   margin: 3px;
   padding: 3px;
   font-size: 30px;
+  transition: all .3s;
   display: flex;
+  position: relative;
+}
+
+.letter:active, #⌫:active, #Enter:active {
+  background: #2980b9;
+  top: 2px;
 }
 
 #⌫ {
-  font-size: 20px;
+  font-size: 30px;
 }
 
 #Enter {
