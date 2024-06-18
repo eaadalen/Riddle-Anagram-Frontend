@@ -1,4 +1,4 @@
 -set up 'daily' riddle
--add letter animations when letters are added to guess
 -auto scroll after correct answer or revealed answer
 -reveal correct/incorrect letter positions after a submitted guess
+-merge handle mobile typing and handle typing

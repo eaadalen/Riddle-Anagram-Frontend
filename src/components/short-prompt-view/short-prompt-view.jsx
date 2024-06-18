@@ -39,9 +39,11 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     if (e.key === 'Backspace') {
       prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
       document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
+      document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove('add-new-letter')
     }
     else if ((/^[A-Z]+$/i.test(e.key)) && (e.key.length == 1)){  // Regex for testing if key is between A-Z and not a specialty key (caps lock, shift, etc)
       if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {  // Only add letter if guess length is less than answer length
+        document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add('add-new-letter')
         prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.key.toUpperCase() // Add letter
         if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {  // Check if active guess and answer are the same length
           if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) { // Check if active guess matches answer
@@ -64,13 +66,14 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     if (e === '⌫') {
       prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
       document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
+      document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove('add-new-letter')
     }
     else {
       if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {  // Only add letter if guess length is less than answer length
+        document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add('add-new-letter')
         prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
         if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {  // Check if active guess and answer are the same length
           if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) { // Check if active guess matches answer
-  
             document.getElementById(activeDivRef.current).className = 'short-prompt-container-correct'
             prompts[activeDivRef.current].locked = true
             solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)})
@@ -139,8 +142,15 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     }
   }
 
+  const nextSlide = () => {
+    let element = document.getElementById(activeDivRef.current);
+    element.dispatchEvent(new Event('mousedown'));
+    element.style.right += 300
+  }
+
   return (
     <div>
+      <button onClick={nextSlide} id='button'>click</button>
       <Swiper
         spaceBetween={1000}
         slidesPerView={1}
@@ -161,7 +171,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
             }        
             <div className='short-prompt-guess'>
               {shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter) => (
-                <div key={Math.random()} className={letter[1] == prompts[prompt].activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
+                <div key={prompt + letter[1]} id={prompt + letter[1]} className={letter[1] == prompts[prompt].activeLetter ? 'active-letter' : 'guess-letter'}>{letter[0]}</div>
               ))}
             </div>
           </div>
