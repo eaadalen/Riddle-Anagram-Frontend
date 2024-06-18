@@ -45339,7 +45339,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
             document.getElementById("longPromptAnswer").childNodes.forEach((item)=>{
                 letters = letters + item.textContent;
             });
-            setFinalAnswer(letters);
+            if (letters.length === prompt.Answer.length) setFinalAnswer(letters);
         }
     };
     const longPromptArray = (guess, answer)=>{
@@ -45366,7 +45366,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: prompt.longPrompt
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 67,
+                lineNumber: 69,
                 columnNumber: 7
             }, undefined),
             !locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45377,12 +45377,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 73,
+                        lineNumber: 75,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 71,
+                lineNumber: 73,
                 columnNumber: 9
             }, undefined),
             locked && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45393,12 +45393,12 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                         children: letter[0]
                     }, Math.random(), false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 80,
+                        lineNumber: 82,
                         columnNumber: 13
                     }, undefined))
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 78,
+                lineNumber: 80,
                 columnNumber: 9
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45406,7 +45406,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                 children: "Unscramble to answer the riddle"
             }, void 0, false, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 84,
+                lineNumber: 86,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -45420,24 +45420,24 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
                                 children: strike
                             }, Math.random(), false, {
                                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                                lineNumber: 91,
+                                lineNumber: 93,
                                 columnNumber: 13
                             }, undefined))
                     }, void 0, false, {
                         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                        lineNumber: 89,
+                        lineNumber: 91,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-                lineNumber: 87,
+                lineNumber: 89,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/long-prompt-view/long-prompt-view.jsx",
-        lineNumber: 66,
+        lineNumber: 68,
         columnNumber: 5
     }, undefined);
 };

@@ -37,7 +37,9 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
       document.getElementById('longPromptAnswer').childNodes.forEach((item) => {
         letters = letters + item.textContent
       })
-      setFinalAnswer(letters)
+      if (letters.length === prompt.Answer.length) {
+        setFinalAnswer(letters)
+      }
     }
   }
 
