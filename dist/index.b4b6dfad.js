@@ -38688,13 +38688,6 @@ const PlayView = ()=>{
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "transition-div-top"
-                    }, void 0, false, {
-                        fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 87,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         className: "short-prompt-container",
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _shortPromptView.ShortPromptView), {
                             prompts: shortPrompts,
@@ -38702,19 +38695,12 @@ const PlayView = ()=>{
                             dataFromKV: dataFromKV
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 89,
+                            lineNumber: 88,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 88,
-                        columnNumber: 11
-                    }, undefined),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "transition-div-bottom"
-                    }, void 0, false, {
-                        fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 91,
+                        lineNumber: 87,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38723,12 +38709,12 @@ const PlayView = ()=>{
                             sendDataToKV: handleDataFromKV
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 93,
+                            lineNumber: 91,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 92,
+                        lineNumber: 90,
                         columnNumber: 11
                     }, undefined)
                 ]
@@ -38747,17 +38733,17 @@ const PlayView = ()=>{
                         data: gameOverData
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 100,
+                        lineNumber: 98,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 99,
+                    lineNumber: 97,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 98,
+                lineNumber: 96,
                 columnNumber: 9
             }, undefined)
         ]
@@ -38854,9 +38840,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
     (0, _react.useEffect)(()=>{
         window.addEventListener("keyup", (event)=>handleTyping(event));
         document.getElementById(activeDivRef.current).className = "short-prompt-container-active";
-        Object.keys(prompts).forEach((element)=>{
-            document.getElementById(element).addEventListener("click", (event)=>handleClick(event));
-        });
     }, []);
     (0, _react.useEffect)(()=>{
         sendDataToSP(solvedLetters.value);
@@ -38883,7 +38866,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         }
     };
     const handleTyping = (e)=>{
-        console.log(prompts[activeDivRef.current].Answer);
         if (e.key === "Backspace") {
             prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
             document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
@@ -38899,7 +38881,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                             type: "addLetter",
                             update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
                         });
-                        setNewActiveDiv();
+                    //setNewActiveDiv()
                     } else {
                         document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
                         prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
@@ -38924,7 +38906,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                         type: "addLetter",
                         update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
                     });
-                    setNewActiveDiv();
+                //setNewActiveDiv()
                 } else {
                     document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
                     prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
@@ -38932,20 +38914,6 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
             }
         }
         triggerRender(Math.random());
-    };
-    const handleClick = (event)=>{
-        console.log(prompts[activeDivRef.current].Answer);
-        if (event.target.textContent != "Reveal Answer?") {
-            var node = null;
-            if (event.target.className === "guess-letter" || event.target.className === "active-letter") node = event.target.parentNode.parentNode;
-            else if (event.target.className === "short-prompt-guess" || event.target.className === "short-prompt") node = event.target.parentNode;
-            else node = event.target;
-            if (node.className === "short-prompt-container-inactive") {
-                if (document.getElementById(activeDivRef.current).className != "short-prompt-container-correct" && document.getElementById(activeDivRef.current).className != "short-prompt-container-revealed") document.getElementById(activeDivRef.current).className = "short-prompt-container-inactive";
-                document.getElementById(node.id).className = "short-prompt-container-active";
-                setActiveDiv(node.id);
-            }
-        }
     };
     const showAnswer = (id)=>{
         prompts[id].locked = true;
@@ -38970,13 +38938,32 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
         ]);
         return returnValue;
     };
+    const updateDivOnSwipe = (direction)=>{
+        let i = 0;
+        if (direction > 0) Object.keys(prompts).forEach((element)=>{
+            if (element === activeDivRef.current) {
+                setActiveDiv(Object.keys(prompts)[i - 1]);
+                document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
+                document.getElementById(Object.keys(prompts)[i - 1]).className = "short-prompt-container-active";
+            }
+            i++;
+        });
+        else Object.keys(prompts).forEach((element)=>{
+            if (element === activeDivRef.current) {
+                setActiveDiv(Object.keys(prompts)[i + 1]);
+                document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
+                document.getElementById(Object.keys(prompts)[i + 1]).className = "short-prompt-container-active";
+            }
+            i++;
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.Swiper), {
             spaceBetween: 1000,
             slidesPerView: 1,
             centeredSlides: true,
-            onSlideChange: ()=>console.log("slide change"),
-            onSwiper: (swiper)=>console.log(swiper),
+            onSlideChange: (swiper)=>updateDivOnSwipe(swiper.touches.diff),
+            className: "mySwiper",
             children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.SwiperSlide), {
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         id: prompt,
@@ -38986,7 +38973,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                 children: prompts[prompt].shortPrompt
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 165,
+                                lineNumber: 162,
                                 columnNumber: 13
                             }, undefined),
                             prompts[prompt].guessesSubmitted > 0 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38996,7 +38983,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                 children: "Reveal Answer?"
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 169,
+                                lineNumber: 166,
                                 columnNumber: 15
                             }, undefined),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -39006,33 +38993,33 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
                                         children: letter[0]
                                     }, Math.random(), false, {
                                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                        lineNumber: 175,
+                                        lineNumber: 172,
                                         columnNumber: 17
                                     }, undefined))
                             }, void 0, false, {
                                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                lineNumber: 173,
+                                lineNumber: 170,
                                 columnNumber: 13
                             }, undefined)
                         ]
                     }, prompt, true, {
                         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 164,
+                        lineNumber: 161,
                         columnNumber: 11
                     }, undefined)
-                }, void 0, false, {
+                }, prompt, false, {
                     fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                    lineNumber: 163,
+                    lineNumber: 160,
                     columnNumber: 9
                 }, undefined))
         }, void 0, false, {
             fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-            lineNumber: 155,
+            lineNumber: 152,
             columnNumber: 7
         }, undefined)
     }, void 0, false, {
         fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 154,
+        lineNumber: 151,
         columnNumber: 5
     }, undefined);
 };
@@ -39046,7 +39033,7 @@ $RefreshReg$(_c, "ShortPromptView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","swiper/react":"9jVsF","swiper/swiper-bundle.min.css":"girFM","swiper/swiper.min.css":"eFTGe"}],"lQMwT":[function() {},{}],"km3Ru":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","swiper/swiper-bundle.min.css":"girFM","swiper/swiper.min.css":"eFTGe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","swiper/react":"9jVsF"}],"lQMwT":[function() {},{}],"girFM":[function() {},{}],"eFTGe":[function() {},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -45321,7 +45308,7 @@ var SwiperSlide = /*#__PURE__*/ (0, _react.forwardRef)(function(_temp, externalR
 });
 SwiperSlide.displayName = "SwiperSlide";
 
-},{"react":"21dqq","./utils":"FmwE2","./use-isomorphic-layout-effect":"fcRxV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"girFM":[function() {},{}],"eFTGe":[function() {},{}],"gylj4":[function(require,module,exports) {
+},{"react":"21dqq","./utils":"FmwE2","./use-isomorphic-layout-effect":"fcRxV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gylj4":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4710 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;

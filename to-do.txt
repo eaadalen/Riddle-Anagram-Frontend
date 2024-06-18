@@ -2,8 +2,6 @@
 -optimize app/text size for mobile, optimize use of screen space
 -add keyboard animations when letters are pressed
 -add letter animations when letters are added to guess
--add submit button to mobile
--add animations to letter entry and deletion (see wordle)
--figure out why it's so slow on mobile, and fix it
--clean up all code, optimize
--add comments to code where necessary
+-fix submission before all letters are solved bug
+-update active div for swiping
+-add enter key to keyboard

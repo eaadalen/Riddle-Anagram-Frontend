@@ -23,9 +23,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
   useEffect(() => {
     window.addEventListener("keyup", event => handleTyping(event));
     document.getElementById(activeDivRef.current).className = 'short-prompt-container-active'
-    Object.keys(prompts).forEach((element) => {
-      document.getElementById(element).addEventListener("click", event => handleClick(event));
-    })
   }, []);
 
   useEffect(() => {
@@ -54,7 +51,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
   }
 
   const handleTyping = (e) => {  
-    console.log(prompts[activeDivRef.current].Answer)
     if (e.key === 'Backspace') {
       prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1)
       document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
@@ -67,7 +63,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
             document.getElementById(activeDivRef.current).className = 'short-prompt-container-correct'
             prompts[activeDivRef.current].locked = true
             solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)})
-            setNewActiveDiv()
+            //setNewActiveDiv()
           }
           else {  // If active guess doesn't match answer, display incorrect animation
             document.getElementById(activeDivRef.current).classList.add('horizontal-shake');
@@ -93,7 +89,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
             document.getElementById(activeDivRef.current).className = 'short-prompt-container-correct'
             prompts[activeDivRef.current].locked = true
             solvedLettersDispatch({ type: 'addLetter', update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)})
-            setNewActiveDiv()
+            //setNewActiveDiv()
           }
           else {  // If active guess doesn't match answer, display incorrect animation
             document.getElementById(activeDivRef.current).classList.add('horizontal-shake');
@@ -103,29 +99,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
       }
     }
     triggerRender(Math.random())
-  }
-
-  const handleClick = (event) => { 
-    console.log(prompts[activeDivRef.current].Answer)
-    if (event.target.textContent != 'Reveal Answer?') {
-      var node = null
-      if (event.target.className === 'guess-letter' || event.target.className === 'active-letter') {
-        node = event.target.parentNode.parentNode
-      }
-      else if (event.target.className === 'short-prompt-guess' || event.target.className === 'short-prompt') {
-        node = event.target.parentNode
-      }
-      else {
-        node = event.target
-      }
-      if (node.className === 'short-prompt-container-inactive') {
-        if (document.getElementById(activeDivRef.current).className != 'short-prompt-container-correct' && document.getElementById(activeDivRef.current).className != 'short-prompt-container-revealed') {
-          document.getElementById(activeDivRef.current).className = 'short-prompt-container-inactive'
-        }
-        document.getElementById(node.id).className = 'short-prompt-container-active'
-        setActiveDiv(node.id)
-      }
-    }
   }
 
   const showAnswer = (id) => {  
@@ -150,17 +123,41 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     return returnValue
   }
 
+  const updateDivOnSwipe = (direction) => {
+    let i = 0
+    if (direction > 0) {  // swipe left
+      Object.keys(prompts).forEach((element) => {
+        if (element === activeDivRef.current) {
+          setActiveDiv(Object.keys(prompts)[i-1])
+          document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
+          document.getElementById(Object.keys(prompts)[i-1]).className = 'short-prompt-container-active'
+        }
+        i++
+      })
+    }
+    else {  // swipe right
+      Object.keys(prompts).forEach((element) => {
+        if (element === activeDivRef.current) {
+          setActiveDiv(Object.keys(prompts)[i+1])
+          document.getElementById(Object.keys(prompts)[i]).className = 'short-prompt-container-inactive'
+          document.getElementById(Object.keys(prompts)[i+1]).className = 'short-prompt-container-active'
+        }
+        i++
+      })
+    }
+  }
+
   return (
     <div>
       <Swiper
         spaceBetween={1000}
         slidesPerView={1}
         centeredSlides
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={swiper => console.log(swiper)}
+        onSlideChange={(swiper) => updateDivOnSwipe(swiper.touches.diff)}
+        className="mySwiper"
       >
         {Object.keys(prompts).map((prompt) => (
-        <SwiperSlide>
+        <SwiperSlide key={prompt} >
           <div key={prompt} id={prompt} className='short-prompt-container-inactive'>
             <div>
               {prompts[prompt].shortPrompt}
