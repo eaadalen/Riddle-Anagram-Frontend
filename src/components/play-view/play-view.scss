@@ -19,11 +19,11 @@
 .short-prompt-container {
     max-width: fit-content;
     overflow: auto;
-    margin-top: 20px;
 }
 
 .user-keyboard {
-
+    position: sticky; 
+    bottom: 1%;
 }
 
 .modal-container {

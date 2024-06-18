@@ -1,5 +1,4 @@
 -set up 'daily' riddle
--add keyboard animations when letters are pressed
 -add letter animations when letters are added to guess
 -fix submission before all letters are solved bug
 -auto scroll after correct answer or revealed answer
