@@ -48090,6 +48090,7 @@ const KeyboardView = ({ sendDataToKV })=>{
         "L"
     ];
     const keysRow3 = [
+        "Enter",
         "Z",
         "X",
         "C",

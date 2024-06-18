@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 export const KeyboardView = ({ sendDataToKV }) => {
   const keysRow1 = ['Q','W','E','R','T','Y','U','I','O','P']
   const keysRow2 = ['A','S','D','F','G','H','J','K','L']
-  const keysRow3 = ['Z','X','C','V','B','N','M','⌫']
+  const keysRow3 = ['Enter','Z','X','C','V','B','N','M','⌫']
 
   useEffect(() => {
     keysRow1.forEach((element) => {
