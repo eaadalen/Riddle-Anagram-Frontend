@@ -1,4 +1,3 @@
 -set up 'daily' riddle
--auto scroll after correct answer or revealed answer
 -reveal correct/incorrect letter positions after a submitted guess
 -merge handle mobile typing and handle typing

@@ -35,7 +35,7 @@
   align-items: center;
   max-width: 340px;
   height: 130px;
-  margin: 20px;
+  margin: 20px 20px 13px;
   padding: 20px;
   display: flex;
   box-shadow: 0 1px 4px #00000029, 0 0 0 2px #333;
@@ -144,33 +144,9 @@
   }
 }
 
-#movable-container {
-  text-align: center;
-  border: 1px dotted silver;
-  justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 80px;
-  margin: auto auto 20px;
-  display: flex;
-  position: relative;
-}
-
-#movable {
-  background-color: #6495ed;
-  border: 1px solid gray;
-  border-radius: 5px;
-  width: 30px;
-  height: 30px;
-  position: relative;
-}
-
-#simulate-dnm > span:before {
-  content: "Start ";
-}
-
-#simulate-dnm.running > span:before {
-  content: "Stop ";
+.swipe-description {
+  color: gray;
+  font-family: Trebuchet MS, sans-serif;
 }
 
 @font-face {

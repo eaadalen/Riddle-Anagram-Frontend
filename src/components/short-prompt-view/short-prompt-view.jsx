@@ -150,9 +150,6 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
         slidesPerView={1}
         centeredSlides
         onSlideChange={(swiper) => updateDivOnSwipe(swiper.touches.diff)}
-        className="mySwiper"
-        navigation={true} 
-        modules={[Navigation]} 
       >
         {Object.keys(prompts).map((prompt) => (
         <SwiperSlide key={prompt} >
@@ -175,6 +172,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
         ))
       }
       </Swiper>
+      <div className='swipe-description'>🡨  Swipe  🡪</div>
     </div>
   )
 }
