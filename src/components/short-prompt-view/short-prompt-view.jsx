@@ -172,7 +172,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
         ))
       }
       </Swiper>
-      <div className='swipe-description'>🡨  Swipe  🡪</div>
+      <div className='swipe-description'>←  Swipe  →</div>
     </div>
   )
 }

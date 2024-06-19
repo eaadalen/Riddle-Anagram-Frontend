@@ -39010,7 +39010,7 @@ const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "swipe-description",
-                children: "\uD83E\uDC68  Swipe  \uD83E\uDC6A"
+                children: "\u2190  Swipe  \u2192"
             }, void 0, false, {
                 fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
                 lineNumber: 175,
