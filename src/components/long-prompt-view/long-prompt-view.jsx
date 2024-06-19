@@ -27,8 +27,8 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
 
   useEffect(() => {
     Sortable.create(longPromptAnswer, {});
-    window.addEventListener('keyup', event => handleSubmit(event))
-    document.getElementById('Enter').addEventListener('click', event => handleSubmit(event))
+    window.addEventListener('keyup', event => handleSubmit(event))  // Handle regular typing submission
+    document.getElementById('Enter').addEventListener('click', event => handleSubmit(event))  // Handle mobile keyboard submission
   }, [])
 
   const handleSubmit = (event) => {
@@ -45,12 +45,24 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
 
   const longPromptArray = (guess, answer) => {  
     let returnValue = []
-    for (let i = 0; i < answer.length; i++) {
-      if (guess.charAt(i) === '') {
-        returnValue.push(['', i])
+    if (finalAnswer.length > 0) {
+      for (let i = 0; i < answer.length; i++) {
+        if (guess.charAt(i) === answer.charAt(i)) {
+          returnValue.push([guess.charAt(i), i, 'correct-letter'])
+        }
+        else {
+          returnValue.push([guess.charAt(i), i, 'incorrect-letter'])
+        }
       }
-      else {
-        returnValue.push([guess.charAt(i), i])
+    }
+    else {
+      for (let i = 0; i < answer.length; i++) {
+        if (guess.charAt(i) === '') {
+          returnValue.push(['', i, 'long-prompt-letter'])
+        }
+        else {
+          returnValue.push([guess.charAt(i), i, 'long-prompt-letter'])
+        }
       }
     }
     return returnValue
@@ -72,14 +84,14 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
       {!locked &&
         <div id='longPromptAnswer' className='long-prompt-answer'>
           {longPromptArray(finalAnswer == '' ? lettersSolved : finalAnswer, prompt.Answer).map((letter) => (
-            <div key={Math.random()} className='long-prompt-letter'>{letter[0]}</div>
+            <div key={Math.random()} id={prompt.Answer + String(letter[1])} className={letter[2]}>{letter[0]}</div>
           ))}
         </div>
       }
       {locked &&
         <div id='none' className='long-prompt-answer'>
           {longPromptArray(finalAnswer == '' ? lettersSolved : finalAnswer, prompt.Answer).map((letter) => (
-            <div key={Math.random()} className='long-prompt-letter'>{letter[0]}</div>
+            <div key={Math.random()} id={prompt.Answer + String(letter[1])} className={letter[2]}>{letter[0]}</div>
           ))}
         </div>
       }

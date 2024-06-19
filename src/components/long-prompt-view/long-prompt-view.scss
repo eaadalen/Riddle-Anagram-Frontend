@@ -29,7 +29,7 @@
   padding-bottom: 20px;
 }
 
-.long-prompt-letter {
+.long-prompt-letter, .correct-letter, .incorrect-letter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,4 +52,12 @@
 .guess {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.correct-letter {
+  background-color: rgb(54, 222, 12);
+}
+
+.incorrect-letter {
+  background-color: rgb(255, 47, 47);
 }

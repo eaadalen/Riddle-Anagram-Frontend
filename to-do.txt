@@ -1,3 +1,4 @@
 -set up 'daily' riddle
 -reveal correct/incorrect letter positions after a submitted guess
 -merge handle mobile typing and handle typing
+-fix loading animation

@@ -878,7 +878,7 @@ button.swiper-pagination-bullet {
   display: flex;
 }
 
-.long-prompt-letter {
+.long-prompt-letter, .correct-letter, .incorrect-letter {
   text-align: center;
   border: 1px solid #000;
   justify-content: center;
@@ -901,6 +901,14 @@ button.swiper-pagination-bullet {
 .guess {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.correct-letter {
+  background-color: #36de0c;
+}
+
+.incorrect-letter {
+  background-color: #ff2f2f;
 }
 
 .user-keyboard {
