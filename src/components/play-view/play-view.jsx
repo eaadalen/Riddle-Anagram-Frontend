@@ -18,7 +18,7 @@ export const PlayView = () => {
 
   useEffect(() => {
     fetch(
-      "https://riddle-unscramble-game-f456ae714e99.herokuapp.com/random",
+      "https://riddle-unscramble-game-f456ae714e99.herokuapp.com/daily",
       {
           method: "GET",
           headers: {
@@ -74,11 +74,6 @@ export const PlayView = () => {
     
   return (
     <div>
-      {!loaded && 
-        <div className="container-eka">
-          <img src={loading}/>
-        </div>
-      }
       {loaded &&
         <div className="container-eka">
           <div className="long-prompt">

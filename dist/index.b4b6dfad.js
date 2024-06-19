@@ -38617,7 +38617,7 @@ const PlayView = ()=>{
     const [showModal, setShowModal] = (0, _react.useState)(false);
     const [gameOverData, setGameOverData] = (0, _react.useState)();
     (0, _react.useEffect)(()=>{
-        fetch("https://riddle-unscramble-game-f456ae714e99.herokuapp.com/random", {
+        fetch("https://riddle-unscramble-game-f456ae714e99.herokuapp.com/daily", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
@@ -38654,20 +38654,6 @@ const PlayView = ()=>{
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
-            !loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "container-eka",
-                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: (0, _loadingAnimationGifDefault.default)
-                }, void 0, false, {
-                    fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 79,
-                    columnNumber: 11
-                }, undefined)
-            }, void 0, false, {
-                fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 78,
-                columnNumber: 9
-            }, undefined),
             loaded && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "container-eka",
                 children: [
@@ -38679,12 +38665,12 @@ const PlayView = ()=>{
                             sendDataToLP: handleDataFromLP
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 85,
+                            lineNumber: 80,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 84,
+                        lineNumber: 79,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38695,12 +38681,12 @@ const PlayView = ()=>{
                             dataFromKV: dataFromKV
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 88,
+                            lineNumber: 83,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 87,
+                        lineNumber: 82,
                         columnNumber: 11
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -38709,18 +38695,18 @@ const PlayView = ()=>{
                             sendDataToKV: handleDataFromKV
                         }, void 0, false, {
                             fileName: "src/components/play-view/play-view.jsx",
-                            lineNumber: 91,
+                            lineNumber: 86,
                             columnNumber: 13
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 90,
+                        lineNumber: 85,
                         columnNumber: 11
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 83,
+                lineNumber: 78,
                 columnNumber: 9
             }, undefined),
             showModal && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Modal), {
@@ -38733,17 +38719,17 @@ const PlayView = ()=>{
                         data: gameOverData
                     }, void 0, false, {
                         fileName: "src/components/play-view/play-view.jsx",
-                        lineNumber: 98,
+                        lineNumber: 93,
                         columnNumber: 13
                     }, undefined)
                 }, void 0, false, {
                     fileName: "src/components/play-view/play-view.jsx",
-                    lineNumber: 97,
+                    lineNumber: 92,
                     columnNumber: 11
                 }, undefined)
             }, void 0, false, {
                 fileName: "src/components/play-view/play-view.jsx",
-                lineNumber: 96,
+                lineNumber: 91,
                 columnNumber: 9
             }, undefined)
         ]
