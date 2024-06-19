@@ -6,7 +6,7 @@ import { Swap } from 'sortablejs/modular/sortable.core.esm';
 export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
   const [locked, setLocked] = useState(false)
-  const [guessesRemaining, setGuessesRemaining] = useState(4)
+  const [guessesRemaining, setGuessesRemaining] = useState(3)
   const [guessRecord, setGuessRecord] = useState([])
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
       sendDataToLP(guessRecord)
       setLocked(true)
     }
-    else {
+    else if (finalAnswer.length > 0) {
       setGuessesRemaining(prev => prev - 1)
       if (finalAnswer != '') {
         guessRecord.push(finalAnswer)

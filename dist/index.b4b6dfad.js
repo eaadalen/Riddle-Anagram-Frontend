@@ -49016,14 +49016,14 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
     _s();
     const [finalAnswer, setFinalAnswer] = (0, _react.useState)("");
     const [locked, setLocked] = (0, _react.useState)(false);
-    const [guessesRemaining, setGuessesRemaining] = (0, _react.useState)(4);
+    const [guessesRemaining, setGuessesRemaining] = (0, _react.useState)(3);
     const [guessRecord, setGuessRecord] = (0, _react.useState)([]);
     (0, _react.useEffect)(()=>{
         if (finalAnswer === prompt.Answer) {
             guessRecord.push(finalAnswer);
             sendDataToLP(guessRecord);
             setLocked(true);
-        } else {
+        } else if (finalAnswer.length > 0) {
             setGuessesRemaining((prev)=>prev - 1);
             if (finalAnswer != "") guessRecord.push(finalAnswer);
             if (guessesRemaining === 1) sendDataToLP(guessRecord);
@@ -49168,7 +49168,7 @@ const LongPromptView = ({ prompt, lettersSolved, sendDataToLP })=>{
         columnNumber: 5
     }, undefined);
 };
-_s(LongPromptView, "vFKccWZlh81LAbkKk/Yw81KfrNI=");
+_s(LongPromptView, "bp0Zfvr6XQB/WDw6oOSCP/koAgE=");
 _c = LongPromptView;
 var _c;
 $RefreshReg$(_c, "LongPromptView");

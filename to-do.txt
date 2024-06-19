@@ -1,3 +1,2 @@
--set up 'daily' riddle
 -merge handle mobile typing and handle typing
 -store user's progress in local storage
