@@ -1,6 +1,7 @@
 import './short-prompt-view.scss'
 import { useState, useEffect, useReducer, useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
@@ -23,17 +24,17 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
   useEffect(() => {
     window.addEventListener("keyup", event => handleTyping(event));
     document.getElementById(activeDivRef.current).className = 'short-prompt-container-active'
-  }, []);
+  }, [])
 
   useEffect(() => {
     sendDataToSP(solvedLetters.value);
-  }, [solvedLetters.value]);
+  }, [solvedLetters.value])
 
   useEffect(() => {
     if (dataFromKV[0] != undefined) {
       handleMobileTyping(dataFromKV[0])
     }
-  }, [dataFromKV]);
+  }, [dataFromKV])
 
   const handleTyping = (e) => {  
     if (e.key === 'Backspace') {
@@ -142,21 +143,16 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     }
   }
 
-  const nextSlide = () => {
-    let element = document.getElementById(activeDivRef.current);
-    element.dispatchEvent(new Event('mousedown'));
-    element.style.right += 300
-  }
-
   return (
     <div>
-      <button onClick={nextSlide} id='button'>click</button>
       <Swiper
         spaceBetween={1000}
         slidesPerView={1}
         centeredSlides
         onSlideChange={(swiper) => updateDivOnSwipe(swiper.touches.diff)}
         className="mySwiper"
+        navigation={true} 
+        modules={[Navigation]} 
       >
         {Object.keys(prompts).map((prompt) => (
         <SwiperSlide key={prompt} >

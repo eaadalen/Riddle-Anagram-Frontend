@@ -31388,7 +31388,7 @@ function renderTransition(component, runTransition, props) {
     return /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _noopTransitionDefault.default), Object.assign({}, props));
 }
 
-},{"@restart/hooks/useMergedRefs":"6hhuo","@restart/hooks/useEventCallback":"7ONdq","@restart/hooks/useIsomorphicEffect":"e8blq","react":"21dqq","./NoopTransition":"cwnaj","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./RTGTransition":"IPK9l"}],"e8blq":[function(require,module,exports) {
+},{"@restart/hooks/useMergedRefs":"6hhuo","@restart/hooks/useEventCallback":"7ONdq","@restart/hooks/useIsomorphicEffect":"e8blq","react":"21dqq","./NoopTransition":"cwnaj","./RTGTransition":"IPK9l","react/jsx-runtime":"6AEwr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"e8blq":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _react = require("react");
@@ -31572,7 +31572,7 @@ function getReactVersion() {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react":"21dqq"}],"lr1Yp":[function(require,module,exports) {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lr1Yp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getSharedManager", ()=>getSharedManager);
@@ -38763,7 +38763,7 @@ $RefreshReg$(_c, "PlayView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../keyboard-view/keyboard-view":"qUS3t","../game-over-view/game-over-view":"0A806"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","./play-view.scss":"koBHD","react":"21dqq","../../../media/loading-animation.gif":"iSTV0","../short-prompt-view/short-prompt-view":"dTZY8","../long-prompt-view/long-prompt-view":"gylj4","../keyboard-view/keyboard-view":"qUS3t","../game-over-view/game-over-view":"0A806","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"koBHD":[function() {},{}],"iSTV0":[function(require,module,exports) {
 module.exports = require("6fa4a5a116db5615").getBundleURL("byUka") + "loading-animation.a2c29883.gif" + "?" + Date.now();
 
 },{"6fa4a5a116db5615":"lgJ39"}],"lgJ39":[function(require,module,exports) {
@@ -38801,7 +38801,234 @@ exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
-},{}],"km3Ru":[function(require,module,exports) {
+},{}],"dTZY8":[function(require,module,exports) {
+var $parcel$ReactRefreshHelpers$7acc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$7acc.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ShortPromptView", ()=>ShortPromptView);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _shortPromptViewScss = require("./short-prompt-view.scss");
+var _react = require("react");
+var _react1 = require("swiper/react");
+var _swiper = require("swiper");
+var _swiperBundleMinCss = require("swiper/swiper-bundle.min.css");
+var _swiperMinCss = require("swiper/swiper.min.css");
+var _s = $RefreshSig$();
+function updateLetters(state, action) {
+    switch(action.type){
+        case "addLetter":
+            return {
+                value: state.value + action.update
+            };
+        default:
+            return state;
+    }
+}
+const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
+    _s();
+    const [activeDiv, setActiveDiv] = (0, _react.useState)(Object.keys(prompts)[0]);
+    const activeDivRef = (0, _react.useRef)();
+    activeDivRef.current = activeDiv;
+    const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
+        value: ""
+    });
+    const [render, triggerRender] = (0, _react.useState)();
+    (0, _react.useEffect)(()=>{
+        window.addEventListener("keyup", (event)=>handleTyping(event));
+        document.getElementById(activeDivRef.current).className = "short-prompt-container-active";
+    }, []);
+    (0, _react.useEffect)(()=>{
+        sendDataToSP(solvedLetters.value);
+    }, [
+        solvedLetters.value
+    ]);
+    (0, _react.useEffect)(()=>{
+        if (dataFromKV[0] != undefined) handleMobileTyping(dataFromKV[0]);
+    }, [
+        dataFromKV
+    ]);
+    const handleTyping = (e)=>{
+        if (e.key === "Backspace") {
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
+            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
+            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove("add-new-letter");
+        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
+            if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
+                document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add("add-new-letter");
+                prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.key.toUpperCase() // Add letter
+                ;
+                if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
+                    if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
+                        document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
+                        prompts[activeDivRef.current].locked = true;
+                        solvedLettersDispatch({
+                            type: "addLetter",
+                            update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
+                        });
+                    //setNewActiveDiv()
+                    } else {
+                        document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
+                        prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
+                    }
+                }
+            }
+        }
+        triggerRender(Math.random());
+    };
+    const handleMobileTyping = (e)=>{
+        if (e === "\u232B") {
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
+            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
+            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove("add-new-letter");
+        } else if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
+            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add("add-new-letter");
+            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
+            ;
+            if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
+                if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
+                    document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
+                    prompts[activeDivRef.current].locked = true;
+                    solvedLettersDispatch({
+                        type: "addLetter",
+                        update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
+                    });
+                //setNewActiveDiv()
+                } else {
+                    document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
+                    prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
+                }
+            }
+        }
+        triggerRender(Math.random());
+    };
+    const showAnswer = (id)=>{
+        prompts[id].locked = true;
+        prompts[id].activeGuess = prompts[id].Answer;
+        document.getElementById(id).className = "short-prompt-container-revealed";
+        solvedLettersDispatch({
+            type: "addLetter",
+            update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
+        });
+        triggerRender(Math.random());
+    };
+    const shortPromptArray = (guess, answer)=>{
+        let returnValue = [];
+        for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
+            "",
+            i
+        ]);
+        else returnValue.push([
+            guess.activeGuess.charAt(i),
+            i
+        ]);
+        return returnValue;
+    };
+    const updateDivOnSwipe = (direction)=>{
+        let i = 0;
+        if (direction > 0) Object.keys(prompts).forEach((element)=>{
+            if (element === activeDivRef.current) {
+                if (prompts[Object.keys(prompts)[i]].locked === false) document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
+                if (prompts[Object.keys(prompts)[i - 1]].locked === false) document.getElementById(Object.keys(prompts)[i - 1]).className = "short-prompt-container-active";
+                setActiveDiv(Object.keys(prompts)[i - 1]);
+            }
+            i++;
+        });
+        else Object.keys(prompts).forEach((element)=>{
+            if (element === activeDivRef.current) {
+                if (prompts[Object.keys(prompts)[i]].locked === false) document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
+                if (prompts[Object.keys(prompts)[i + 1]].locked === false) document.getElementById(Object.keys(prompts)[i + 1]).className = "short-prompt-container-active";
+                setActiveDiv(Object.keys(prompts)[i + 1]);
+            }
+            i++;
+        });
+    };
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.Swiper), {
+            spaceBetween: 1000,
+            slidesPerView: 1,
+            centeredSlides: true,
+            onSlideChange: (swiper)=>updateDivOnSwipe(swiper.touches.diff),
+            className: "mySwiper",
+            navigation: true,
+            modules: [
+                (0, _swiper.Navigation)
+            ],
+            children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.SwiperSlide), {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        id: prompt,
+                        className: "short-prompt-container-inactive",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: prompts[prompt].shortPrompt
+                            }, void 0, false, {
+                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                lineNumber: 160,
+                                columnNumber: 13
+                            }, undefined),
+                            prompts[prompt].guessesSubmitted > 0 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                id: String(prompt) + "reveal",
+                                className: "reveal-answer",
+                                onClick: (event)=>showAnswer(prompt),
+                                children: "Reveal Answer?"
+                            }, void 0, false, {
+                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                lineNumber: 164,
+                                columnNumber: 15
+                            }, undefined),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "short-prompt-guess",
+                                children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                        id: prompt + letter[1],
+                                        className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
+                                        children: letter[0]
+                                    }, prompt + letter[1], false, {
+                                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                        lineNumber: 170,
+                                        columnNumber: 17
+                                    }, undefined))
+                            }, void 0, false, {
+                                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                                lineNumber: 168,
+                                columnNumber: 13
+                            }, undefined)
+                        ]
+                    }, prompt, true, {
+                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                        lineNumber: 159,
+                        columnNumber: 11
+                    }, undefined)
+                }, prompt, false, {
+                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+                    lineNumber: 158,
+                    columnNumber: 9
+                }, undefined))
+        }, void 0, false, {
+            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+            lineNumber: 148,
+            columnNumber: 7
+        }, undefined)
+    }, void 0, false, {
+        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
+        lineNumber: 147,
+        columnNumber: 5
+    }, undefined);
+};
+_s(ShortPromptView, "sq8SZctt4pvg5UHjMlIyeLQ4SuA=");
+_c = ShortPromptView;
+var _c;
+$RefreshReg$(_c, "ShortPromptView");
+
+  $parcel$ReactRefreshHelpers$7acc.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","swiper/swiper-bundle.min.css":"girFM","swiper/swiper.min.css":"eFTGe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","swiper/react":"9jVsF","swiper":"cCbRx"}],"lQMwT":[function() {},{}],"girFM":[function() {},{}],"eFTGe":[function() {},{}],"km3Ru":[function(require,module,exports) {
 "use strict";
 var Refresh = require("7422ead32dcc1e6b");
 function debounce(func, delay) {
@@ -39403,245 +39630,7 @@ module.exports = require("9e039173d01172ab");
     exports.setSignature = setSignature;
 })();
 
-},{}],"dTZY8":[function(require,module,exports) {
-var $parcel$ReactRefreshHelpers$7acc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$7acc.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ShortPromptView", ()=>ShortPromptView);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _shortPromptViewScss = require("./short-prompt-view.scss");
-var _react = require("react");
-var _react1 = require("swiper/react");
-var _swiperBundleMinCss = require("swiper/swiper-bundle.min.css");
-var _swiperMinCss = require("swiper/swiper.min.css");
-var _s = $RefreshSig$();
-function updateLetters(state, action) {
-    switch(action.type){
-        case "addLetter":
-            return {
-                value: state.value + action.update
-            };
-        default:
-            return state;
-    }
-}
-const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV })=>{
-    _s();
-    const [activeDiv, setActiveDiv] = (0, _react.useState)(Object.keys(prompts)[0]);
-    const activeDivRef = (0, _react.useRef)();
-    activeDivRef.current = activeDiv;
-    const [solvedLetters, solvedLettersDispatch] = (0, _react.useReducer)(updateLetters, {
-        value: ""
-    });
-    const [render, triggerRender] = (0, _react.useState)();
-    (0, _react.useEffect)(()=>{
-        window.addEventListener("keyup", (event)=>handleTyping(event));
-        document.getElementById(activeDivRef.current).className = "short-prompt-container-active";
-    }, []);
-    (0, _react.useEffect)(()=>{
-        sendDataToSP(solvedLetters.value);
-    }, [
-        solvedLetters.value
-    ]);
-    (0, _react.useEffect)(()=>{
-        if (dataFromKV[0] != undefined) handleMobileTyping(dataFromKV[0]);
-    }, [
-        dataFromKV
-    ]);
-    const handleTyping = (e)=>{
-        if (e.key === "Backspace") {
-            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
-            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
-            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove("add-new-letter");
-        } else if (/^[A-Z]+$/i.test(e.key) && e.key.length == 1) {
-            if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
-                document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add("add-new-letter");
-                prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.key.toUpperCase() // Add letter
-                ;
-                if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
-                    if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
-                        document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
-                        prompts[activeDivRef.current].locked = true;
-                        solvedLettersDispatch({
-                            type: "addLetter",
-                            update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
-                        });
-                    //setNewActiveDiv()
-                    } else {
-                        document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
-                        prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
-                    }
-                }
-            }
-        }
-        triggerRender(Math.random());
-    };
-    const handleMobileTyping = (e)=>{
-        if (e === "\u232B") {
-            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess.slice(0, -1);
-            document.getElementById(activeDivRef.current).classList.remove("horizontal-shake");
-            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove("add-new-letter");
-        } else if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {
-            document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add("add-new-letter");
-            prompts[activeDivRef.current].activeGuess = prompts[activeDivRef.current].activeGuess + e.toUpperCase() // Add letter
-            ;
-            if (prompts[activeDivRef.current].activeGuess.length === prompts[activeDivRef.current].Answer.length) {
-                if (prompts[activeDivRef.current].activeGuess === prompts[activeDivRef.current].Answer) {
-                    document.getElementById(activeDivRef.current).className = "short-prompt-container-correct";
-                    prompts[activeDivRef.current].locked = true;
-                    solvedLettersDispatch({
-                        type: "addLetter",
-                        update: prompts[activeDivRef.current].activeGuess.charAt(prompts[activeDivRef.current].activeLetter)
-                    });
-                //setNewActiveDiv()
-                } else {
-                    document.getElementById(activeDivRef.current).classList.add("horizontal-shake");
-                    prompts[activeDivRef.current].guessesSubmitted = prompts[activeDivRef.current].guessesSubmitted + 1;
-                }
-            }
-        }
-        triggerRender(Math.random());
-    };
-    const showAnswer = (id)=>{
-        prompts[id].locked = true;
-        prompts[id].activeGuess = prompts[id].Answer;
-        document.getElementById(id).className = "short-prompt-container-revealed";
-        solvedLettersDispatch({
-            type: "addLetter",
-            update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)
-        });
-        triggerRender(Math.random());
-    };
-    const shortPromptArray = (guess, answer)=>{
-        let returnValue = [];
-        for(let i = 0; i < answer.length; i++)if (guess.activeGuess.charAt(i) === "") returnValue.push([
-            "",
-            i
-        ]);
-        else returnValue.push([
-            guess.activeGuess.charAt(i),
-            i
-        ]);
-        return returnValue;
-    };
-    const updateDivOnSwipe = (direction)=>{
-        let i = 0;
-        if (direction > 0) Object.keys(prompts).forEach((element)=>{
-            if (element === activeDivRef.current) {
-                if (prompts[Object.keys(prompts)[i]].locked === false) document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
-                if (prompts[Object.keys(prompts)[i - 1]].locked === false) document.getElementById(Object.keys(prompts)[i - 1]).className = "short-prompt-container-active";
-                setActiveDiv(Object.keys(prompts)[i - 1]);
-            }
-            i++;
-        });
-        else Object.keys(prompts).forEach((element)=>{
-            if (element === activeDivRef.current) {
-                if (prompts[Object.keys(prompts)[i]].locked === false) document.getElementById(Object.keys(prompts)[i]).className = "short-prompt-container-inactive";
-                if (prompts[Object.keys(prompts)[i + 1]].locked === false) document.getElementById(Object.keys(prompts)[i + 1]).className = "short-prompt-container-active";
-                setActiveDiv(Object.keys(prompts)[i + 1]);
-            }
-            i++;
-        });
-    };
-    const nextSlide = ()=>{
-        let element = document.getElementById(activeDivRef.current);
-        element.dispatchEvent(new Event("mousedown"));
-        element.style.right += 300;
-    };
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: nextSlide,
-                id: "button",
-                children: "click"
-            }, void 0, false, {
-                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 153,
-                columnNumber: 7
-            }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.Swiper), {
-                spaceBetween: 1000,
-                slidesPerView: 1,
-                centeredSlides: true,
-                onSlideChange: (swiper)=>updateDivOnSwipe(swiper.touches.diff),
-                className: "mySwiper",
-                children: Object.keys(prompts).map((prompt)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _react1.SwiperSlide), {
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                            id: prompt,
-                            className: "short-prompt-container-inactive",
-                            children: [
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    children: prompts[prompt].shortPrompt
-                                }, void 0, false, {
-                                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                    lineNumber: 164,
-                                    columnNumber: 13
-                                }, undefined),
-                                prompts[prompt].guessesSubmitted > 0 && prompts[prompt].locked != true && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    id: String(prompt) + "reveal",
-                                    className: "reveal-answer",
-                                    onClick: (event)=>showAnswer(prompt),
-                                    children: "Reveal Answer?"
-                                }, void 0, false, {
-                                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                    lineNumber: 168,
-                                    columnNumber: 15
-                                }, undefined),
-                                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                    className: "short-prompt-guess",
-                                    children: shortPromptArray(prompts[prompt], prompts[prompt].Answer).map((letter)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                            id: prompt + letter[1],
-                                            className: letter[1] == prompts[prompt].activeLetter ? "active-letter" : "guess-letter",
-                                            children: letter[0]
-                                        }, prompt + letter[1], false, {
-                                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                            lineNumber: 174,
-                                            columnNumber: 17
-                                        }, undefined))
-                                }, void 0, false, {
-                                    fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                                    lineNumber: 172,
-                                    columnNumber: 13
-                                }, undefined)
-                            ]
-                        }, prompt, true, {
-                            fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                            lineNumber: 163,
-                            columnNumber: 11
-                        }, undefined)
-                    }, prompt, false, {
-                        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                        lineNumber: 162,
-                        columnNumber: 9
-                    }, undefined))
-            }, void 0, false, {
-                fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-                lineNumber: 154,
-                columnNumber: 7
-            }, undefined)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/short-prompt-view/short-prompt-view.jsx",
-        lineNumber: 152,
-        columnNumber: 5
-    }, undefined);
-};
-_s(ShortPromptView, "sq8SZctt4pvg5UHjMlIyeLQ4SuA=");
-_c = ShortPromptView;
-var _c;
-$RefreshReg$(_c, "ShortPromptView");
-
-  $parcel$ReactRefreshHelpers$7acc.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","./short-prompt-view.scss":"lQMwT","react":"21dqq","swiper/react":"9jVsF","swiper/swiper-bundle.min.css":"girFM","swiper/swiper.min.css":"eFTGe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"lQMwT":[function() {},{}],"9jVsF":[function(require,module,exports) {
+},{}],"9jVsF":[function(require,module,exports) {
 /**
  * Swiper React 6.8.4
  * Most modern mobile touch slider and framework with hardware accelerated transitions
@@ -39970,7 +39959,7 @@ var _effectCoverflowDefault = parcelHelpers.interopDefault(_effectCoverflow);
 var _thumbs = require("./esm/components/thumbs/thumbs");
 var _thumbsDefault = parcelHelpers.interopDefault(_thumbs);
 
-},{"./esm/components/core/core-class":"5Ccqt","./esm/components/virtual/virtual":false,"./esm/components/keyboard/keyboard":false,"./esm/components/mousewheel/mousewheel":false,"./esm/components/navigation/navigation":false,"./esm/components/pagination/pagination":false,"./esm/components/scrollbar/scrollbar":false,"./esm/components/parallax/parallax":false,"./esm/components/zoom/zoom":false,"./esm/components/lazy/lazy":false,"./esm/components/controller/controller":false,"./esm/components/a11y/a11y":false,"./esm/components/history/history":false,"./esm/components/hash-navigation/hash-navigation":false,"./esm/components/autoplay/autoplay":false,"./esm/components/effect-fade/effect-fade":false,"./esm/components/effect-cube/effect-cube":false,"./esm/components/effect-flip/effect-flip":false,"./esm/components/effect-coverflow/effect-coverflow":false,"./esm/components/thumbs/thumbs":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Ccqt":[function(require,module,exports) {
+},{"./esm/components/core/core-class":"5Ccqt","./esm/components/virtual/virtual":false,"./esm/components/keyboard/keyboard":false,"./esm/components/mousewheel/mousewheel":false,"./esm/components/navigation/navigation":"9LHy0","./esm/components/pagination/pagination":false,"./esm/components/scrollbar/scrollbar":false,"./esm/components/parallax/parallax":false,"./esm/components/zoom/zoom":false,"./esm/components/lazy/lazy":false,"./esm/components/controller/controller":false,"./esm/components/a11y/a11y":false,"./esm/components/history/history":false,"./esm/components/hash-navigation/hash-navigation":false,"./esm/components/autoplay/autoplay":false,"./esm/components/effect-fade/effect-fade":false,"./esm/components/effect-cube/effect-cube":false,"./esm/components/effect-flip/effect-flip":false,"./esm/components/effect-coverflow/effect-coverflow":false,"./esm/components/thumbs/thumbs":false,"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5Ccqt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 /* eslint no-param-reassign: "off" */ var _ssrWindow = require("ssr-window");
@@ -44761,7 +44750,156 @@ exports.default = {
     _emitClasses: false
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"FmwE2":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9LHy0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _dom = require("../../utils/dom");
+var _domDefault = parcelHelpers.interopDefault(_dom);
+var _utils = require("../../utils/utils");
+function _extends() {
+    _extends = Object.assign || function(target) {
+        for(var i = 1; i < arguments.length; i++){
+            var source = arguments[i];
+            for(var key in source)if (Object.prototype.hasOwnProperty.call(source, key)) target[key] = source[key];
+        }
+        return target;
+    };
+    return _extends.apply(this, arguments);
+}
+var Navigation = {
+    toggleEl: function toggleEl($el, disabled) {
+        $el[disabled ? "addClass" : "removeClass"](this.params.navigation.disabledClass);
+        if ($el[0] && $el[0].tagName === "BUTTON") $el[0].disabled = disabled;
+    },
+    update: function update() {
+        // Update Navigation Buttons
+        var swiper = this;
+        var params = swiper.params.navigation;
+        var toggleEl = swiper.navigation.toggleEl;
+        if (swiper.params.loop) return;
+        var _swiper$navigation = swiper.navigation, $nextEl = _swiper$navigation.$nextEl, $prevEl = _swiper$navigation.$prevEl;
+        if ($prevEl && $prevEl.length > 0) {
+            if (swiper.isBeginning) toggleEl($prevEl, true);
+            else toggleEl($prevEl, false);
+            if (swiper.params.watchOverflow && swiper.enabled) $prevEl[swiper.isLocked ? "addClass" : "removeClass"](params.lockClass);
+        }
+        if ($nextEl && $nextEl.length > 0) {
+            if (swiper.isEnd) toggleEl($nextEl, true);
+            else toggleEl($nextEl, false);
+            if (swiper.params.watchOverflow && swiper.enabled) $nextEl[swiper.isLocked ? "addClass" : "removeClass"](params.lockClass);
+        }
+    },
+    onPrevClick: function onPrevClick(e) {
+        var swiper = this;
+        e.preventDefault();
+        if (swiper.isBeginning && !swiper.params.loop) return;
+        swiper.slidePrev();
+    },
+    onNextClick: function onNextClick(e) {
+        var swiper = this;
+        e.preventDefault();
+        if (swiper.isEnd && !swiper.params.loop) return;
+        swiper.slideNext();
+    },
+    init: function init() {
+        var swiper = this;
+        var params = swiper.params.navigation;
+        swiper.params.navigation = (0, _utils.createElementIfNotDefined)(swiper.$el, swiper.params.navigation, swiper.params.createElements, {
+            nextEl: "swiper-button-next",
+            prevEl: "swiper-button-prev"
+        });
+        if (!(params.nextEl || params.prevEl)) return;
+        var $nextEl;
+        var $prevEl;
+        if (params.nextEl) {
+            $nextEl = (0, _domDefault.default)(params.nextEl);
+            if (swiper.params.uniqueNavElements && typeof params.nextEl === "string" && $nextEl.length > 1 && swiper.$el.find(params.nextEl).length === 1) $nextEl = swiper.$el.find(params.nextEl);
+        }
+        if (params.prevEl) {
+            $prevEl = (0, _domDefault.default)(params.prevEl);
+            if (swiper.params.uniqueNavElements && typeof params.prevEl === "string" && $prevEl.length > 1 && swiper.$el.find(params.prevEl).length === 1) $prevEl = swiper.$el.find(params.prevEl);
+        }
+        if ($nextEl && $nextEl.length > 0) $nextEl.on("click", swiper.navigation.onNextClick);
+        if ($prevEl && $prevEl.length > 0) $prevEl.on("click", swiper.navigation.onPrevClick);
+        (0, _utils.extend)(swiper.navigation, {
+            $nextEl: $nextEl,
+            nextEl: $nextEl && $nextEl[0],
+            $prevEl: $prevEl,
+            prevEl: $prevEl && $prevEl[0]
+        });
+        if (!swiper.enabled) {
+            if ($nextEl) $nextEl.addClass(params.lockClass);
+            if ($prevEl) $prevEl.addClass(params.lockClass);
+        }
+    },
+    destroy: function destroy() {
+        var swiper = this;
+        var _swiper$navigation2 = swiper.navigation, $nextEl = _swiper$navigation2.$nextEl, $prevEl = _swiper$navigation2.$prevEl;
+        if ($nextEl && $nextEl.length) {
+            $nextEl.off("click", swiper.navigation.onNextClick);
+            $nextEl.removeClass(swiper.params.navigation.disabledClass);
+        }
+        if ($prevEl && $prevEl.length) {
+            $prevEl.off("click", swiper.navigation.onPrevClick);
+            $prevEl.removeClass(swiper.params.navigation.disabledClass);
+        }
+    }
+};
+exports.default = {
+    name: "navigation",
+    params: {
+        navigation: {
+            nextEl: null,
+            prevEl: null,
+            hideOnClick: false,
+            disabledClass: "swiper-button-disabled",
+            hiddenClass: "swiper-button-hidden",
+            lockClass: "swiper-button-lock"
+        }
+    },
+    create: function create() {
+        var swiper = this;
+        (0, _utils.bindModuleMethods)(swiper, {
+            navigation: _extends({}, Navigation)
+        });
+    },
+    on: {
+        init: function init(swiper) {
+            swiper.navigation.init();
+            swiper.navigation.update();
+        },
+        toEdge: function toEdge(swiper) {
+            swiper.navigation.update();
+        },
+        fromEdge: function fromEdge(swiper) {
+            swiper.navigation.update();
+        },
+        destroy: function destroy(swiper) {
+            swiper.navigation.destroy();
+        },
+        "enable disable": function enableDisable(swiper) {
+            var _swiper$navigation3 = swiper.navigation, $nextEl = _swiper$navigation3.$nextEl, $prevEl = _swiper$navigation3.$prevEl;
+            if ($nextEl) $nextEl[swiper.enabled ? "removeClass" : "addClass"](swiper.params.navigation.lockClass);
+            if ($prevEl) $prevEl[swiper.enabled ? "removeClass" : "addClass"](swiper.params.navigation.lockClass);
+        },
+        click: function click(swiper, e) {
+            var _swiper$navigation4 = swiper.navigation, $nextEl = _swiper$navigation4.$nextEl, $prevEl = _swiper$navigation4.$prevEl;
+            var targetEl = e.target;
+            if (swiper.params.navigation.hideOnClick && !(0, _domDefault.default)(targetEl).is($prevEl) && !(0, _domDefault.default)(targetEl).is($nextEl)) {
+                if (swiper.pagination && swiper.params.pagination && swiper.params.pagination.clickable && (swiper.pagination.el === targetEl || swiper.pagination.el.contains(targetEl))) return;
+                var isHidden;
+                if ($nextEl) isHidden = $nextEl.hasClass(swiper.params.navigation.hiddenClass);
+                else if ($prevEl) isHidden = $prevEl.hasClass(swiper.params.navigation.hiddenClass);
+                if (isHidden === true) swiper.emit("navigationShow");
+                else swiper.emit("navigationHide");
+                if ($nextEl) $nextEl.toggleClass(swiper.params.navigation.hiddenClass);
+                if ($prevEl) $prevEl.toggleClass(swiper.params.navigation.hiddenClass);
+            }
+        }
+    }
+};
+
+},{"../../utils/dom":"iauJ2","../../utils/utils":"3PNrL","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"FmwE2":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "isObject", ()=>isObject);
@@ -45314,7 +45452,7 @@ var SwiperSlide = /*#__PURE__*/ (0, _react.forwardRef)(function(_temp, externalR
 });
 SwiperSlide.displayName = "SwiperSlide";
 
-},{"react":"21dqq","./utils":"FmwE2","./use-isomorphic-layout-effect":"fcRxV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"girFM":[function() {},{}],"eFTGe":[function() {},{}],"gylj4":[function(require,module,exports) {
+},{"react":"21dqq","./utils":"FmwE2","./use-isomorphic-layout-effect":"fcRxV","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gylj4":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$4710 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
