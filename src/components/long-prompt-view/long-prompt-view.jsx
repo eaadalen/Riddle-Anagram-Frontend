@@ -1,6 +1,7 @@
 import './long-prompt-view.scss'
 import { useState, useEffect } from 'react';
 import Sortable from 'sortablejs';
+import { Swap } from 'sortablejs/modular/sortable.core.esm';
 
 export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
@@ -26,7 +27,8 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   }, [finalAnswer])
 
   useEffect(() => {
-    Sortable.create(longPromptAnswer, {});
+    Sortable.mount(new Swap());
+    Sortable.create(longPromptAnswer, {swap: true, swapClass: 'highlight', animation: 150});
     window.addEventListener('keyup', event => handleSubmit(event))  // Handle regular typing submission
     document.getElementById('Enter').addEventListener('click', event => handleSubmit(event))  // Handle mobile keyboard submission
   }, [])
