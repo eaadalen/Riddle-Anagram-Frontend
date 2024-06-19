@@ -1,2 +1,3 @@
--merge handle mobile typing and handle typing
 -store user's progress in local storage
+-have a consequence for revealing answers early on
+-lock final answer after game over

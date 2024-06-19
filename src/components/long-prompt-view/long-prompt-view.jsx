@@ -1,7 +1,6 @@
 import './long-prompt-view.scss'
 import { useState, useEffect } from 'react';
-import Sortable from 'sortablejs';
-import { Swap } from 'sortablejs/modular/sortable.core.esm';
+import { Sortable, Swap } from 'sortablejs';
 
 export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
