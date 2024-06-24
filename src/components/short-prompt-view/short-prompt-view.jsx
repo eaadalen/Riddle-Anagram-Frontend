@@ -69,6 +69,9 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
       document.getElementById(activeDivRef.current).classList.remove('horizontal-shake')
       document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.remove('add-new-letter')
     }
+    else if (e === 'Enter') {
+      // do nothing
+    }
     else {
       if (prompts[activeDivRef.current].activeGuess.length < prompts[activeDivRef.current].maxLength) {  // Only add letter if guess length is less than answer length
         document.getElementById(activeDivRef.current + String(prompts[activeDivRef.current].activeGuess.length)).classList.add('add-new-letter')
