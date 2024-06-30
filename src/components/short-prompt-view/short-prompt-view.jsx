@@ -1,7 +1,6 @@
 import './short-prompt-view.scss'
 import { useState, useEffect, useReducer, useRef } from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from 'swiper';
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
@@ -14,7 +13,7 @@ function updateLetters(state, action) {
   }
 }
 
-export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
+export const ShortPromptView = ({ prompts, p_strikes_SP, sendDataToSP, dataFromKV }) => {
   const [activeDiv, setActiveDiv] = useState(Object.keys(prompts)[0])
   const activeDivRef = useRef();
   activeDivRef.current = activeDiv
@@ -98,6 +97,7 @@ export const ShortPromptView = ({ prompts, sendDataToSP, dataFromKV }) => {
     prompts[id].activeGuess = prompts[id].Answer
     document.getElementById(id).className = 'short-prompt-container-revealed'
     solvedLettersDispatch({ type: 'addLetter', update: prompts[id].activeGuess.charAt(prompts[id].activeLetter)})
+    p_strikes_SP(prev => prev - 1)
     triggerRender(Math.random())
   }
 

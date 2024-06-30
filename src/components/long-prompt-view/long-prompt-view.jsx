@@ -2,10 +2,10 @@ import './long-prompt-view.scss'
 import { useState, useEffect } from 'react';
 import { Sortable, Swap } from 'sortablejs';
 
-export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
+export const LongPromptView = ({ prompt, p_strikes_LP, lettersSolved, sendDataToLP }) => {
   const [finalAnswer, setFinalAnswer] = useState('')
   const [locked, setLocked] = useState(false)
-  const [guessesRemaining, setGuessesRemaining] = useState(3)
+  const [guessesRemaining, setGuessesRemaining] = useState(5)
   const [guessRecord, setGuessRecord] = useState([])
 
   useEffect(() => {
@@ -31,6 +31,13 @@ export const LongPromptView = ({ prompt, lettersSolved, sendDataToLP }) => {
     window.addEventListener('keyup', event => handleSubmit(event))  // Handle regular typing submission
     document.getElementById('Enter').addEventListener('click', event => handleSubmit(event))  // Handle mobile keyboard submission
   }, [])
+
+  useEffect(() => {
+    setGuessesRemaining(5+p_strikes_LP)
+    if (guessesRemaining === 1) {
+      sendDataToLP(guessRecord)
+    }
+  }, [p_strikes_LP])
 
   const handleSubmit = (event) => {
     if (event.key === 'Enter' || event.srcElement.id === 'Enter') {

@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import "./game-over-view.scss"
 
 export const GameOverView = ({ answer, data }) => {
@@ -21,13 +22,15 @@ export const GameOverView = ({ answer, data }) => {
 
   return (
     <div>
-      <div className='guess-array'>
-        {guessesArray(data, answer).map((element) => 
-          <div key={Math.random()}>
-            {element}
-          </div>
-        )}
-      </div>
+      {(data.length > 0) && 
+        <div className='guess-array'>
+          {guessesArray(data, answer).map((element) => 
+            <div key={Math.random()}>
+              {element}
+            </div>
+          )}
+        </div>
+      }
       {(data[data.length - 1] === answer) &&
         <div>
           Correct!

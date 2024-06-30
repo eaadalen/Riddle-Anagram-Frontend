@@ -1,6 +1,5 @@
 import "./play-view.scss"
 import { useState, useEffect } from "react";
-import loading from '../../../media/loading-animation.gif';
 import { ShortPromptView } from '../short-prompt-view/short-prompt-view'
 import { LongPromptView } from '../long-prompt-view/long-prompt-view'
 import { KeyboardView } from '../keyboard-view/keyboard-view'
@@ -11,6 +10,7 @@ export const PlayView = () => {
   const [shortPrompts, setShortPrompts] = useState({})
   const [longPrompt, setLongPrompt] = useState({})
   const [loaded, setLoaded] = useState(false)
+  const [preliminaryStrikes, setPreliminaryStrikes] = useState(0);
   const [dataFromSP, setDataFromSP] = useState('');
   const [dataFromKV, setDataFromKV] = useState('');
   const [showModal, setShowModal] = useState(false)
@@ -46,6 +46,10 @@ export const PlayView = () => {
     })
   }, []) 
 
+  function handleDataFromPS(data) { // preliminary strikes
+    setPreliminaryStrikes(data);
+  }
+
   function handleDataFromSP(data) {
     setDataFromSP(data);
   }
@@ -77,10 +81,10 @@ export const PlayView = () => {
       {loaded &&
         <div className="container-eka">
           <div className="long-prompt">
-            <LongPromptView prompt={longPrompt} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
+            <LongPromptView prompt={longPrompt} p_strikes_LP={preliminaryStrikes} lettersSolved={dataFromSP} sendDataToLP={handleDataFromLP}/>
           </div>
           <div className="short-prompt-container">
-            <ShortPromptView prompts={shortPrompts} sendDataToSP={handleDataFromSP} dataFromKV={dataFromKV}/>
+            <ShortPromptView prompts={shortPrompts} p_strikes_SP={handleDataFromPS} sendDataToSP={handleDataFromSP} dataFromKV={dataFromKV}/>
           </div>
           <div className="user-keyboard">
             <KeyboardView sendDataToKV={handleDataFromKV}/>
